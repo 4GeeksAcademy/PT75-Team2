@@ -1,0 +1,16 @@
+/* .pageButton{
+    width: 80%;
+} */
+ .profileLink{
+    float: right;
+    padding-top: 20px;
+ }
+ .links{
+    background-color: whitesmoke;
+ }
+ .navbar-brand{
+    color:white
+ }
+ .links:hover{
+    color: blue;
+ }
