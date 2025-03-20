@@ -24,8 +24,6 @@ class User(db.Model):
         db.DateTime, default=datetime.utcnow)
 
     # # Relationship to Itineraries
-    # itineraries = relationship(
-    #     "Itinerary", back_populates="users", cascade="all, delete")
 
     def set_password(self, password: str) -> None:
         """Hashes and stores the password"""
@@ -50,9 +48,8 @@ class User(db.Model):
 
 class Itinerary(db.Model):
     # __table__= "itinerary"
-    __tablename__ = "itineraries"
     id: Mapped[int] = mapped_column(
-        db.Integer, primary_key=True, autoincrement=True)
+        db.Integer, primary_key=True)
 
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id"), nullable=False)
@@ -76,18 +73,17 @@ class Itinerary(db.Model):
         db.DateTime, default=datetime.utcnow)
 
     # Relationship to User
-    # user = relationship("users", back_populates="itineraries")
 
 
-def serialize(self):
-    return {
-        "id": self.id,
-        "user_id": self.user_id,
-        "start_date": self.start_date,
-        "end_date": self.end_date,
-        "location": self.location,
-        "hotel_name": self.hotel_name,
-        "hotel_location": self.hotel_location,
-        "attraction_name": self.attraction_name,
-        "attraction_location": self.attraction_location
-    }
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "location": self.location,
+            "hotel_name": self.hotel_name,
+            "hotel_location": self.hotel_location,
+            "attraction_name": self.attraction_name,
+            "attraction_location": self.attraction_location
+        }
