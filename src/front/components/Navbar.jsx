@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	const profilepic = 'https://th.bing.com/th/id/OIP.6W2ogLXdf48OKWgl_5jSPgHaHa?rs=1&pid=ImgDetMain'
-
+    const token = sessionStorage.getItem('token');
 	return (
 		<nav className="navbar nav" style={{backgroundColor:"lightblue"}}>
 			<div className="container  d-block align-items-center ">
@@ -14,14 +14,17 @@ export const Navbar = () => {
 					Tripsync
 				</Link>
 				<div className="profileLink align-items-right">
-					<Link to="/profile" >
+					{token?(<Link to="/profile" >
 						<img
 							src={profilepic}
 							alt="User Profile"
 							className="profile-picture rounded-circle "
 							style={{ height: "70px", width: "70px" }}
 						/>
-					</Link>
+					</Link>):(<Link to="/">
+					<button className="btn button-primary">Signup</button>
+					<button className="btn button-success">Login</button>
+					</Link>)}
 
 				</div>
 				<div className="links d-flex">

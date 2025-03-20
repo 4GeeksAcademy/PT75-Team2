@@ -14,3 +14,24 @@
  .links:hover{
     color: blue;
  }
+
+ .landingCard {
+   display: flex;
+   overflow-x: auto; 
+   scroll-snap-type: x mandatory; 
+   gap: 20px; 
+   padding: 10px;
+ }
+ 
+ .card {
+   flex: 0 0 calc(33.33% - 20px); 
+   min-width: 300px; 
+   scroll-snap-align: start;
+   border-radius: 10px;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ }
+ 
+.card-img-top{
+   height: 100px;
+   width: 150px
+}
