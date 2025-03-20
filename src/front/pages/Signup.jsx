@@ -1,25 +1,36 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            alert("Password do not match!");
+            alert("Passwords do not match!");
             return;
         }
-        const response = await fetch("/api/signup", {
+
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}signup`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, password })
+            body: JSON.stringify({ name, email, password }),
         });
+
         const data = await response.json();
-        console.log("Signup response:", data)
+        console.log("Signup response:", data);
+
+        if (response.ok) {
+            alert("Signup successful! Redirecting to login...");
+            navigate("/login"); // Redirect to Login page
+        } else {
+            alert(data.error || "Signup failed. Please try again.");
+        }
     };
 
     return (

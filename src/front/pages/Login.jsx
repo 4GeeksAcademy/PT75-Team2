@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const response = await fetch("/api/login", {
+
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -15,6 +18,15 @@ export const Login = () => {
 
         const data = await response.json();
         console.log("Login response:", data);
+
+        if (response.ok) {
+            // Store token in localStorage
+            localStorage.setItem("token", data.token);
+            alert("Login successful! Redirecting to dashboard...");
+            navigate("/dashboard"); // Redirect to Dashboard
+        } else {
+            setError(data.error || "Invalid credentials. Please try again.");
+        }
     };
 
     return (
