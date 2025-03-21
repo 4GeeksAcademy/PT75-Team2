@@ -1,11 +1,32 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "../../front/footer.css"
+
 export const Footer = () => (
 	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Check the <a target="_blank" href="https://4geeks.com/docs/start/react-flask-template">template documentation</a> <i className="fa-solid fa-file"></i> for help.
-		</p>
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
-	</footer>
+		<div className="container">
+			<div className="row">
+				<div className="logo-div col-lg-6 col-md-12 mb-4 mb-md-0">
+					<h3 className="text"><strong>TripSync</strong></h3>
+					<p>Filler info/website description to be added here. </p>
+				</div>
+				<div className="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
+				<div className="col-lg-3 col-md-6 mb-4 mb-md-0">
+					<h5 className="text-uppercase mb-0">Connect With Us</h5>
+					<Link to="/aboutus" className="about-us">About Us</Link>
+				</div>
+			</div>
+			<hr></hr>
+			<div className="links-container inline-row">
+				<Link to="/" className="p-5">HOME</Link>
+				<Link to="/hotel" className="p-5">HOTELS</Link>
+				<Link to="/attractions" className="p-5">ATTRACTIONS</Link>
+				<Link to="/maps" className="p-5">MAPS</Link>
+				<Link to="/itinerary" className="p-5">ITINERARY</Link>
+			</div>
+			<div className="copyright p-1">
+				© 2025 Copyright: <strong>TripSync.com</strong>
+			</div>
+		</div>
+	</footer >
 );
