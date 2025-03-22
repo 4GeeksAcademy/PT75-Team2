@@ -14,6 +14,7 @@ import { Signup } from "./pages/Signup";
 import Itinerary from "./pages/Itinerary";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Dashboard } from "./pages/Dashboard";
+import { Hotels } from "./pages/Hotels";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
       <Route path="/demo" element={<Demo />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/hotels" element={<Hotels />} />
       <Route path="/itinerary" element={<Itinerary />} />
       {/* Protect Dashboard */}
       <Route path="/" element={<ProtectedRoute />}>
