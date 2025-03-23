@@ -74,7 +74,6 @@ class Itinerary(db.Model):
 
     # Relationship to User
 
-
     def serialize(self):
         return {
             "id": self.id,
@@ -86,4 +85,27 @@ class Itinerary(db.Model):
             "hotel_location": self.hotel_location,
             "attraction_name": self.attraction_name,
             "attraction_location": self.attraction_location
+        }
+
+
+class Wishlist(db.Model):
+    __tablename__ = "wishlist"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id"), nullable=False)
+    place_id: Mapped[str] = mapped_column(String(120), nullable=False)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
+    address: Mapped[str] = mapped_column(String(250), nullable=True)
+    rating: Mapped[str] = mapped_column(String(10), nullable=True)
+    photo_reference: Mapped[str] = mapped_column(String(255), nullable=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "place_id": self.place_id,
+            "name": self.name,
+            "address": self.address,
+            "rating": self.rating,
+            "photo_reference": self.photo_reference
         }
