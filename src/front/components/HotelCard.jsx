@@ -78,7 +78,7 @@ export const HotelCard = ({
                         </span>
                         <a
                             className="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
-                            href={`https://www.google.com/maps/place/?q=place_id=${hotel.place_id}`}
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name)}&query_place_id=${hotel.place_id}`}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
