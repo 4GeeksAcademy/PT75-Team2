@@ -209,3 +209,27 @@ def get_wishlist():
     user_id = get_jwt_identity()
     items = Wishlist.query.filter_by(user_id=user_id).all()
     return jsonify([item.serialize() for item in items]), 200
+
+
+@api.route("/place-details/<place_id>", methods=["GET"])
+def get_place_details(place_id):
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+    if not GOOGLE_API_KEY:
+        return jsonify({"error": "Google API Key not found"}), 500
+
+    try:
+        fields = "formatted_phone_number,website,user_ratings_total"
+        url = f"https://maps.googleapis.com/maps/api/place/details/json?place_id={place_id}&fields={fields}&key={GOOGLE_API_KEY}"
+
+        response = requests.get(url)
+        data = response.json()
+
+        if data.get("status") != "OK":
+            return jsonify({"error": "Failed to fetch place details", "details": data}), 500
+
+        return jsonify(data.get("result", {})), 200
+
+    except Exception as e:
+        print("Error fetching place details:", str(e))
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500

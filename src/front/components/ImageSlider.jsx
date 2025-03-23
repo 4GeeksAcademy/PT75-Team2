@@ -10,8 +10,8 @@ export const ImageSlider = ({ photos, currentIndex, onChange, placeId }) => {
         <div className="position-relative">
             <img
                 src={photoUrl}
-                className="card-img-top object-fit-cover"
-                style={{ height: "200px", width: "100%", objectFit: "cover", borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem" }}
+                className="slider-image"
+                style={{ height: "240px", width: "100%", objectFit: "cover", borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem" }}
                 alt="Hotel"
             />
             {photos.length > 1 && (
