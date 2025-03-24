@@ -15,7 +15,7 @@
   color: blue;
 }
 
-.landingCard {
+.landingCard, .hotelCard, .attractionCard{
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;

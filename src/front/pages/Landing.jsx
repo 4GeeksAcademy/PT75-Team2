@@ -2,6 +2,8 @@ import React from "react";
 import { LandingCard } from "../components/landingCard";
 import { HotelCard } from "../components/hotelCard";
 import { CityCard } from "../components/cityCard";
+import { Attractions } from "../components/attractionCard";
+
 
 
 
@@ -28,8 +30,7 @@ export const LandingPage = () => {
             <h5>Find Your Dream Destination</h5>
             <CityCard/>
             <HotelCard/>
-
-            
+            <Attractions/>         
            
         </div>
     )
