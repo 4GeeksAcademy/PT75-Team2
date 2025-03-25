@@ -16,6 +16,7 @@ import { LandingPage } from "./pages/landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Dashboard } from "./pages/Dashboard";
 import { Hotels } from "./pages/Hotels";
+import { Maps } from "./pages/Maps";
 
 
 export const router = createBrowserRouter(
@@ -39,6 +40,7 @@ export const router = createBrowserRouter(
       <Route path="/hotels" element={<Hotels />} />
       <Route path="/itinerary" element={<Itinerary />} />
       <Route path="/" element={<LandingPage />} />
+      <Route path="/maps" element={<Maps />} />
 
       {/* Protect Dashboard */}
       <Route path="/" element={<ProtectedRoute />}>
