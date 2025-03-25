@@ -1,5 +1,6 @@
 import React from "react";
 import { LandingCard } from "./landingCard";
+import './card.css'
 
 const locations = [{
     title: "New York",

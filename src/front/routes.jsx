@@ -12,7 +12,7 @@ import { Demo } from "./pages/Demo";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import Itinerary from "./pages/Itinerary";
-import { LandingPage } from "./pages/landing";
+import { LandingPage } from "./pages/Landing";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

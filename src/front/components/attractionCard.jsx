@@ -1,6 +1,6 @@
 import React from "react";
 import { LandingCard } from "./landingCard";
-
+import './card.css'
 
 const attractions = [{
   title: "EIffel Tower, Paris France",
@@ -57,7 +57,7 @@ const attractions = [{
 export const Attractions =()=>{
 
      return(
-<div className="attractionCard  mt-5 d-flex" >
+<div className="attractionCard  d-flex" >
       {
         attractions.map((attraction, index) => (
           <LandingCard key={index}

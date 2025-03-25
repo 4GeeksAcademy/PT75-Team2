@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import { FontAwesomeIcon } from "fortawesome/react-fontawesome";
 // import { faPlane } from "fortawesome/react-fontawesome";
+import './card.css'
 
 export const Navbar = () => {
 	const profilepic = 'https://th.bing.com/th/id/OIP.6W2ogLXdf48OKWgl_5jSPgHaHa?rs=1&pid=ImgDetMain'
