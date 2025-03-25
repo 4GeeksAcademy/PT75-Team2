@@ -16,6 +16,7 @@ import { LandingPage } from "./pages/landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Dashboard } from "./pages/Dashboard";
 import { Hotels } from "./pages/Hotels";
+import { Attractions } from "./pages/Attractions";
 
 
 export const router = createBrowserRouter(
@@ -31,6 +32,7 @@ export const router = createBrowserRouter(
 
       {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
 
+      <Route path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/single/:theId" element={<Single />} />  {/* Dynamic route for single items */}
       <Route path="/demo" element={<Demo />} />
@@ -38,7 +40,7 @@ export const router = createBrowserRouter(
       <Route path="/signup" element={<Signup />} />
       <Route path="/hotels" element={<Hotels />} />
       <Route path="/itinerary" element={<Itinerary />} />
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/attractions" element={<Attractions />} />
 
       {/* Protect Dashboard */}
       <Route path="/" element={<ProtectedRoute />}>
