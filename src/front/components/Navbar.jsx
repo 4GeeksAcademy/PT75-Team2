@@ -38,7 +38,7 @@ export const Navbar = () => {
 
 				<div className="links d-flex">
 					<div className="pageButtons d-flex align-items-center gap-3">
-						<Link to="/hotel" className="nav-link">Hotels</Link>
+						<Link to="/hotels" className="nav-link">Hotels</Link>
 						<Link to="/attractions" className="nav-link">Attractions</Link>
 						<Link to="/maps" className="nav-link">Maps</Link>
 						<Link to="/itinerary" className="nav-link">Itinerary</Link>
