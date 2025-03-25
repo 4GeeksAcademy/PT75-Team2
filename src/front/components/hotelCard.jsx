@@ -1,6 +1,6 @@
 import React from "react";
 import { LandingCard } from "./landingCard";
-import './hotelCard.css'
+import './card.css'
 
 
 const hotels = [{

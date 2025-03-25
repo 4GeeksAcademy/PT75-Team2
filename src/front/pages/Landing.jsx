@@ -4,7 +4,7 @@ import { HotelCard } from "../components/hotelCard";
 import { CityCard } from "../components/cityCard";
 import { Attractions } from "../components/attractionCard";
 import '../components/card.css'
-import CardCarousel from "../components/Carousel";
+import { AboutUs } from "../components/aboutUs";
 
 
 
@@ -18,7 +18,8 @@ export const LandingPage = () => {
             <h1>Hotels</h1>
             <HotelCard/>
             <h1>Attractions</h1>
-            <Attractions/>         
+            <Attractions/>   
+            <AboutUs/>      
             
         </div>
     )

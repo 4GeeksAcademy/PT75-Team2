@@ -40,14 +40,14 @@ const attractions = [{
 {
   title: "Midieval Torture Museum, Los Angeles",
   image: "https://www.bing.com/th?id=ORA4.EA8C5D355B0902CECB6BD7C0A5C6E320_F725FC81947923D9&w=232&h=154&c=1&rs=2&pid=MapsTourActivityAds",
-  description: "Explore more than just its name.",
+  description: "A recreation of the midieval torture chambers. Dark, scary, different.",
   rating: "4 start",
   price : "$27 per person"
 },
 {
   title: "Estacao das Docas, Brazil",
   image: "https://lh3.googleusercontent.com/p/AF1QipM91m6I6lLLCiKT_bqX6U_6hlRYEuvBi-H7xT8d=s1600-w1600",
-  description: "Beautiful Restaurant.",
+  description: "If you like high quality brazilian food then this is the spot for you.",
   rating: "4 star",
   price: ""
 }
