@@ -24,14 +24,16 @@ export const Attractions = () => {
 
     // Separate into restaurants and activities
     const restaurants = results.filter(place =>
-        place.types?.includes("restaurant")
+        place.types && place.types.some(type => type.toLowerCase().includes("restaurant"))
     );
+    console.log("Restaurants:", restaurants);
     const activities = results.filter(place =>
         !place.types?.includes("restaurant")
     );
 
     const chunkedRestaurants = chunkArray(restaurants, 3);
     const chunkedActivities = chunkArray(activities, 3);
+
 
     return (
         <div className="container my-4">
@@ -53,7 +55,7 @@ export const Attractions = () => {
             {/* === Restaurants Carousel === */}
             {chunkedRestaurants.length > 0 && (
                 <>
-                    <h3 className="text-start mb-3">🍽️ Restaurants</h3>
+                    <h3 className="text-start mb-3">Restaurants</h3>
                     <div id="restaurantCarousel" className="carousel slide mb-5" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {chunkedRestaurants.map((chunk, index) => (
@@ -66,9 +68,14 @@ export const Attractions = () => {
                                             <AttractionCard key={`rest-${i}`} place={place} />
                                         ))}
                                     </div>
+
                                 </div>
+
                             ))}
+
                         </div>
+
+
 
                         <button
                             className="carousel-control-prev"
@@ -93,7 +100,7 @@ export const Attractions = () => {
             {/* === Activities Carousel === */}
             {chunkedActivities.length > 0 && (
                 <>
-                    <h3 className="text-start mb-3">🎉 Activities</h3>
+                    <h3 className="text-start mb-3">Activities</h3>
                     <div id="activityCarousel" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {chunkedActivities.map((chunk, index) => (

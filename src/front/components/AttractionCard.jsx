@@ -1,5 +1,4 @@
 import React from "react";
-import "../HotelCard.css"; // keep this if it holds shared styles
 
 export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
     const {

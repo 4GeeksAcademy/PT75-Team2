@@ -28,24 +28,23 @@ export const router = createBrowserRouter(
     // Note: The child paths of the Layout element replace the Outlet component with the elements contained in the "element" attribute of these child paths.
 
     // Root Route: All navigation will start from here.
-    <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
+    <Route path="/" element={<Layout />} >
+      <Route index element={<LandingPage />} />
+      <Route path="single/:theId" element={<Single />} />
+      <Route path="demo" element={<Demo />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="hotels" element={<Hotels />} />
+      <Route path="itinerary" element={<Itinerary />} />
+      <Route path="attractions" element={<Attractions />} />
 
-      {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
-
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/single/:theId" element={<Single />} />  {/* Dynamic route for single items */}
-      <Route path="/demo" element={<Demo />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/hotels" element={<Hotels />} />
-      <Route path="/itinerary" element={<Itinerary />} />
-      <Route path="/attractions" element={<Attractions />} />
-
-      {/* Protect Dashboard */}
-      <Route path="/" element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+      {/* Protected route for /home */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="home" element={<Home />} />
       </Route>
+
+      {/* Fallback for unmatched routes */}
+      <Route path="*" element={<h1>Page not found</h1>} />
     </Route>
   )
 );

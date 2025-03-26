@@ -238,7 +238,6 @@ def get_place_details(place_id):
 @api.route("/attractions", methods=["GET"])
 def get_attractions():
     destination = request.args.get("destination")
-    search_type = request.args.get("type", "tourist_attraction")
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
     if not GOOGLE_API_KEY:
@@ -248,16 +247,24 @@ def get_attractions():
         return jsonify({"error": "Destination is required"}), 400
 
     try:
-        url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={search_type}+in+{destination}&key={GOOGLE_API_KEY}"
-        response = requests.get(url)
-        data = response.json()
+        # We'll fetch both restaurants and attractions
+        queries = [
+            f"restaurant in {destination}",
+            f"tourist_attraction in {destination}"
+        ]
 
-        if data.get("status") != "OK":
-            return jsonify({"error": "Failed to fetch attractions", "details": data}), 500
+        all_results = []
 
-        attractions = data.get("results", [])
+        for query in queries:
+            url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={query}&key={GOOGLE_API_KEY}"
+            response = requests.get(url)
+            data = response.json()
 
-        for place in attractions:
+            if data.get("status") == "OK":
+                all_results.extend(data.get("results", []))
+
+        # Add photo_url for each place
+        for place in all_results:
             if "photos" in place:
                 photo_ref = place["photos"][0]["photo_reference"]
                 place[
@@ -265,8 +272,39 @@ def get_attractions():
             else:
                 place["photo_url"] = "/placeholder.jpg"
 
-        return jsonify({"results": attractions}), 200
+        return jsonify({"results": all_results}), 200
 
     except Exception as e:
         print("Error fetching attractions:", str(e))
         return jsonify({"error": "Internal server error", "details": str(e)}), 500
+
+
+@api.route("/top-destinations", methods=["GET"])
+def get_top_destinations():
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+    query = request.args.get("query")
+
+    if not GOOGLE_API_KEY:
+        return jsonify({"error": "Google API Key not found"}), 500
+
+    if not query:
+        return jsonify({"error": "Query parameter is required"}), 400
+
+    try:
+        url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={query}&key={GOOGLE_API_KEY}"
+        response = requests.get(url)
+        data = response.json()
+
+        for place in data.get("results", []):
+            if "photos" in place:
+                photo_ref = place["photos"][0]["photo_reference"]
+                place[
+                    "photo_url"] = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_ref}&key={GOOGLE_API_KEY}"
+            else:
+                place["photo_url"] = "/placeholder.jpg"
+
+        return jsonify({"results": data.get("results", [])}), 200
+
+    except Exception as e:
+        print("Error fetching destinations:", e)
+        return jsonify({"error": "Internal Server Error"}), 500

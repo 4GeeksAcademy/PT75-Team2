@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { HotelCard } from "../components/HotelCard";
-import "../HotelCard.css";
 
 export const Hotels = () => {
     const [destination, setDestination] = useState("");
@@ -9,8 +8,6 @@ export const Hotels = () => {
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(false);
     const [wishlist, setWishlist] = useState([]);
-    const [currentPhoto, setCurrentPhoto] = useState({});
-
 
 
     const handleSearch = async (e) => {
@@ -36,6 +33,9 @@ export const Hotels = () => {
             );
 
             setHotels(enrichedHotels);
+            localStorage.setItem("start_date", startDate);
+            localStorage.setItem("end_date", endDate);
+
         } catch (error) {
             console.error("Hotel search error:", error);
             alert("Something went wrong while searching for hotels.");
@@ -69,17 +69,6 @@ export const Hotels = () => {
 
         fetchWishlist();
     }, []);
-
-    const changePhoto = (placeId, direction) => {
-        setCurrentPhoto(prev => {
-            const current = prev[placeId] || 0;
-            const hotel = hotels.find(h => h.place_id === placeId);
-            const length = hotel?.photos?.length || 1;
-            const newIndex = (current + direction + length) % length;
-            return { ...prev, [placeId]: newIndex };
-        });
-    };
-
 
     const handleAddToWishlist = (hotel) => {
         setWishlist(prev =>
@@ -152,13 +141,11 @@ export const Hotels = () => {
             </div>
 
             <div className="container py-5">
-                <div className="row">
+                <div className="d-flex flex-wrap gap-4 justify-content-center">
                     {hotels.map((hotel, i) => (
                         <HotelCard
                             key={i}
                             hotel={hotel}
-                            currentPhoto={currentPhoto}
-                            onChangePhoto={changePhoto}
                             isWishlisted={wishlist.includes(hotel.place_id)}
                             onToggleWishlist={(hotel) => {
                                 setWishlist((prev) =>
