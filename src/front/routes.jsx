@@ -8,13 +8,11 @@ import {
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
-import { Demo } from "./pages/Demo";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import Itinerary from "./pages/Itinerary";
 import { LandingPage } from "./pages/landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { Dashboard } from "./pages/Dashboard";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
 
@@ -31,7 +29,6 @@ export const router = createBrowserRouter(
     <Route path="/" element={<Layout />} >
       <Route index element={<LandingPage />} />
       <Route path="single/:theId" element={<Single />} />
-      <Route path="demo" element={<Demo />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="hotels" element={<Hotels />} />
