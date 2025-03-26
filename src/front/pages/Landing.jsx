@@ -1,7 +1,7 @@
 import React from "react";
 import { LandingCard } from "../components/landingCard";
-import { HotelCard } from "../components/hotelCard";
-import { CityCard } from "../components/cityCard";
+import { HotelCard } from "../components/HotelLandingCard";
+import { CityCard } from "../components/CityCard";
 import { Attractions } from "../components/attractionCard";
 import '../components/card.css'
 import { AboutUs } from "../components/aboutUs";

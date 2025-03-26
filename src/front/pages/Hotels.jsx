@@ -11,6 +11,31 @@ export const Hotels = () => {
     const [wishlist, setWishlist] = useState([]);
     const [currentPhoto, setCurrentPhoto] = useState({});
 
+    const handleAddItinerary = async (e) => {
+        const token = localStorage.getItem("token");
+        const data = [{
+            location: hotels.location,
+            startDate: hotels.startDate,
+            endDate: hotels.endDate
+        }]
+        try {
+            const response = await fetch('https://miniature-invention-r4pp9wq9p46rh5x7q-3001.app.github.dev/itinerary', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(data)
+
+            })
+
+            const results = await response.json()
+            console.log("Here are your results", results)
+
+
+        } catch (err) { "Error adding hotel", err }
+    }
+
 
 
     const handleSearch = async (e) => {
