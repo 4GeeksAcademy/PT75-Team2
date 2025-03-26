@@ -1,49 +1,52 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// import { FontAwesomeIcon } from "fortawesome/react-fontawesome";
-// import { faPlane } from "fortawesome/react-fontawesome";
-import './card.css'
+import { Link, useNavigate } from "react-router-dom";
+import "/src/front/navbar.css"; // Adjust the path if needed
 
 export const Navbar = () => {
-	const profilepic = 'https://th.bing.com/th/id/OIP.6W2ogLXdf48OKWgl_5jSPgHaHa?rs=1&pid=ImgDetMain'
-	const token = sessionStorage.getItem('token');
-	return (
-		<nav className="navbar nav" style={{ backgroundColor: "lightblue" }}>
-			<div className="container  d-block align-items-center ">
-				<Link to="/" className="navbar-brand mb-0 h1" style={{ fontSize: "50px", fontFamily: "serif" }}>
-					{/* <FontAwesomeIcon icon={faPlane}/> */}
-					Tripsync
-				</Link>
-				<div className="profileLink align-items-right">
-					{token ? (
-						<Link to="/profile">
-							<img
-								src={profilepic}
-								alt="User Profile"
-								className="profile-picture rounded-circle"
-								style={{ height: "70px", width: "70px" }}
-							/>
-						</Link>
-					) : (
-						<div className="signLogBtn">
-							<Link to="/signup">
-								<button className="btn btn-primary me-3">Signup</button>
-							</Link>
-							<Link to="/login">
-								<button className="btn btn-success">Login</button>
-							</Link>
-						</div>
-					)}
-				</div>
+	const navigate = useNavigate();
+	const token = localStorage.getItem("token");
+	const profilepic = "https://th.bing.com/th/id/OIP.6W2ogLXdf48OKWgl_5jSPgHaHa?rs=1&pid=ImgDetMain";
 
-				<div className="links d-flex">
-					<div className="pageButtons d-flex align-items-center gap-3">
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		navigate("/login");
+	};
+
+	return (
+		<nav className="navbar navbar-expand-lg navbar-custom">
+			<div className="container d-flex justify-content-between align-items-center py-2">
+				<Link to="/" className="navbar-brand fs-3">
+					TripSync
+				</Link>
+
+				<div className="d-flex align-items-center gap-4">
+					<div className="d-flex gap-3">
 						<Link to="/hotels" className="nav-link">Hotels</Link>
 						<Link to="/attractions" className="nav-link">Attractions</Link>
 						<Link to="/maps" className="nav-link">Maps</Link>
 						<Link to="/itinerary" className="nav-link">Itinerary</Link>
 					</div>
 
+					{token ? (
+						<div className="d-flex align-items-center gap-3">
+							<Link to="/profile">
+								<img
+									src={profilepic}
+									alt="Profile"
+									className="rounded-circle"
+									style={{ height: "50px", width: "50px", objectFit: "cover" }}
+								/>
+							</Link>
+							<button className="btn btn-outline-light btn-sm" onClick={handleLogout}>
+								Logout
+							</button>
+						</div>
+					) : (
+						<div className="d-flex gap-2">
+							<Link to="/signup" className="btn btn-light btn-sm">Signup</Link>
+							<Link to="/login" className="btn btn-light btn-sm">Login</Link>
+						</div>
+					)}
 				</div>
 			</div>
 		</nav>

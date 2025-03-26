@@ -18,7 +18,7 @@ hr {
   margin-top: 20px;
 }
 
-a:link {
+#footerButton:link {
   color: white;
   background-color: transparent;
   font-weight: bold;
@@ -26,14 +26,14 @@ a:link {
   font-size: large;
 }
 
-a:visited {
+#footerButton:visited {
   color: white;
   background-color: transparent;
   font-weight: bold;
   text-decoration: underline;
 }
 
-a:hover {
+#footerButton:hover {
   color: white;
   background-color: transparent;
   text-shadow: 2px 2px 2px black;

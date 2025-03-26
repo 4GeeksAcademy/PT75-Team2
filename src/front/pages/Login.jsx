@@ -23,7 +23,7 @@ export const Login = () => {
             // Store token in localStorage
             localStorage.setItem("token", data.token);
             alert("Login successful! Redirecting to dashboard...");
-            navigate("/dashboard"); // Redirect to Dashboard
+            navigate("/home"); // Redirect to Dashboard
         } else {
             setError(data.error || "Invalid credentials. Please try again.");
         }

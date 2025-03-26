@@ -1,11 +1,7 @@
 import React from "react";
-import { ImageSlider } from "./ImageSlider";
-import "../HotelCard.css";
 
 export const HotelCard = ({
     hotel,
-    currentPhoto,
-    onChangePhoto,
     onToggleWishlist,
     isWishlisted,
 }) => {
@@ -48,43 +44,109 @@ export const HotelCard = ({
         }
     };
 
+    const handleAddToItinerary = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Please log in to add to itinerary.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    location: hotel.vicinity || hotel.name,
+                    start_date: localStorage.getItem("start_date"),
+                    end_date: localStorage.getItem("end_date"),
+                }),
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                alert(err.error || "Failed to add to itinerary");
+                return;
+            }
+
+            alert("Added to itinerary!");
+        } catch (err) {
+            console.error("Itinerary error:", err);
+            alert("Something went wrong.");
+        }
+    };
+
+
+    const photoUrl =
+        hotel?.photos?.[0]?.photo_reference
+            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hotel.photos[0].photo_reference}&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
+            : "/placeholder.jpg";
+
+
     return (
-        <div className="col-md-4 mb-4">
-            <div className="card hotel-card border-0 shadow-sm">
-                <div className="hotel-image-container position-relative">
-                    <ImageSlider
-                        photos={hotel.photos}
-                        currentIndex={currentPhoto[hotel.place_id] || 0}
-                        onChange={onChangePhoto}
-                        placeId={hotel.place_id}
-                    />
-                    <button
-                        className="wishlist-btn"
-                        onClick={handleAddToWishlist}
-                        title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+        <div
+            className="card shadow-sm position-relative"
+            style={{
+                width: "270px",
+                minWidth: "270px",
+                borderRadius: "12px",
+                overflow: "hidden",
+            }}
+        >
+            <div className="position-relative">
+                <img
+                    src={photoUrl}
+                    className="card-img-top"
+                    alt={hotel.name}
+                    onError={(e) => (e.target.src = "/placeholder.jpg")}
+                    style={{
+                        height: "240px",
+                        objectFit: "cover",
+                    }}
+                />
+                <button
+                    className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
+                    onClick={handleAddToWishlist}
+                    title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                    style={{
+                        width: "32px",
+                        height: "32px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    <i
+                        className={`bi ${isWishlisted ? "bi-heart-fill text-danger" : "bi-heart"}`}
+                    ></i>
+                </button>
+                <button
+                    className="btn btn-sm btn-success w-100 mt-2"
+                    onClick={handleAddToItinerary}
+                >
+                    <i className="bi bi-suitcase2-fill me-1"></i> Add to Itinerary
+                </button>
+            </div>
+
+            <div className="card-body px-3 pt-3 pb-2">
+                <h6 className="card-title mb-1">{hotel.name}</h6>
+                <p className="text-muted small mb-2">{hotel.vicinity}</p>
+
+                <div className="d-flex justify-content-between align-items-center">
+                    <span className="badge bg-light text-dark px-2 py-1">
+                        ⭐ {hotel.rating || "N/A"}
+                    </span>
+
+                    <a
+                        className="btn btn-sm btn-outline-primary"
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name)}&query_place_id=${hotel.place_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                     >
-                        <i className={`bi ${isWishlisted ? "bi-heart-fill text-danger" : "bi-heart text-light"}`}></i>
-                    </button>
-                </div>
-
-                <div className="card-body">
-                    <h5 className="card-title mb-1">{hotel.name}</h5>
-                    <p className="text-muted small mb-2">{hotel.vicinity}</p>
-
-                    <div className="d-flex justify-content-between align-items-center mt-2">
-                        <span className="rating-badge">
-                            <i className="bi bi-star-fill text-warning me-1"></i>
-                            {hotel.rating || "N/A"}
-                        </span>
-                        <a
-                            className="btn btn-sm btn-outline-primary d-flex align-items-center gap-1"
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel.name)}&query_place_id=${hotel.place_id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <i className="bi bi-geo-alt-fill"></i> Maps
-                        </a>
-                    </div>
+                        <i className="bi bi-geo-alt-fill me-1"></i> Maps
+                    </a>
                 </div>
             </div>
         </div>
