@@ -13,16 +13,16 @@ export const Footer = () => (
 				<div className="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
 				<div className="col-lg-3 col-md-6 mb-4 mb-md-0">
 					<h5 className="text-uppercase mb-0">Connect With Us</h5>
-					<Link to="/aboutus" className="about-us">About Us</Link>
+					<Link to="/aboutus" className="about-us" id="footerButton">About Us</Link>
 				</div>
 			</div>
 			<hr></hr>
 			<div className="links-container inline-row">
-				<Link to="/" className="p-5">HOME</Link>
-				<Link to="/hotel" className="p-5">HOTELS</Link>
-				<Link to="/attractions" className="p-5">ATTRACTIONS</Link>
-				<Link to="/maps" className="p-5">MAPS</Link>
-				<Link to="/itinerary" className="p-5">ITINERARY</Link>
+				<Link to="/" className="p-5" id="footerButton">HOME</Link>
+				<Link to="/hotel" className="p-5" id="footerButton">HOTELS</Link>
+				<Link to="/attractions" className="p-5" id="footerButton">ATTRACTIONS</Link>
+				<Link to="/maps" className="p-5" id="footerButton">MAPS</Link>
+				<Link to="/itinerary" className="p-5" id="footerButton">ITINERARY</Link>
 			</div>
 			<div className="copyright p-1">
 				© 2025 Copyright: <strong>TripSync.com</strong>
