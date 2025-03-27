@@ -19,7 +19,7 @@ export const Footer = () => (
 			<hr></hr>
 			<div className="links-container inline-row">
 				<Link to="/" className="p-5" id="footerButton">HOME</Link>
-				<Link to="/hotel" className="p-5" id="footerButton">HOTELS</Link>
+				<Link to="/hotels" className="p-5" id="footerButton">HOTELS</Link>
 				<Link to="/attractions" className="p-5" id="footerButton">ATTRACTIONS</Link>
 				<Link to="/maps" className="p-5" id="footerButton">MAPS</Link>
 				<Link to="/itinerary" className="p-5" id="footerButton">ITINERARY</Link>
