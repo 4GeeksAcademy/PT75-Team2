@@ -11,11 +11,11 @@ import { Single } from "./pages/Single";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import Itinerary from "./pages/Itinerary";
-import { LandingPage } from "./pages/landing";
+import { LandingPage } from "./pages/Landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
-
+import { AccountSettings } from "./pages/AccountSettings";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +34,7 @@ export const router = createBrowserRouter(
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
+      <Route path="/account" element={<AccountSettings />} />
 
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>

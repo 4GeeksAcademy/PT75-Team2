@@ -46,11 +46,28 @@ export const CarouselSection = ({ id, title, places }) => {
                 </div>
 
                 {/* Carousel controls */}
-                <button className="carousel-control-prev" type="button" data-bs-target={`#${id}`} data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon"></span>
+                <button
+                    className="carousel-control-prev d-flex align-items-center justify-content-center"
+                    type="button"
+                    data-bs-target={`#${id}`}
+                    data-bs-slide="prev"
+                >
+                    <span
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true"
+                    ></span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target={`#${id}`} data-bs-slide="next">
-                    <span className="carousel-control-next-icon"></span>
+
+                <button
+                    className="carousel-control-next d-flex align-items-center justify-content-center"
+                    type="button"
+                    data-bs-target={`#${id}`}
+                    data-bs-slide="next"
+                >
+                    <span
+                        className="carousel-control-next-icon"
+                        aria-hidden="true"
+                    ></span>
                 </button>
             </div>
         </div>

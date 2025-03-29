@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { dispatch } = useGlobalReducer();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,6 +25,7 @@ export const Login = () => {
         if (response.ok) {
             // Store token in localStorage
             localStorage.setItem("token", data.token);
+            dispatch({ type: "set_user", payload: data.user }); // Set user globally
             alert("Login successful! Redirecting to dashboard...");
             navigate("/home"); // Redirect to Dashboard
         } else {

@@ -20,10 +20,9 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(
         db.String(120), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(db.String(255), nullable=False)
+    avatar: Mapped[str] = mapped_column(db.String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         db.DateTime, default=datetime.utcnow)
-
-    # # Relationship to Itineraries
 
     def set_password(self, password: str) -> None:
         """Hashes and stores the password"""
@@ -40,7 +39,7 @@ class User(db.Model):
 
     def serialize(self) -> dict:
         """Returns user data without the password."""
-        return {"id": self.id, "name": self.name, "email": self.email}
+        return {"id": self.id, "name": self.name, "email": self.email, "avatar": self.avatar}
 
     def __repr__(self):
         return f"<User {self.name}>"
