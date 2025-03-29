@@ -1,0 +1,71 @@
+.wheel-container {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  display: flex;
+  align-content: right;
+  background: conic-gradient(
+    #ff4757 0deg 60deg,
+    #ffa502 60deg 120deg,
+    #2ed573 120deg 180deg,
+    #1e90ff 180deg 240deg,
+    #3742fa 240deg 300deg,
+    #ff6b81 300deg 360deg
+  );
+}
+
+.wheel-col {
+  float: right;
+}
+
+.wheel-arrow {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: #3742fa;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.spin-button {
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  justify-content: center;
+  width: auto;
+  float: center;
+  margin: auto;
+}
+
+.spin-button:hover {
+  background: #bcbdbe;
+}
+
+.selected-city {
+  float: center;
+  margin: auto;
+  font-size: x-large;
+}
+
+.sync-spin-text {
+  justify-content: center;
+}
+
+.container-row {
+  display: flex;
+}
+
+.destination-announce {
+  font-size: x-large;
+}
+
+.jumbotron-container {
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 20px;
+}
