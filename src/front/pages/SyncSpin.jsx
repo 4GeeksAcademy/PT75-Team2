@@ -6,7 +6,7 @@ import "../syncSpin.css";
 
 const cities = [
     "Paris", "Tokyo", "New York", "Sydney", "Barcelona",
-    "Dubai", "Cape Town", "Rio de Janeiro", "Rome", "Bangkok"
+    "Dubai", "Cape Town", "Rio de Janeiro", "Rome!", "Bangkok"
 ];
 // const cities = [
 //     { name: "Paris", lat: 48.8566, lng: 2.3522 },
@@ -60,7 +60,7 @@ const SyncSpin = () => {
                         <div className="col button-col mt-5">
                             <div className="row">
                                 <h1 className="display-5 destination-announce">Your next destination:</h1>
-                                {selectedCity && <h2 className="mt-1 mx-4 font-bold selected-city">{selectedCity}</h2>}
+                                {selectedCity && <h2 className="mt-1 mx-4 font-bold selected-city">{selectedCity}!</h2>}
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const SyncSpin = () => {
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container jumbotron-container">
                             <h1 class="display-4">What is SyncSpin?</h1>
-                            <p class="lead">Not sure where to jet-off to next? Leave that to SyncSpin.Spin the wheel and we'll take care of the rest!</p>
+                            <p class="lead">Not sure where to jet-off to next? Leave that to SyncSpin. Spin the wheel and we'll take care of the rest!</p>
                             <p class="lead">
                                 <button type="button" class="btn btn-light btn-lg spin-button" onClick={spinWheel}>
                                     Spin the Wheel!
