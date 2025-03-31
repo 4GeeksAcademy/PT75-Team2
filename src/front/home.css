@@ -1,0 +1,22 @@
+.hotelsContainer,
+.attractionsContainer {
+  height: flex;
+  width: auto;
+  padding: 20px;
+  margin: auto;
+  justify-content: center;
+}
+
+.card {
+  height: 100%;
+  min-width: 100px;
+  display: inline-flex;
+  vertical-align: top;
+  justify-content: center;
+  margin: 10px;
+}
+
+.container {
+  margin: auto;
+}
+
