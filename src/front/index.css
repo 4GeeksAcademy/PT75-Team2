@@ -1,5 +1,5 @@
 /* === Navbar/Profile Customization === */
-/* .profileLink {
+.profileLink {
   float: right;
   padding-top: 20px;
 }
@@ -14,7 +14,7 @@
 
 .links:hover {
   color: blue;
-} */
+}
 
 /* === Carousel Arrows Styling === */
 .carousel-control-prev,
