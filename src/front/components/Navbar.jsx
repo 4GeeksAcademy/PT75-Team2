@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "/src/front/navbar.css"; // Adjust the path if needed
+import "/src/front/navbar.css";
+import tripSyncLogo from "../assets/img/TripSync-logo2.png";
 
 export const Navbar = () => {
 	const navigate = useNavigate();
@@ -14,9 +15,9 @@ export const Navbar = () => {
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-custom">
-			<div className="container d-flex justify-content-between align-items-center py-2">
+			<div className="container d-flex justify-content-between align-items-center">
 				<Link to="/" className="navbar-brand fs-3">
-					TripSync
+					<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
 				</Link>
 
 				<div className="d-flex align-items-center gap-4">
