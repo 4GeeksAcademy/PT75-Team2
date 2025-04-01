@@ -37,7 +37,9 @@ export const router = createBrowserRouter(
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
-
+      <Route path="aboutus" element={<AboutUs />} />
+      <Route path="accountSettings" element={<AccountSettings />} />
+      
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>
         <Route path="home" element={<Home />} />

@@ -13,7 +13,7 @@ import requests
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
-CORS(api)
+# CORS(api)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -253,23 +253,28 @@ def add_to_wishlist():
     user_id = get_jwt_identity()
     data = request.get_json()
 
+    # Validate incoming data
+    if not data or "place_id" not in data:
+        return jsonify({"error": "Missing or invalid JSON payload"}), 400
+
     # Prevent duplicates
     existing = Wishlist.query.filter_by(
-        user_id=user_id, place_id=data["place_id"]).first()
+        user_id=user_id, place_id=data["place_id"]
+    ).first()
     if existing:
         return jsonify({"error": "Already in wishlist"}), 409
 
     new_item = Wishlist(
         user_id=user_id,
         place_id=data["place_id"],
-        name=data["name"],
+        name=data.get("name"),
         address=data.get("address"),
         rating=data.get("rating"),
         photo_reference=data.get("photo_reference")
     )
     db.session.add(new_item)
     db.session.commit()
-
+    print("Received wishlist payload:", data)
     return jsonify(new_item.serialize()), 201
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AttractionCard } from "../components/AttractionCard";
 
 // Helper to group cards
@@ -13,6 +13,7 @@ const chunkArray = (arr, size) => {
 export const Attractions = () => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
 
     const handleSearch = async () => {
         const response = await fetch(
@@ -26,7 +27,6 @@ export const Attractions = () => {
     const restaurants = results.filter(place =>
         place.types && place.types.some(type => type.toLowerCase().includes("restaurant"))
     );
-    console.log("Restaurants:", restaurants);
     const activities = results.filter(place =>
         !place.types?.includes("restaurant")
     );
@@ -34,6 +34,30 @@ export const Attractions = () => {
     const chunkedRestaurants = chunkArray(restaurants, 3);
     const chunkedActivities = chunkArray(activities, 3);
 
+    useEffect(() => {
+        const fetchWishlist = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+
+            try {
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}wishlist`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    const ids = data.map((item) => item.place_id);
+                    setWishlist(ids);
+                }
+            } catch (err) {
+                console.error("Error loading wishlist", err);
+            }
+        };
+
+        fetchWishlist();
+    }, []);
 
     return (
         <div className="container my-4">
@@ -65,7 +89,18 @@ export const Attractions = () => {
                                 >
                                     <div className="d-flex justify-content-center gap-3">
                                         {chunk.map((place, i) => (
-                                            <AttractionCard key={`rest-${i}`} place={place} />
+                                            <AttractionCard
+                                                key={`rest-${i}`}
+                                                place={place}
+                                                isWishlisted={wishlist.includes(place.place_id)}
+                                                onToggleWishlist={(place) => {
+                                                    setWishlist((prev) =>
+                                                        prev.includes(place.place_id)
+                                                            ? prev.filter((id) => id !== place.place_id)
+                                                            : [...prev, place.place_id]
+                                                    );
+                                                }}
+                                            />
                                         ))}
                                     </div>
 
@@ -110,7 +145,18 @@ export const Attractions = () => {
                                 >
                                     <div className="d-flex justify-content-center gap-3">
                                         {chunk.map((place, i) => (
-                                            <AttractionCard key={`act-${i}`} place={place} />
+                                            <AttractionCard
+                                                key={`act-${i}`}
+                                                place={place}
+                                                isWishlisted={wishlist.includes(place.place_id)}
+                                                onToggleWishlist={(place) => {
+                                                    setWishlist((prev) =>
+                                                        prev.includes(place.place_id)
+                                                            ? prev.filter((id) => id !== place.place_id)
+                                                            : [...prev, place.place_id]
+                                                    );
+                                                }}
+                                            />
                                         ))}
                                     </div>
                                 </div>

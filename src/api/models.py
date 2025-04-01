@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean, ForeignKey
+from sqlalchemy import String, Boolean, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token
@@ -97,7 +97,7 @@ class Wishlist(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     address: Mapped[str] = mapped_column(String(250), nullable=True)
     rating: Mapped[str] = mapped_column(String(10), nullable=True)
-    photo_reference: Mapped[str] = mapped_column(String(255), nullable=True)
+    photo_reference: Mapped[str] = mapped_column(Text, nullable=True)
 
     def serialize(self):
         return {
