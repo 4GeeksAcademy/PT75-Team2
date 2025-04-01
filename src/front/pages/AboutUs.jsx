@@ -12,7 +12,7 @@ export const AboutUs = () => {
             </div>
             <div className="container about-us-container d-flex justify-content-center p-2">
                 <p>
-                    Welcome to TripSync! We’re Mario, Ashley, and Gordon—three students at 4Geeks Acedemy who came together with a shared love for travel and technology to create this website as part of our final class project.
+                    Welcome to TripSync! We’re Mario, Ashley, and Gordon—three students at 4Geeks Academy who came together with a shared love for travel and technology to create this website as part of our final class project.
                     At TripSync, our mission is to make exploring the world easier and more exciting. Whether you’re looking for spontaneous travel inspiration or a carefully planned trip, we’ve built tools to help make your journey memorable. From a random trip location generator to curated destination guides, we aim to take the stress out of planning so you can focus on enjoying your travels.
                     This project is a result of countless hours of collaboration, creativity, and problem-solving. We're proud of what we've accomplished and hope it helps inspire your next adventure.
                     <br></br>
@@ -35,23 +35,23 @@ export const AboutUs = () => {
                             <span className="text-muted d-block mb-2">ormario1996@gmail.com</span>
                             <div className="d-flex align-items-center justify-content-center mt-4">
                                 <div className="row">
-                                    <Link onClick={() => window.location.href = "https://www.linkedin.com/in/mario-orol-5057951ba/"}>
+                                    <a href="https://www.linkedin.com/in/mario-orol-5057951ba/" target="_blank" rel="noopener noreferrer">
                                         <i className="fa-brands fa-linkedin fa-2xl"></i>
-                                    </Link>
+                                    </a>
                                     <h6 className="qr">QR</h6>
                                 </div>
                                 <br></br>
                                 <div className="row justify-content-center">
-                                    <Link onClick={() => window.location.href = "https://github.com/Mariorlando96"}>
+                                    <a href="https://github.com/Mariorlando96" target="_blank" rel="noopener noreferrer">
                                         <i className="fa-brands fa-github fa-2xl"></i>
-                                    </Link>
+                                    </a>
                                     <h6 className="qr">QR</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
+                
                     <div className="card m-2" style={{ width: "18rem" }}>
                         <div className="user text-center">
                             <div className="profile mt-4">
@@ -65,15 +65,15 @@ export const AboutUs = () => {
                             <span className="text-muted d-block mb-2">gordon.smithjr@hotmail.com</span>
                             <div className="d-flex align-items-center justify-content-center mt-4">
                                 <div className="row">
-                                    <Link onClick={() => window.location.href = "https://www.linkedin.com/in/gordon-smith-476705239/"}>
+                                    <a href="https://www.linkedin.com/in/gordon-smith-476705239/" target="_blank" rel="noopener noreferrer">
                                         <i className="fa-brands fa-linkedin fa-2xl"></i>
-                                    </Link>
+                                    </a>
                                     <h6 className="qr">QR</h6>
                                 </div>
                                 <div className="row justify-content-center">
-                                    <Link onClick={() => window.location.href = "https://github.com/1122gs"}>
+                                    <a href="https://github.com/1122gs" target="_blank" rel="noopener noreferrer">
                                         <i className="fa-brands fa-github fa-2xl"></i>
-                                    </Link>
+                                    </a>
                                     <h6 className="qr">QR</h6>
                                 </div>
                             </div>
@@ -91,20 +91,18 @@ export const AboutUs = () => {
                             <h4 className="mb-2">Ashley Dogan</h4>
                             <span className="text-muted d-block mb-0">Milwaukee, WI, USA</span>
                             <span className="text-muted d-block mb-2">ashleyjdogan@gmail.com</span>
-
-
                             <div className="d-flex align-items-center justify-content-center mt-4">
                                 <div className="row">
-                                    <Link onClick={() => window.location.href = "https://www.linkedin.com/in/ashley-j-dogan/"}>
+                                    <a href="https://www.linkedin.com/in/ashley-j-dogan/" target="_blank" rel="noopener noreferrer">
                                         <i className="fa-brands fa-linkedin fa-2xl"></i>
-                                    </Link>
+                                    </a>
                                     <h6 className="qr">QR</h6>
                                 </div>
                                 <br></br>
                                 <div className="row justify-content-center">
-                                    <Link onClick={() => window.location.href = "https://github.com/AshleyDogan"}>
+                                    <a href="https://github.com/AshleyDogan" target="_blank" rel="noopener noreferrer">
                                         <i className="fa-brands fa-github fa-2xl"></i>
-                                    </Link>
+                                    </a>
                                     <h6 className="qr">QR</h6>
                                 </div>
                             </div>

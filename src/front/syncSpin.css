@@ -71,3 +71,16 @@
   width: 80%;
   margin: 20px;
 }
+
+.card-img-top {
+  height: 200px;
+  width: auto;
+}
+
+.maps-button {
+  width: 16rem;
+}
+
+.fa-location-dot {
+  margin-right: 10px;
+}
