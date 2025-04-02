@@ -11,7 +11,7 @@ import requests
 
 api = Blueprint('api', __name__)
 
-# Allow CORS requests to this API
+# # Allow CORS requests to this API
 CORS(api)
 
 
@@ -55,6 +55,8 @@ def login():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
+    
+    
 
     user = User.query.filter_by(email=email).first()
     if not user or not user.check_password(password):
@@ -73,9 +75,10 @@ def protected():
     return jsonify({"message": "Access granted", "user": current_user}), 200
 
 
-@api.route("/itinerary", methods=["POST"])
+@api.route("/itinerary/", methods=["POST"])
 @jwt_required()
 def add_to_itinerary():
+    print("User ID from token:", get_jwt_identity())
     user_id = get_jwt_identity()
     data = request.get_json()
 
@@ -90,6 +93,29 @@ def add_to_itinerary():
     db.session.commit()
 
     return jsonify(new_item.serialize()), 201
+
+@api.route("/itinerary/<int:id>", methods=["PUT"])
+@jwt_required()
+def edit_to_itinerary(id):
+    print("User ID from token:", get_jwt_identity())
+    user_id = get_jwt_identity()
+    data = request.get_json()
+
+    itinerary_item = Itinerary.query.filter_by(id=id, user_id=user_id).first()
+    
+    if not itinerary_item:
+        return jsonify({"error": "Itinerary item not found"}), 404
+
+    itinerary_item.location = data.get("location", itinerary_item.location)
+    itinerary_item.start_date = data.get("start_date", itinerary_item.start_date)
+    itinerary_item.end_date = data.get("end_date", itinerary_item.end_date)
+
+    db.session.commit()
+    
+
+    return jsonify(itinerary_item.serialize()), 201
+
+
 
 
 @api.route("/itinerary", methods=["GET"])
@@ -112,6 +138,16 @@ def remove_itinerary_item(item_id):
     db.session.commit()
 
     return jsonify({"message": "Item removed"}), 200
+
+
+@api.route('/itinerary/<int:user_id>', methods=['GET'])
+def shared_itinerary(user_id):
+    itinerary_items = Itinerary.query.filter_by(user_id=user_id).all()
+
+    if not itinerary_items:
+        return jsonify({"error": "No itinerary found"}), 404
+
+    return jsonify([item.serialize() for item in itinerary_items]), 200
 
 
 @api.route("/hotels", methods=["GET"])

@@ -11,12 +11,11 @@ import { Single } from "./pages/Single";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import Itinerary from "./pages/Itinerary";
-
-import { LandingPage } from "./pages/Landing";
-
+import { LandingPage } from "./pages/landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
+import SharedItinerary from "./pages/SharedItinerary";
 
 
 
@@ -37,6 +36,8 @@ export const router = createBrowserRouter(
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
+      <Route path="/sharedItinerary/:userId" element={<SharedItinerary />} />
+
 
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>
