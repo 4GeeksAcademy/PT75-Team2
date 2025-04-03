@@ -15,9 +15,14 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-custom">
 			<div className="container d-flex justify-content-between align-items-center py-2">
-				<Link to="/" className="navbar-brand fs-3">
+				{ token?
+				(<Link to="/home" className="navbar-brand fs-3">
 					TripSync
-				</Link>
+				</Link>)
+				: (<Link to="/" className="navbar-brand fs-3">
+					TripSync
+				</Link>) 
+                }
 
 				<div className="d-flex align-items-center gap-4">
 					<div className="d-flex gap-3">

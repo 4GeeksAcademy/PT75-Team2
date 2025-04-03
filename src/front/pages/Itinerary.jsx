@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaTrashAlt, FaMapMarkerAlt, FaCalendarAlt, FaSuitcase } from "react-icons/fa";
 import { Attractions } from "./Attractions";
+import { Hotels } from "./Hotels"
 // import 'src/front/components/itinerary.css'
 
 const Itinerary = () => {
@@ -131,7 +132,7 @@ const Itinerary = () => {
                                             </button>
                                         </>
                                     ) : (
-                                        <>
+                                        <div className="align-items-center">
                                             <h5 className="card-title border-dark">
                                                 <FaMapMarkerAlt className="me-2 text-primary" />
                                                 {item.location}
@@ -140,30 +141,34 @@ const Itinerary = () => {
                                                 <FaCalendarAlt className="me-2 text-secondary" />
                                                 <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
                                             </p>
-                                            <div className="itineraryButtons float-end">
-                                            <button
-                                                className="btn btn-outline-primary btn-sm me-2"
-                                                onClick={() => startEditing(item)}
-                                            >
-                                                Edit
-                                            </button>
-                                            <button
-                                                className="btn btn-outline-danger btn-sm"
-                                                onClick={() => removeFromItinerary(item.id)}
-                                            >
-                                                <FaTrashAlt className="me-1" /> Remove
-                                            </button>
+                                            <div className="d-flex justify-content-between align-items-center pt-2">
+                                                <button
+                                                    className="btn btn-sm btn-outline-primary"
+                                                    onClick={() => startEditing(item)}
+                                                >
+                                                    Edit
+                                                </button>
+                                                <button
+                                                    className="btn btn-sm btn-outline-danger"
+                                                    onClick={() => removeFromItinerary(item.id)}
+                                                >
+                                                    <FaTrashAlt className="me-1" />
+                                                    Remove
+                                                </button>
                                             </div>
-                                            <div className="sharedItinerary text-center mb-4">
-                                                <input
-                                                    type="text"
-                                                    className="form-control d-inline-block w-auto float-start"
-                                                    value={shareableLink}
-                                                    readOnly
-                                                    onClick={(e) => e.target.select()}
-                                                />
+                                            <div className="text-center mb-4 float-start pt-3">
+                                                <button
+                                                    className="btn btn-outline-secondary"
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(shareableLink);
+                                                        alert("Link copied to clipboard!");
+                                                    }}
+                                                >
+                                                    Share Your Itinerary
+                                                </button>
                                             </div>
-                                        </>
+
+                                        </div>
                                     )}
                                 </div>
                             </div>

@@ -2,17 +2,17 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const SharedItinerary = () => {
-  const { share_id } = useParams();
+  const { userId } = useParams();
   const [itinerary, setItinerary] = useState(null);
 
   useEffect(() => {
     const fetchItinerary = async () => {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}shared/itinerary/${share_id}`);
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}shared/itinerary/${userId}`);
       const data = await res.json();
       setItinerary(data);
     };
     fetchItinerary();
-  }, [share_id]);
+  }, [userId]);
 
   if (!itinerary) return <p>Loading shared itinerary...</p>;
 
