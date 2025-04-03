@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Itinerary, Wishlist
 from api.utils import generate_sitemap, APIException
@@ -12,7 +13,7 @@ import requests
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
-CORS(api)
+# CORS(api)
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -71,6 +72,90 @@ def login():
 def protected():
     current_user = get_jwt_identity()
     return jsonify({"message": "Access granted", "user": current_user}), 200
+
+
+@api.route("/me", methods=["GET"])
+@jwt_required()
+def get_current_user():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify(user.serialize()), 200
+
+
+@api.route("/account", methods=["PATCH"])
+@jwt_required()
+def update_account():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    data = request.get_json()
+    user.name = data.get("name", user.name)
+    db.session.commit()
+
+    return jsonify({"message": "Profile updated", "user": user.serialize()}), 200
+
+
+@api.route("/account/password", methods=["PATCH"])
+@jwt_required()
+def update_password():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+
+    data = request.get_json()
+    current_password = data.get("current_password")
+    new_password = data.get("new_password")
+
+    if not user or not current_password or not new_password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    if not user.check_password(current_password):
+        return jsonify({"error": "Current password is incorrect"}), 403
+
+    user.set_password(new_password)
+    db.session.commit()
+
+    return jsonify({"message": "Password updated successfully"}), 200
+
+
+UPLOAD_FOLDER = os.path.join("static", "avatars")
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
+
+
+@api.route("/account/avatar", methods=["POST"])
+@jwt_required()
+def upload_avatar():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+
+    if 'avatar' not in request.files:
+        return jsonify({"error": "No file provided"}), 400
+
+    file = request.files['avatar']
+
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    if '.' not in file.filename or file.filename.rsplit('.', 1)[1].lower() not in ALLOWED_EXTENSIONS:
+        return jsonify({"error": "File type not allowed"}), 400
+
+    # Ensure upload folder exists
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+
+    filename = secure_filename(f"user_{user.id}_{file.filename}")
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    file.save(file_path)
+
+    # Store the relative path or full URL if preferred
+    user.avatar = f"/{file_path}"
+    db.session.commit()
+
+    return jsonify({"message": "Avatar uploaded", "avatar_url": user.avatar}), 200
 
 
 @api.route("/itinerary", methods=["POST"])
@@ -168,23 +253,28 @@ def add_to_wishlist():
     user_id = get_jwt_identity()
     data = request.get_json()
 
+    # Validate incoming data
+    if not data or "place_id" not in data:
+        return jsonify({"error": "Missing or invalid JSON payload"}), 400
+
     # Prevent duplicates
     existing = Wishlist.query.filter_by(
-        user_id=user_id, place_id=data["place_id"]).first()
+        user_id=user_id, place_id=data["place_id"]
+    ).first()
     if existing:
         return jsonify({"error": "Already in wishlist"}), 409
 
     new_item = Wishlist(
         user_id=user_id,
         place_id=data["place_id"],
-        name=data["name"],
+        name=data.get("name"),
         address=data.get("address"),
         rating=data.get("rating"),
         photo_reference=data.get("photo_reference")
     )
     db.session.add(new_item)
     db.session.commit()
-
+    print("Received wishlist payload:", data)
     return jsonify(new_item.serialize()), 201
 
 

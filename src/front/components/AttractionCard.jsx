@@ -67,7 +67,9 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
                     onError={(e) => (e.target.src = "/placeholder.jpg")}
                     style={{
                         height: "240px",
+                        width: "100%",
                         objectFit: "cover",
+                        objectPosition: "center"
                     }}
                 />
                 <button

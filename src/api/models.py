@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean, ForeignKey
+from sqlalchemy import String, Boolean, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token
@@ -20,10 +20,9 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(
         db.String(120), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(db.String(255), nullable=False)
+    avatar: Mapped[str] = mapped_column(db.String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         db.DateTime, default=datetime.utcnow)
-
-    # # Relationship to Itineraries
 
     def set_password(self, password: str) -> None:
         """Hashes and stores the password"""
@@ -40,7 +39,7 @@ class User(db.Model):
 
     def serialize(self) -> dict:
         """Returns user data without the password."""
-        return {"id": self.id, "name": self.name, "email": self.email}
+        return {"id": self.id, "name": self.name, "email": self.email, "avatar": self.avatar}
 
     def __repr__(self):
         return f"<User {self.name}>"
@@ -98,7 +97,7 @@ class Wishlist(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     address: Mapped[str] = mapped_column(String(250), nullable=True)
     rating: Mapped[str] = mapped_column(String(10), nullable=True)
-    photo_reference: Mapped[str] = mapped_column(String(255), nullable=True)
+    photo_reference: Mapped[str] = mapped_column(Text, nullable=True)
 
     def serialize(self):
         return {
