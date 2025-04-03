@@ -103,7 +103,9 @@ export const HotelCard = ({
                     onError={(e) => (e.target.src = "/placeholder.jpg")}
                     style={{
                         height: "240px",
+                        width: "100%",
                         objectFit: "cover",
+                        objectPosition: "center"
                     }}
                 />
                 <button
@@ -121,12 +123,6 @@ export const HotelCard = ({
                     <i
                         className={`bi ${isWishlisted ? "bi-heart-fill text-danger" : "bi-heart"}`}
                     ></i>
-                </button>
-                <button
-                    className="btn btn-sm btn-success w-100 mt-2"
-                    onClick={handleAddToItinerary}
-                >
-                    <i className="bi bi-suitcase2-fill me-1"></i> Add to Itinerary
                 </button>
             </div>
 
@@ -148,6 +144,13 @@ export const HotelCard = ({
                         <i className="bi bi-geo-alt-fill me-1"></i> Maps
                     </a>
                 </div>
+
+                <button
+                    className="btn btn-sm btn-success w-100 mt-2"
+                    onClick={handleAddToItinerary}
+                >
+                    <i className="bi bi-suitcase2-fill me-1"></i> Add to Itinerary
+                </button>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
 
+
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
 	const navigate = useNavigate();
@@ -67,8 +68,8 @@ export const Home = () => {
 			<section className="mb-5">
 				<h3>Saved Hotels</h3>
 				{hotels.length > 0 ? (
-					<div className="d-flex flex-wrap gap-4">
-						{hotels.slice(0, 3).map(hotel => (
+					<div className="d-flex overflow-auto gap-4 pb-2">
+						{hotels.map(hotel => (
 							<WishlistCard
 								key={hotel.place_id}
 								item={hotel}
@@ -88,8 +89,8 @@ export const Home = () => {
 			<section className="mb-5">
 				<h3>Saved Attractions</h3>
 				{attractions.length > 0 ? (
-					<div className="d-flex flex-wrap gap-4">
-						{attractions.slice(0, 3).map(attraction => (
+					<div className="d-flex overflow-auto gap-4 pb-2">
+						{attractions.map(attraction => (
 							<WishlistCard
 								key={attraction.place_id}
 								item={attraction}
