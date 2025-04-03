@@ -14,7 +14,11 @@ const WishlistCard = ({ item, onRemove, apiKey }) => {
             <img
                 src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${apiKey}`}
                 className="card-img-top"
-                style={{ height: "200px", objectFit: "cover" }}
+                style={{
+                    height: "300px", width: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center"
+                }}
                 alt={item.name}
                 onError={(e) => (e.target.src = "/placeholder.jpg")}
             />
