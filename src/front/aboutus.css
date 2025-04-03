@@ -1,5 +1,6 @@
 .profile-card {
   width: 280px;
+  height: auto;
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -10,13 +11,14 @@
 
 .card-header {
   background: dodgerblue;
-  height: 150px; /* Height of the purple section */
+  height: 150px; 
+  position: absolute;
   width: 100%;
 }
 
 .profile {
   position: absolute;
-  top: 10px; /* Moves the image up to overlap */
+  top: 5px; 
   left: 50%;
   transform: translateX(-50%);
   width: 150px;
@@ -24,6 +26,7 @@
   border-radius: 50%;
   overflow: hidden;
   border: 5px solid white;
+  background: white;
 }
 
 .profile img {
@@ -32,6 +35,8 @@
   object-fit: cover;
 }
 
-.card-body {
-  padding: 20px 20px 5px;
+.card-body{
+  padding: 150px 20px 5px;
+  margin-top: 15px;
 }
+

@@ -31,7 +31,7 @@ export const AboutUs = () => {
             <div className="container d-flex justify-content-center align-items-center p-2 mb-5">
 
 
-        {/* Mario Profile */}
+                {/* Mario Profile */}
                 <div className="card profile-card m-2">
                     <div className="card-header"></div>
                     <div className="user text-center">
@@ -71,7 +71,7 @@ export const AboutUs = () => {
                     </div>
                 </div>
 
-        {/* Gordon Profile */}
+                {/* Gordon Profile */}
                 <div className="card profile-card m-2">
                     <div className="card-header"></div>
                     <div className="user text-center">
@@ -113,7 +113,7 @@ export const AboutUs = () => {
                 </div>
 
 
-        {/* Ashley Profile*/}
+                {/* Ashley Profile*/}
                 <div className="card profile-card m-2" style={{ width: "18rem" }}>
                     <div className="card-header"></div>
                     <div className="user text-center">
@@ -130,7 +130,7 @@ export const AboutUs = () => {
                                 <div className="row justify-content-center align-items-center display-flex">
                                     <div className="col-5">
                                         <a href="https://www.linkedin.com/in/ashley-j-dogan/" target="_blank" rel="noopener noreferrer">
-                                            <i className="fa-brands fa-linkedin fa-2xl"></i>
+                                            <i className="fa-brands fa-linkedin fa-2xl icon"></i>
                                         </a>
                                     </div>
                                     <div className="col-5">
