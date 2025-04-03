@@ -1,17 +1,23 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "/src/front/navbar.css";
-import tripSyncLogo from "../assets/img/TripSync-logo2.png";
+import AccountDropdown from "./AccountDropdown";
+import "/src/front/navbar.css"; // Adjust the path if needed
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Navbar = () => {
 	const navigate = useNavigate();
 	const token = localStorage.getItem("token");
-	const profilepic = "https://th.bing.com/th/id/OIP.6W2ogLXdf48OKWgl_5jSPgHaHa?rs=1&pid=ImgDetMain";
+	const { store, dispatch } = useGlobalReducer();
+
+
+	const user = store.user;
 
 	const handleLogout = () => {
+		dispatch({ type: "logout" });
 		localStorage.removeItem("token");
-		navigate("/login");
+		navigate("/");
 	};
+
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-custom">
@@ -26,21 +32,12 @@ export const Navbar = () => {
 						<Link to="/attractions" className="nav-link">Attractions</Link>
 						<Link to="/syncspin" className="nav-link">SyncSpin</Link>
 						<Link to="/itinerary" className="nav-link">Itinerary</Link>
+						<Link to="/aboutus" className="nav-link">About us</Link>
 					</div>
 
-					{token ? (
+					{user ? (
 						<div className="d-flex align-items-center gap-3">
-							<Link to="/profile">
-								<img
-									src={profilepic}
-									alt="Profile"
-									className="rounded-circle"
-									style={{ height: "50px", width: "50px", objectFit: "cover" }}
-								/>
-							</Link>
-							<button className="btn btn-outline-light btn-sm" onClick={handleLogout}>
-								Logout
-							</button>
+							<AccountDropdown user={user} onLogout={handleLogout} />
 						</div>
 					) : (
 						<div className="d-flex gap-2">

@@ -12,12 +12,12 @@ import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import SyncSpin from "./pages/SyncSpin";
 import Itinerary from "./pages/Itinerary";
-import { LandingPage } from "./pages/landing";
+import { LandingPage } from "./pages/Landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
 import { AboutUs } from "./pages/AboutUs";
-
+import { AccountSettings } from "./pages/AccountSettings";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,7 +38,8 @@ export const router = createBrowserRouter(
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
       <Route path="aboutus" element={<AboutUs />} />
-
+      <Route path="accountSettings" element={<AccountSettings />} />
+      
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>
         <Route path="home" element={<Home />} />
