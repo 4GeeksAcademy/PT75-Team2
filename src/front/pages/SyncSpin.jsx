@@ -5,7 +5,10 @@ import "../syncSpin.css";
 
 const cities = [
     "Paris", "Tokyo", "New York", "Sydney", "Barcelona",
-    "Dubai", "Cape Town", "Rio de Janeiro", "Rome!", "Bangkok"
+    "Dubai", "Cape Town", "Rio de Janeiro", "Rome", "Bangkok",
+    "Madrid", "London", "Dublin", "Istanbul", "San Francisco", "New Orleans", "Milan",
+    "Berlin", "Cairo", "Dubai", "Mexico City", "Vancouver", "Prague", "Manila", "Seoul",
+    "Johannesburg", "Beunos Aires", "Amsterdam", "Nassau"
 ];
 
 
@@ -167,7 +170,7 @@ const SyncSpin = () => {
 
                         {attraction && (
                             <div className="col-md-4">
-                                <h2 className="display-6 text-center">Attraction:</h2>
+                                <h2 className="display-6 text-center">Attraction</h2>
                                 <div className="card m-2" style={{ width: "18rem" }}>
                                     <img
                                         src={getPhotoUrl(attraction)}
