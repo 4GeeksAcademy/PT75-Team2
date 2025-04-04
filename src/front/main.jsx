@@ -1,9 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'  // Global styles for your application
-import { RouterProvider } from "react-router-dom";  // Import RouterProvider to use the router
-import { router } from "./routes";  // Import the router configuration
-import { StoreProvider } from './hooks/useGlobalReducer';  // Import the StoreProvider for global state management
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+// import './newindex.css';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
+import { StoreProvider } from './hooks/useGlobalReducer';
+import useGlobalReducer from './hooks/useGlobalReducer';
 import { BackendURL } from './components/BackendURL';
 import { Tripsync } from '../contextapi';
 
@@ -14,6 +16,7 @@ const Main = () => {
               <BackendURL / >
         </React.StrictMode>
         );
+
     return (
         <Tripsync>
         <React.StrictMode>  
@@ -26,7 +29,8 @@ const Main = () => {
         </React.StrictMode>
         </Tripsync>
     );
-}
+};
+
 
 // Render the Main component into the root DOM element.
 ReactDOM.createRoot(document.getElementById('root')).render(<Main />)

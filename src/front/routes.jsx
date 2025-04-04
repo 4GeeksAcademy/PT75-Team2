@@ -10,14 +10,16 @@ import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
+import SyncSpin from "./pages/SyncSpin";
 import Itinerary from "./pages/Itinerary";
-import { LandingPage } from "./pages/landing";
+import { LandingPage } from "./pages/Landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
 import SharedItinerary from "./pages/SharedItinerary";
 
-
+import { AboutUs } from "./pages/AboutUs";
+import { AccountSettings } from "./pages/AccountSettings";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,12 +34,11 @@ export const router = createBrowserRouter(
       <Route index element={<LandingPage />} />
       <Route path="single/:theId" element={<Single />} />
       <Route path="login" element={<Login />} />
+      <Route path="syncspin" element={<SyncSpin />} />
       <Route path="signup" element={<Signup />} />
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
-      <Route path="/sharedItinerary/:userId" element={<SharedItinerary />} />
-
 
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>

@@ -14,7 +14,7 @@ const Itinerary = () => {
 
     const userId = localStorage.getItem("user_id");
     const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
-
+    // https://s-media-cache-ak0.pinimg.com/originals/ec/29/52/ec2952bd7f66a6ca4bc36c26e8c5bad2.jpg
 
 
     const fetchItinerary = async () => {
@@ -102,8 +102,8 @@ const Itinerary = () => {
                 <div className="row row-cols-1 row-cols-md-2 g-4">
                     {itinerary.map((item) => (
                         <div key={item.id} className="col">
-                            <div className="card h-100 shadow-sm">
-                                <div className="card-body">
+                            <div className="mb-4">
+                                <div className=" card-body p-0 mb-5" >
                                     {editingId === item.id ? (
                                         <>
                                             <input
@@ -133,14 +133,32 @@ const Itinerary = () => {
                                         </>
                                     ) : (
                                         <div className="align-items-center">
-                                            <h5 className="card-title border-dark">
-                                                <FaMapMarkerAlt className="me-2 text-primary" />
-                                                {item.location}
-                                            </h5>
-                                            <p className="card-text mb-2">
-                                                <FaCalendarAlt className="me-2 text-secondary" />
-                                                <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
-                                            </p>
+                                            <div className="itineraryCard">
+                                                <div>
+                                                    <p className="fw-bold text-info"style={{color:"whitesmoke"}}>
+                                                        {(() => {
+                                                            const today = new Date();
+                                                            const start = new Date(item.start_date);
+                                                            const diffTime = start.getTime() - today.getTime();
+                                                            const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                                            return daysLeft > 0
+                                                                ? `${daysLeft} day(s) left until your trip! ✈️`
+                                                                : `You're on your trip or it already passed! 🌴`;
+                                                        })()}
+                                                    </p>
+                                                </div>
+                                                <div className="p-3 pt-10" > 
+                                                <h5 className="card-title fs-3  ">
+                                                    <FaMapMarkerAlt className="me-2 text-primary" />
+                                                    {item.location}
+                                                </h5>
+                                                <p className="card-text mb-2">
+                                                    <FaCalendarAlt className="me-2 text-secondary" />
+                                                    <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
+                                                </p>
+                                                </div>
+                                            </div>
+                                            <br/>
                                             <div className="d-flex justify-content-between align-items-center pt-2">
                                                 <button
                                                     className="btn btn-sm btn-outline-primary"

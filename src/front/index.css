@@ -1,61 +1,62 @@
-/* .pageButton{
-    width: 80%;
-} */
+/* === Navbar/Profile Customization === */
 .profileLink {
   float: right;
   padding-top: 20px;
 }
+
 .links {
   color: whitesmoke;
 }
+
 .navbar-brand {
   color: white;
 }
+
 .links:hover {
   color: blue;
 }
 
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
+/* === Carousel Arrows Styling === */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 22px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease-in-out;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+  background-color: transparent;
 }
 
-.carousel-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: white;
 }
 
-.carousel-arrow.left {
-  left: 10px;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Make arrows white */
 }
 
-.carousel-arrow.right {
-  right: 10px;
+/* Optional: Smaller arrows on mobile */
+@media (max-width: 576px) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 36px;
+    height: 36px;
+  }
 }
 
+/* === Hero Background === */
 .hero-section {
-  background-image: url("/hotel-room.jpg"); /* place your background image in public/images */
+  background-image: url("/hotel-room.jpg");
   background-size: cover;
   background-position: center;
   height: 50vh;
   position: relative;
 }
 
+/* === Hotel Card Image Fixes === */
 .image-slider {
   height: 100%;
   width: 100%;
@@ -80,4 +81,18 @@
 
 .itineraryJumbotron{
   background-image: url('https://th.bing.com/th/id/OIP.XqTA8VtB9RntnTkXlzVqZAHaE8?rs=1&pid=ImgDetMain');
+}
+
+.itineraryCard{
+  background-image: url("https://th.bing.com/th/id/OIP.7Udfz_fzoj4TXEyEXMh9_gHaLG?rs=1&pid=ImgDetMain");
+  height: 330px;
+  border-radius: 15px;
+  
+}
+
+.myItineraryCard {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }

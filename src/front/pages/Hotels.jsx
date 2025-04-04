@@ -70,14 +70,6 @@ export const Hotels = () => {
         fetchWishlist();
     }, []);
 
-    const handleAddToWishlist = (hotel) => {
-        setWishlist(prev =>
-            prev.includes(hotel.place_id)
-                ? prev.filter(id => id !== hotel.place_id)
-                : [...prev, hotel.place_id]
-        );
-    };
-
     const fetchPlaceDetails = async (placeId) => {
         try {
             const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}place-details/${placeId}`);

@@ -19,6 +19,31 @@ export function StoreProvider({ children }) {
 
 // Custom hook to access the global state and dispatch function.
 export default function useGlobalReducer() {
-    const { dispatch, store } = useContext(StoreContext)
-    return { dispatch, store };
+    const { dispatch, store } = useContext(StoreContext);
+
+    const loadUserFromToken = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}me`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                dispatch({ type: "set_user", payload: user });
+            } else {
+                localStorage.removeItem("token");
+            }
+        } catch (error) {
+            console.error("Failed to load user:", error);
+            localStorage.removeItem("token");
+        }
+    };
+
+    return { dispatch, store, loadUserFromToken };
 }

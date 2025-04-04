@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AttractionCard } from "../components/AttractionCard";
+import { useLocation } from "react-router-dom";
 
 // Helper to group cards
 const chunkArray = (arr, size) => {
@@ -11,22 +12,24 @@ const chunkArray = (arr, size) => {
 };
 
 export const Attractions = () => {
+    const location = useLocation();
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
 
-    const handleSearch = async () => {
+    const handleSearch = async (customQuery = query) => {
         const response = await fetch(
-            `${import.meta.env.VITE_BACKEND_URL}attractions?destination=${encodeURIComponent(query)}`
+            `${import.meta.env.VITE_BACKEND_URL}attractions?destination=${encodeURIComponent(customQuery)}`
         );
         const data = await response.json();
         setResults(data.results || []);
     };
 
+
     // Separate into restaurants and activities
     const restaurants = results.filter(place =>
         place.types && place.types.some(type => type.toLowerCase().includes("restaurant"))
     );
-    console.log("Restaurants:", restaurants);
     const activities = results.filter(place =>
         !place.types?.includes("restaurant")
     );
@@ -34,23 +37,65 @@ export const Attractions = () => {
     const chunkedRestaurants = chunkArray(restaurants, 3);
     const chunkedActivities = chunkArray(activities, 3);
 
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const destination = params.get("destination");
+        if (destination) {
+            setQuery(destination);
+            handleSearch(destination);
+        }
+    }, [location]);
+
+
+    useEffect(() => {
+        const fetchWishlist = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+
+            try {
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}wishlist`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    const ids = data.map((item) => item.place_id);
+                    setWishlist(ids);
+                }
+            } catch (err) {
+                console.error("Error loading wishlist", err);
+            }
+        };
+
+        fetchWishlist();
+    }, []);
+
 
     return (
         <div className="container my-4">
             <h2 className="text-center mb-4">Discover Attractions</h2>
 
-            <div className="input-group mb-4">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter a destination (e.g., Miami)"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-                <button className="btn btn-primary" onClick={handleSearch}>
-                    Search
-                </button>
+            <div className="d-flex justify-content-center mb-4">
+                <div className="input-group w-100" style={{ maxWidth: "600px" }}>
+                    <span className="input-group-text bg-white border-end-0">
+                        <i className="bi bi-geo-alt-fill text-primary"></i>
+                    </span>
+                    <input
+                        type="text"
+                        className="form-control border-start-0 border-end-0"
+                        placeholder="Search for cities to explore..."
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                    />
+                    <button className="btn btn-primary" onClick={() => handleSearch()}>
+                        <i className="bi bi-search"></i>
+                    </button>
+                </div>
             </div>
+
 
             {/* === Restaurants Carousel === */}
             {chunkedRestaurants.length > 0 && (
@@ -65,7 +110,18 @@ export const Attractions = () => {
                                 >
                                     <div className="d-flex justify-content-center gap-3">
                                         {chunk.map((place, i) => (
-                                            <AttractionCard key={`rest-${i}`} place={place} />
+                                            <AttractionCard
+                                                key={`rest-${i}`}
+                                                place={place}
+                                                isWishlisted={wishlist.includes(place.place_id)}
+                                                onToggleWishlist={(place) => {
+                                                    setWishlist((prev) =>
+                                                        prev.includes(place.place_id)
+                                                            ? prev.filter((id) => id !== place.place_id)
+                                                            : [...prev, place.place_id]
+                                                    );
+                                                }}
+                                            />
                                         ))}
                                     </div>
 
@@ -110,7 +166,18 @@ export const Attractions = () => {
                                 >
                                     <div className="d-flex justify-content-center gap-3">
                                         {chunk.map((place, i) => (
-                                            <AttractionCard key={`act-${i}`} place={place} />
+                                            <AttractionCard
+                                                key={`act-${i}`}
+                                                place={place}
+                                                isWishlisted={wishlist.includes(place.place_id)}
+                                                onToggleWishlist={(place) => {
+                                                    setWishlist((prev) =>
+                                                        prev.includes(place.place_id)
+                                                            ? prev.filter((id) => id !== place.place_id)
+                                                            : [...prev, place.place_id]
+                                                    );
+                                                }}
+                                            />
                                         ))}
                                     </div>
                                 </div>
