@@ -26,7 +26,7 @@ export const Login = () => {
             localStorage.setItem('user_id', userId)};
         console.log("Login response:", data);
 
-        if (response.ok) {
+        if (response.ok) {out 
             // Store token in localStorage
             localStorage.setItem("token", data.token);
             dispatch({ type: "set_user", payload: data.user }); // Set user globally
