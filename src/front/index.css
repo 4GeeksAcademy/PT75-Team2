@@ -96,3 +96,10 @@
   box-shadow: none;
   padding: 0;
 }
+
+.myItineraryText{
+  padding-top: 170px;
+}
+.itineraryButtons{
+ padding-top: 200px;
+}

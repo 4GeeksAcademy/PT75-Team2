@@ -12,9 +12,15 @@ const Itinerary = () => {
     const [editEnd, setEditEnd] = useState("");
 
 
-    const userId = localStorage.getItem("user_id");
+    const userId = localStorage.getItem('user_id');
+if (!userId) {
+
+    console.log('User ID not found in localStorage.');
+} else {
+    console.log('User ID:', userId);
+}
+
     const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
-    // https://s-media-cache-ak0.pinimg.com/originals/ec/29/52/ec2952bd7f66a6ca4bc36c26e8c5bad2.jpg
 
 
     const fetchItinerary = async () => {
@@ -134,8 +140,8 @@ const Itinerary = () => {
                                     ) : (
                                         <div className="align-items-center">
                                             <div className="itineraryCard">
-                                                <div>
-                                                    <p className="fw-bold text-info"style={{color:"whitesmoke"}}>
+                                                <div className="d-flex justify-contentent-between">
+                                                    <p className="fw-bold text-info p-2 text-muted btn-outline">
                                                         {(() => {
                                                             const today = new Date();
                                                             const start = new Date(item.start_date);
@@ -146,20 +152,36 @@ const Itinerary = () => {
                                                                 : `You're on your trip or it already passed! 🌴`;
                                                         })()}
                                                     </p>
+
                                                 </div>
-                                                <div className="p-3 pt-10" > 
-                                                <h5 className="card-title fs-3  ">
-                                                    <FaMapMarkerAlt className="me-2 text-primary" />
-                                                    {item.location}
-                                                </h5>
-                                                <p className="card-text mb-2">
-                                                    <FaCalendarAlt className="me-2 text-secondary" />
-                                                    <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
-                                                </p>
+                                                <div className="itineraryButtons d-flex align-items-center float-end ">
+                                                    <button
+                                                        className="btn btn-sm  pe-3"
+                                                        onClick={() => startEditing(item)}
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        className="btn btn-sm "
+                                                        onClick={() => removeFromItinerary(item.id)}
+                                                    >
+                                                        <FaTrashAlt className="me-1" />
+
+                                                    </button>
+                                                </div>
+                                                <div className="myItineraryText" >
+                                                    <h5 className="card-title fs-3  ">
+                                                        <FaMapMarkerAlt className="me-2 text-primary" />
+                                                        {item.location}
+                                                    </h5> 
+                                                    <p className=" card-text mb-2 p-1">
+                                                        <FaCalendarAlt className="me-3 text-secondary " />
+                                                        <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <div className="d-flex justify-content-between align-items-center pt-2">
+                                            <br />
+                                            {/* <div className="d-flex justify-content-between align-items-center pt-2">
                                                 <button
                                                     className="btn btn-sm btn-outline-primary"
                                                     onClick={() => startEditing(item)}
@@ -173,7 +195,7 @@ const Itinerary = () => {
                                                     <FaTrashAlt className="me-1" />
                                                     Remove
                                                 </button>
-                                            </div>
+                                            </div> */}
                                             <div className="text-center mb-4 float-start pt-3">
                                                 <button
                                                     className="btn btn-outline-secondary"
