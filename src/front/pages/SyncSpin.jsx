@@ -67,11 +67,11 @@ const SyncSpin = () => {
                 </div>
                 <div className="col-6">
 
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container jumbotron-container">
-                            <h1 class="display-4">What is SyncSpin?</h1>
-                            <p class="lead">Not sure where to jet-off to next? Leave that to SyncSpin. Spin the wheel and we'll take care of the rest!</p>
-                            <p class="lead">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container jumbotron-container">
+                            <h1 className="display-4">What is SyncSpin?</h1>
+                            <p className="lead">Not sure where to jet-off to next? Leave that to SyncSpin. Spin the wheel and we'll take care of the rest!</p>
+                            <p className="lead">
                                 <button type="button" class="btn btn-light btn-lg spin-button" onClick={spinWheel}>
                                     Spin the Wheel!
                                 </button>
