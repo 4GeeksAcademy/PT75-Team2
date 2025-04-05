@@ -72,15 +72,43 @@
   margin: 20px;
 }
 
-.card-img-top {
-  height: 200px;
+.sync-card-img-top {
+  height: 180px;
   width: auto;
-}
-
-.maps-button {
-  width: 16rem;
 }
 
 .fa-location-dot {
   margin-right: 10px;
+}
+
+div.sync-card-body {
+  padding-top: 0px;
+  margin-top: 20px;
+  padding-top: 20px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.sync-card {
+  height: auto;
+}
+
+.sync-itinerary-button {
+  width: 17rem;
+  margin: auto;
+  margin-top: 10px;
+  height: 30px;
+  font-size: small;
+}
+
+
+.sync-maps-button {
+  width: 17rem;
+  margin: auto;
+  height: 30px;
+  font-size: small;
+}
+
+.sync-card-text {
+  font-size: small;
 }

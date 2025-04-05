@@ -26,26 +26,26 @@
   transform: translateY(-50%);
   transition: background-color 0.3s ease;
   background-color: transparent;
-}
+} 
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
   background-color: white;
-}
+} 
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: invert(1); /* Make arrows white */
-}
+  filter: invert(1); 
+} 
 
 /* Optional: Smaller arrows on mobile */
-@media (max-width: 576px) {
+ @media (max-width: 576px) {
   .carousel-control-prev,
   .carousel-control-next {
     width: 36px;
     height: 36px;
   }
-}
+} 
 
 /* === Hero Background === */
 .hero-section {
@@ -54,19 +54,19 @@
   background-position: center;
   height: 50vh;
   position: relative;
-}
+} 
 
 /* === Hotel Card Image Fixes === */
 .image-slider {
   height: 100%;
   width: 100%;
-}
+} 
 
 .slider-image {
   height: 100%;
   width: 100%;
   object-fit: cover;
-}
+} 
 
 @media (max-width: 768px) {
   .hotel-card {
@@ -77,4 +77,4 @@
   .hotel-card .card-body {
     height: auto;
   }
-}
+} 

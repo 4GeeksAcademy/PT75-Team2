@@ -77,6 +77,39 @@ const SyncSpin = () => {
         }, 3000);
     };
 
+    const saveToItinerary = async (place, type) => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Please log in to save to your itinerary.");
+            return;
+        }
+
+        const body = {
+            name: place.name,
+            location: getAddress(place),
+            place_id: place.place_id,
+            type, // e.g., "Hotel", "Restaurant", "Attraction"
+            photo_url: getPhotoUrl(place),
+            start_date: new Date().toISOString().split("T")[0], // Replace with real dates if needed
+            end_date: new Date().toISOString().split("T")[0],
+        };
+
+        try {
+            await fetch(`${BACKEND_URL}itinerary`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(body),
+            });
+            alert(`${type} added to your itinerary!`);
+        } catch (err) {
+            console.error("Failed to add to itinerary:", err);
+        }
+    };
+
+
     return (
         <div>
             <div className="row container-row inline-block">
@@ -114,25 +147,33 @@ const SyncSpin = () => {
                 </div>
             </div>
 
-            <div className="container card-container">
+            <div className="container sync-card-container ">
                 <div className="container d-flex justify-content-center align-items-center p-2">
                     <div className="row mt-4">
 
                         {hotel && (
                             <div className="col-md-4">
                                 <h2 className="display-6 text-center">Hotel</h2>
-                                <div className="card m-2" style={{ width: "18rem" }}>
+                                <div className="card m-2 sync-card" style={{ width: "18rem" }}>
                                     <img
                                         src={getPhotoUrl(hotel)}
-                                        className="card-img-top"
+                                        className="card-img-top sync-card-img-top"
                                         alt={hotel.name}
                                     />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{hotel.name}</h5>
-                                        <p className="card-text">{getAddress(hotel)}</p>
+                                    <button
+                                        className="btn btn-success sync-itinerary-button"
+                                        onClick={() => saveToItinerary(hotel, "Hotel")}
+                                    >
+                                        Add to Itinerary
+                                    </button>
+                                    <div className="card-body sync-card-body">
+                                        <h5 className="card-title sync-card-title">{hotel.name}</h5>
+                                        <p className="card-text sync-card-text">{getAddress(hotel)}</p>
+                                    </div>
+                                    <div className="card-footer sync-card-footer">
                                         <a
                                             href={`https://www.google.com/maps/place/?q=place_id:${hotel.place_id}`}
-                                            className="btn btn-outline-primary maps-button"
+                                            className="btn btn-outline-primary sync-maps-button"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
@@ -146,18 +187,25 @@ const SyncSpin = () => {
                         {restaurant && (
                             <div className="col-md-4">
                                 <h2 className="display-6 text-center">Restaurant</h2>
-                                <div className="card m-2" style={{ width: "18rem" }}>
+                                <div className="card sync-card m-2" style={{ width: "18rem" }}>
                                     <img
                                         src={getPhotoUrl(restaurant)}
-                                        className="card-img-top"
+                                        className="card-img-top sync-card-img-top"
                                         alt={restaurant.name}
                                     />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{restaurant.name}</h5>
-                                        <p className="card-text">{getAddress(restaurant)}</p>
+                                    <button
+                                        className="btn btn-success sync-itinerary-button"
+                                        onClick={() => saveToItinerary(restaurant, "Restaurant")}
+                                    >
+                                        Add to Itinerary
+                                    </button>                                    <div className="card-body sync-card-body">
+                                        <h5 className="card-title sync-card-title">{restaurant.name}</h5>
+                                        <p className="card-text sync-card-text">{getAddress(restaurant)}</p>
+                                    </div>
+                                    <div className="card-footer sync-card-footer">
                                         <a
                                             href={`https://www.google.com/maps/place/?q=place_id:${restaurant.place_id}`}
-                                            className="btn btn-outline-primary maps-button"
+                                            className="btn btn-outline-primary sync-maps-button"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
@@ -171,23 +219,31 @@ const SyncSpin = () => {
                         {attraction && (
                             <div className="col-md-4">
                                 <h2 className="display-6 text-center">Attraction</h2>
-                                <div className="card m-2" style={{ width: "18rem" }}>
+                                <div className="card m-2 sync-card" style={{ width: "18rem" }}>
                                     <img
                                         src={getPhotoUrl(attraction)}
-                                        className="card-img-top"
+                                        className="card-img-top sync-card-img-top"
                                         alt={attraction.name}
                                     />
-                                    <div className="card-body">
+                                    <button
+                                        className="btn btn-success sync-itinerary-button"
+                                        onClick={() => saveToItinerary(attraction, "Attraction")}
+                                    >
+                                        Add to Itinerary
+                                    </button>                                    <div className="card-body sync-card-body">
                                         <h5 className="card-title">{attraction.name}</h5>
-                                        <p className="card-text">{getAddress(attraction)}</p>
+                                        <p className="card-text sync-card-text">{getAddress(attraction)}</p>
+                                    </div>
+                                    <div className="card-footer sync-card-footer">
                                         <a
                                             href={`https://www.google.com/maps/place/?q=place_id:${attraction.place_id}`}
-                                            className="btn btn-outline-primary maps-button"
+                                            className="btn btn-outline-primary sync-maps-button"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
                                             <i class="fa-solid fa-location-dot"></i>View on Maps
                                         </a>
+
                                     </div>
                                 </div>
                             </div>

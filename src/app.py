@@ -21,7 +21,7 @@ static_file_dir = os.path.join(os.path.dirname(
 app = Flask(__name__)
 # CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 CORS(app,
-     origins=["https://fantastic-umbrella-v6vqjq665pj42q44-3000.app.github.dev"],
+     origins=[os.getenv("FRONTEND_URL")],
      supports_credentials=True)
 app.url_map.strict_slashes = False
 
