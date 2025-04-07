@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AccountDropdown from "./AccountDropdown";
 import "/src/front/navbar.css";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import tripSyncLogo from "../assets/img/TripSync-logo.png";
 
 export const Navbar = () => {
 	const navigate = useNavigate();
@@ -19,7 +20,9 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-custom">
 			<div className="container">
-				<Link to="/" className="navbar-brand fs-3">TripSync</Link>
+				<Link to="/" className="navbar-brand fs-3">					
+					<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
+				</Link>
 
 				<button
 					className="navbar-toggler"
