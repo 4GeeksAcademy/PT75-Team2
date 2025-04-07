@@ -89,8 +89,9 @@ export const Hotels = () => {
 
     return (
         <>
-            <div className="hero-section d-flex align-items-center justify-content-center text-center">
-                <div className="container bg-white bg-opacity-50 p-4 rounded shadow-lg" style={{ maxWidth: '900px' }}>
+            {/* 🔹 HERO SECTION */}
+            <div className="hero-section d-flex align-items-center justify-content-center text-center py-5" style={{ backgroundColor: "#f8f9fa" }}>
+                <div className="container bg-white bg-opacity-75 p-4 rounded shadow" style={{ maxWidth: '900px' }}>
                     <h2 className="fw-bold mb-4">Find Your Perfect Stay</h2>
                     <form onSubmit={handleSearch}>
                         <div className="row g-3">
@@ -132,24 +133,37 @@ export const Hotels = () => {
                 </div>
             </div>
 
+            {/* 🔹 RESULTS SECTION */}
             <div className="container py-5">
-                <div className="d-flex flex-wrap gap-4 justify-content-center">
-                    {hotels.map((hotel, i) => (
-                        <HotelCard
-                            key={i}
-                            hotel={hotel}
-                            isWishlisted={wishlist.includes(hotel.place_id)}
-                            onToggleWishlist={(hotel) => {
-                                setWishlist((prev) =>
-                                    prev.includes(hotel.place_id)
-                                        ? prev.filter((id) => id !== hotel.place_id)
-                                        : [...prev, hotel.place_id]
-                                );
-                            }}
-                        />
-                    ))}
-                </div>
+                {hotels.length > 0 ? (
+                    <>
+                        <h3 className="text-center mb-4">Search Results</h3>
+                        <div className="d-flex flex-wrap justify-content-center gap-4">
+                            {hotels.map((hotel, i) => (
+                                <HotelCard
+                                    key={i}
+                                    hotel={hotel}
+                                    isWishlisted={wishlist.includes(hotel.place_id)}
+                                    onToggleWishlist={(hotel) => {
+                                        setWishlist((prev) =>
+                                            prev.includes(hotel.place_id)
+                                                ? prev.filter((id) => id !== hotel.place_id)
+                                                : [...prev, hotel.place_id]
+                                        );
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    !loading && (
+                        <div className="text-center text-muted mt-5">
+                            <p>No hotels to show. Start by searching a destination.</p>
+                        </div>
+                    )
+                )}
             </div>
         </>
     );
+
 };

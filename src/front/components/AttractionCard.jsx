@@ -51,27 +51,30 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
 
     return (
         <div
-            className="card shadow-sm position-relative"
+            className="card shadow-sm position-relative border-0"
             style={{
                 width: "270px",
                 minWidth: "270px",
-                borderRadius: "12px",
-                overflow: "hidden",
+                borderRadius: "1rem",
+                transition: "transform 0.2s ease-in-out",
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         >
             <div className="position-relative">
                 <img
                     src={photo_url}
-                    className="card-img-top"
                     alt={name}
+                    className="card-img-top"
                     onError={(e) => (e.target.src = "/placeholder.jpg")}
                     style={{
                         height: "240px",
                         width: "100%",
                         objectFit: "cover",
-                        objectPosition: "center"
+                        objectPosition: "center",
                     }}
                 />
+
                 <button
                     className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
                     onClick={handleAddToWishlist}
@@ -85,8 +88,7 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
                     }}
                 >
                     <i
-                        className={`bi ${isWishlisted ? "bi-heart-fill text-danger" : "bi-heart"
-                            }`}
+                        className={`bi ${isWishlisted ? "bi-heart-fill text-danger" : "bi-heart"}`}
                     ></i>
                 </button>
             </div>
@@ -95,7 +97,7 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
                 <h6 className="card-title mb-1">{name}</h6>
                 <p className="text-muted small mb-2">{formatted_address}</p>
 
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex justify-content-between align-items-center mb-2">
                     <span className="badge bg-light text-dark px-2 py-1">
                         ⭐ {rating || "N/A"}
                     </span>
@@ -105,7 +107,7 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
                 </div>
 
                 <a
-                    className="btn btn-sm btn-outline-primary w-100 mt-3"
+                    className="btn btn-sm btn-outline-primary w-100"
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                         name
                     )}&query_place_id=${place_id}`}

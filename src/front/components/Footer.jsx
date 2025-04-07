@@ -1,32 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../front/footer.css"
+import "../../front/footer.css";
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
+	<footer className="footer mt-auto py-4 text-white bg-primary">
 		<div className="container">
-			<div className="row">
-				<div className="logo-div col-lg-6 col-md-12 mb-4 mb-md-0">
-					<h3 className="text"><strong>TripSync</strong></h3>
+			<div className="row align-items-start">
+				<div className="col-lg-6 text-center text-lg-start mb-4">
+					<Link to="/" className="navbar-brand fw-bold fs-3 text-white text-decoration-none">
+						TripSync
+					</Link>
 				</div>
-				<div className="col-lg-3 col-md-6 mb-md-0"></div>
-				<div className="col-lg-3 col-md-6 mb-md-0">
-					<h5 className="text-uppercase mb-0">
-						<Link to="/aboutus" className="about-us" id="footerButton">Connect With Us</Link>
-					</h5>
+
+
+				<div className="col-lg-3 ms-lg-auto text-center text-lg-end mb-4">
+					<Link to="/aboutus" className="text-white text-decoration-none fw-semibold d-block">
+						Connect With Us
+					</Link>
 				</div>
 			</div>
-			<hr></hr>
-			<div className="links-container inline-row">
-				<Link to="/" className="p-5" id="footerButton">Home</Link>
-				<Link to="/hotels" className="p-5" id="footerButton">Hotels</Link>
-				<Link to="/attractions" className="p-5" id="footerButton">Attractions</Link>
-				<Link to="/syncspin" className="p-5" id="footerButton">SyncSpin</Link>
-				<Link to="/itinerary" className="p-5" id="footerButton">Itinerary</Link>
+
+			<hr className="my-4 border-light" />
+
+			{/* Horizontal links bar — responsive! */}
+			<div className="d-flex flex-wrap justify-content-center gap-4 mb-3">
+				<Link to="/" className="text-white text-decoration-none fw-semibold">Home</Link>
+				<Link to="/hotels" className="text-white text-decoration-none fw-semibold">Hotels</Link>
+				<Link to="/attractions" className="text-white text-decoration-none fw-semibold">Attractions</Link>
+				<Link to="/syncspin" className="text-white text-decoration-none fw-semibold">SyncSpin</Link>
+				<Link to="/itinerary" className="text-white text-decoration-none fw-semibold">Itinerary</Link>
 			</div>
-			<div className="copyright p-1">
-				© 2025 Copyright: <strong>TripSync.com</strong>
+
+			<div className="text-center small">
+				&copy; 2025 <strong>TripSync.com</strong> — All rights reserved.
 			</div>
 		</div>
-	</footer >
+	</footer>
 );
