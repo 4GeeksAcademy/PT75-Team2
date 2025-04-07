@@ -25,7 +25,7 @@ export default function AccountDropdown({ user, onLogout }) {
                     </div>
                     <ul className="list-unstyled mb-0">
                         <li>
-                            <Link to="/account" className="dropdown-item py-1">
+                            <Link to="/accountSettings" className="dropdown-item py-1">
                                 <i className="bi bi-person px-3" /> Account Settings
                             </Link>
                         </li>

@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
 
-
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
 	const navigate = useNavigate();
@@ -63,10 +62,11 @@ export const Home = () => {
 
 	return (
 		<div className="container py-5">
-			<h1 className="text-center mb-4">Welcome to TripSync 🌍</h1>
+			<h1 className="text-center mb-5 fw-bold">Welcome to TripSync 🌍</h1>
 
+			{/* Saved Hotels */}
 			<section className="mb-5">
-				<h3>Saved Hotels</h3>
+				<h3 className="mb-3">Saved Hotels</h3>
 				{hotels.length > 0 ? (
 					<div className="d-flex overflow-auto gap-4 pb-2">
 						{hotels.map(hotel => (
@@ -81,13 +81,14 @@ export const Home = () => {
 				) : (
 					<p className="text-muted">You haven't saved any hotels yet.</p>
 				)}
-				<Link to="/hotels" className="btn btn-sm btn-outline-primary mt-2">
+				<Link to="/hotels" className="btn btn-sm btn-outline-primary mt-3">
 					View All Hotels
 				</Link>
 			</section>
 
+			{/* Saved Attractions */}
 			<section className="mb-5">
-				<h3>Saved Attractions</h3>
+				<h3 className="mb-3">Saved Attractions</h3>
 				{attractions.length > 0 ? (
 					<div className="d-flex overflow-auto gap-4 pb-2">
 						{attractions.map(attraction => (
@@ -102,27 +103,27 @@ export const Home = () => {
 				) : (
 					<p className="text-muted">You haven't saved any attractions yet.</p>
 				)}
-				<Link to="/attractions" className="btn btn-sm btn-outline-primary mt-2">
+				<Link to="/attractions" className="btn btn-sm btn-outline-primary mt-3">
 					View All Attractions
 				</Link>
 			</section>
 
-			<section>
-				<h3>Itinerary</h3>
+			{/* Itinerary Preview */}
+			<section className="mb-4">
+				<h3 className="mb-3">Itinerary</h3>
 				{itinerary.length > 0 ? (
 					itinerary.slice(0, 2).map((item) => (
 						<div key={item.id} className="border p-3 rounded shadow-sm mb-3">
 							<h6 className="mb-1">{item.location}</h6>
 							<p className="mb-0">
-								From: <strong>{item.start_date}</strong> to{" "}
-								<strong>{item.end_date}</strong>
+								From: <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
 							</p>
 						</div>
 					))
 				) : (
 					<p className="text-muted">You haven't created an itinerary yet.</p>
 				)}
-				<Link to="/Itinerary" className="btn btn-sm btn-outline-primary mt-2">
+				<Link to="/itinerary" className="btn btn-sm btn-outline-primary mt-3">
 					View Your Itinerary
 				</Link>
 			</section>
