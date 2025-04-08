@@ -23,11 +23,22 @@ export const Signup = () => {
         });
 
         const data = await response.json();
+        // if (data){
+        //     const user_name = data.user.name;
+        //     localStorage.setItem('user_name', user_name)
+        //     console.log(user_name)};
+        
+    
         console.log("Signup response:", data);
 
         if (response.ok) {
             alert("Signup successful! Redirecting to login...");
             navigate("/login"); // Redirect to Login page
+            const user_name = data.user.name;
+            localStorage.setItem('user_name', user_name);
+            console.log(user_name);
+
+            
         } else {
             alert(data.error || "Signup failed. Please try again.");
         }

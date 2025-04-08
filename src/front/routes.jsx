@@ -39,6 +39,7 @@ export const router = createBrowserRouter(
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
+      <Route path="shareditInerary/:user_id" element={<SharedItinerary />} />
 
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>

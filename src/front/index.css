@@ -98,7 +98,9 @@
 }
 
 .myItineraryText{
-  padding-top: 170px;
+  padding: 120px;
+  color:rgb(3, 3, 56);
+  
 }
 .itineraryButtons{
  padding-top: 200px;

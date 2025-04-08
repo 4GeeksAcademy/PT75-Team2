@@ -21,12 +21,12 @@ export const Login = () => {
         
 
         const data = await response.json();
-        if (data.success) {
-            const userId = data.user.id;
-            localStorage.setItem('user_id', userId)};
-        console.log("Login response:", data);
+        if (data) {
+            const user_id = data.user.id;
+            localStorage.setItem('user_id', user_id)};
+        // console.log("Login response:", user_id)};
 
-        if (response.ok) {out 
+        if (response.ok) {
             // Store token in localStorage
             localStorage.setItem("token", data.token);
             dispatch({ type: "set_user", payload: data.user }); // Set user globally

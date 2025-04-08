@@ -13,12 +13,12 @@ const Itinerary = () => {
 
 
     const userId = localStorage.getItem('user_id');
-if (!userId) {
+    if (!userId) {
 
-    console.log('User ID not found in localStorage.');
-} else {
-    console.log('User ID:', userId);
-}
+        console.log('User ID not found in localStorage.');
+    } else {
+        console.log('User ID:', userId);
+    }
 
     const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
 
@@ -102,6 +102,17 @@ if (!userId) {
                     <FaSuitcase className="me-2 text-dark" /> My Travel Itinerary
                 </h1>
                 <p className="lead text-muted">Plan, update, and manage your travel stops with ease.</p>
+                <div className="text-center mb-4 pb-5 float-end">
+                    <button
+                        className="btn btn-primary text-blue"
+                        onClick={() => {
+                            navigator.clipboard.writeText(shareableLink);
+                            alert("Link copied to clipboard!");
+                        }}
+                    >
+                        Share Your Itinerary
+                    </button>
+                </div>
             </div>
 
             {itinerary.length ? (
@@ -173,39 +184,12 @@ if (!userId) {
                                                     <h5 className="card-title fs-3  ">
                                                         <FaMapMarkerAlt className="me-2 text-primary" />
                                                         {item.location}
-                                                    </h5> 
+                                                    </h5>
                                                     <p className=" card-text mb-2 p-1">
                                                         <FaCalendarAlt className="me-3 text-secondary " />
                                                         <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
                                                     </p>
                                                 </div>
-                                            </div>
-                                            <br />
-                                            {/* <div className="d-flex justify-content-between align-items-center pt-2">
-                                                <button
-                                                    className="btn btn-sm btn-outline-primary"
-                                                    onClick={() => startEditing(item)}
-                                                >
-                                                    Edit
-                                                </button>
-                                                <button
-                                                    className="btn btn-sm btn-outline-danger"
-                                                    onClick={() => removeFromItinerary(item.id)}
-                                                >
-                                                    <FaTrashAlt className="me-1" />
-                                                    Remove
-                                                </button>
-                                            </div> */}
-                                            <div className="text-center mb-4 float-start pt-3">
-                                                <button
-                                                    className="btn btn-outline-secondary"
-                                                    onClick={() => {
-                                                        navigator.clipboard.writeText(shareableLink);
-                                                        alert("Link copied to clipboard!");
-                                                    }}
-                                                >
-                                                    Share Your Itinerary
-                                                </button>
                                             </div>
 
                                         </div>

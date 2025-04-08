@@ -278,16 +278,16 @@ def remove_itinerary_item(item_id):
     return jsonify({"message": "Item removed"}), 200
 
 
-@api.route('/itinerary/<int:user_id>', methods=['GET'])
+
+@api.route('/shared/itinerary/<int:user_id>', methods=['GET'])
 def shared_itinerary(user_id):
-    user_id = get_jwt_identity
-    itinerary_items = Itinerary.query.filter_by(user_id=user_id).all()
+    itinerary = Itinerary.query.filter_by(user_id=user_id).all()
 
-
-    if not itinerary_items:
+    if not itinerary:
         return jsonify({"error": "No itinerary found"}), 404
 
-    return jsonify([item.serialize() for item in itinerary_items]), 200
+    return jsonify([item.serialize() for item in itinerary]), 200
+
 
 
 @api.route("/hotels", methods=["GET"])

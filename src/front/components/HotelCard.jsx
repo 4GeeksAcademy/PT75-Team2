@@ -157,13 +157,6 @@ export const HotelCard = ({
                         <i className="bi bi-geo-alt-fill me-1"></i> Maps
                     </a>
                 </div>
-
-                <button
-                    className="btn btn-sm btn-success w-100 mt-2"
-                    onClick={handleAddToItinerary}
-                >
-                    <i className="bi bi-suitcase2-fill me-1"></i> Add to Itinerary
-                </button>
             </div>
         </div>
     );
