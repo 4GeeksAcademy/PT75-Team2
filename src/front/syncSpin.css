@@ -1,4 +1,4 @@
-.wheel-container {
+/* .wheel-container {
   position: relative;
   width: 240px;
   height: 240px;
@@ -111,4 +111,168 @@ div.sync-card-body {
 
 .sync-card-text {
   font-size: small;
+} */
+
+.wheel-container {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  border-radius: 50%;
+  border: 2px solid #545455;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(
+    #ff4757 0deg 60deg,
+    #ffa502 60deg 120deg,
+    #2ed573 120deg 180deg,
+    #1e90ff 180deg 240deg,
+    #3742fa 240deg 300deg,
+    #ff6b81 300deg 360deg
+  );
+}
+
+.wheel-arrow {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.wheel-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spin-button {
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  display: block;
+  margin: 1rem auto;
+}
+
+.spin-button:hover {
+  background: #bcbdbe;
+}
+
+.selected-city {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+  margin-top: 0.5rem;
+}
+
+.sync-spin-text {
+  justify-content: center;
+}
+
+.destination-announce {
+  font-size: x-large;
+  text-align: center;
+}
+
+.jumbotron-container {
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.sync-card-img-top {
+  height: 180px;
+  width: auto;
+  object-fit: cover;
+}
+
+.fa-location-dot {
+  margin-right: 10px;
+}
+
+.sync-card-body {
+  padding-top: 20px !important;
+  margin-top: 20px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.sync-card {
+  height: auto;
+}
+
+.sync-itinerary-button,
+.sync-maps-button {
+  width: 17rem;
+  margin: 10px auto 0 auto;
+  height: 30px;
+  font-size: small;
+  display: block;
+}
+
+.sync-card-text {
+  font-size: small;
+}
+
+.container-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .wheel-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .destination-announce {
+    font-size: 1.2rem;
+  }
+
+  .selected-city {
+    font-size: 1.3rem;
+  }
+
+  .sync-card-img-top {
+    height: 150px;
+  }
+
+  .sync-itinerary-button,
+  .sync-maps-button {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .jumbotron-container {
+    width: 100%;
+    margin: 0;
+  }
+
+  .sync-card-body {
+    height: auto;
+    margin-top: 10px;
+    padding-top: 20px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wheel-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .selected-city {
+    font-size: 2rem;
+  }
 }
