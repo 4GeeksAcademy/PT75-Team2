@@ -147,3 +147,18 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* Calendar in the Hotels.jsx*/
+.rdrCalendarWrapper {
+  border-radius: 0.5rem;
+  font-family: inherit;
+}
+
+.rdrDateDisplay {
+  display: none; /* hides the input at the top */
+}
+
+.rdrMonthAndYearPickers select {
+  border-radius: 4px;
+  padding: 2px 4px;
+}
