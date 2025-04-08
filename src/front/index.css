@@ -26,25 +26,16 @@
   transform: translateY(-50%);
   transition: background-color 0.3s ease;
   background-color: transparent;
-}
+} 
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
   background-color: white;
-}
+} 
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1); /* Make arrows white */
-}
-
-/* Optional: Smaller arrows on mobile */
-@media (max-width: 576px) {
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 36px;
-    height: 36px;
-  }
 }
 
 /* === Hero Background === */
@@ -54,27 +45,65 @@
   background-position: center;
   height: 50vh;
   position: relative;
-}
+} 
 
 /* === Hotel Card Image Fixes === */
 .image-slider {
   height: 100%;
   width: 100%;
-}
+} 
 
 .slider-image {
   height: 100%;
   width: 100%;
   object-fit: cover;
+} 
+
+/* new changes mobile tweaks */
+/* === GLOBAL RESPONSIVE TWEAKS === */
+body {
+  overflow-x: hidden;
+  font-family: "Segoe UI", sans-serif;
 }
 
-@media (max-width: 768px) {
-  .hotel-card {
-    height: auto;
+/* Make text & padding adapt to screen size */
+@media (max-width: 576px) {
+  .navbar .nav-link {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
   }
 
-  .hotel-image-container,
-  .hotel-card .card-body {
-    height: auto;
+  .navbar-brand {
+    font-size: 1.25rem;
   }
-}
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .hero-section {
+    height: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .links-container {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  #footerButton {
+    padding: 0.5rem 0;
+    display: block;
+    text-align: center;
+  }
+} 

@@ -1,4 +1,4 @@
-footer {
+.footer {
   background-color: dodgerblue;
   color: white;
 }
@@ -37,8 +37,4 @@ hr {
   color: white;
   background-color: transparent;
   text-shadow: 2px 2px 2px black;
-}
-
-.about-us {
-  font-size: smaller;
 }
