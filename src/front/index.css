@@ -78,30 +78,3 @@
     height: auto;
   }
 }
-
-.itineraryJumbotron{
-  background-image: url('https://th.bing.com/th/id/OIP.XqTA8VtB9RntnTkXlzVqZAHaE8?rs=1&pid=ImgDetMain');
-}
-
-.itineraryCard{
-  background-image: url("https://th.bing.com/th/id/OIP.7Udfz_fzoj4TXEyEXMh9_gHaLG?rs=1&pid=ImgDetMain");
-  height: 330px;
-  border-radius: 15px;
-  
-}
-
-.myItineraryCard {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-}
-
-.myItineraryText{
-  padding: 120px;
-  color:rgb(3, 3, 56);
-  
-}
-.itineraryButtons{
- padding-top: 200px;
-}

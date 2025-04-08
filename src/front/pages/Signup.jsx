@@ -23,11 +23,7 @@ export const Signup = () => {
         });
 
         const data = await response.json();
-        // if (data){
-        //     const user_name = data.user.name;
-        //     localStorage.setItem('user_name', user_name)
-        //     console.log(user_name)};
-        
+       
     
         console.log("Signup response:", data);
 

@@ -24,7 +24,7 @@ export const Login = () => {
         if (data) {
             const user_id = data.user.id;
             localStorage.setItem('user_id', user_id)};
-        // console.log("Login response:", user_id)};
+       
 
         if (response.ok) {
             // Store token in localStorage
