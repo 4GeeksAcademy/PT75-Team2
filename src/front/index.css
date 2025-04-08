@@ -26,12 +26,12 @@
   transform: translateY(-50%);
   transition: background-color 0.3s ease;
   background-color: transparent;
-} 
+}
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
   background-color: white;
-} 
+}
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -45,19 +45,19 @@
   background-position: center;
   height: 50vh;
   position: relative;
-} 
+}
 
 /* === Hotel Card Image Fixes === */
 .image-slider {
   height: 100%;
   width: 100%;
-} 
+}
 
 .slider-image {
   height: 100%;
   width: 100%;
   object-fit: cover;
-} 
+}
 
 /* new changes mobile tweaks */
 /* === GLOBAL RESPONSIVE TWEAKS === */
@@ -106,4 +106,44 @@ body {
     display: block;
     text-align: center;
   }
-} 
+}
+
+/* === Elegant Horizontal Scroll Styling === */
+.scroll-wrapper {
+  scroll-behavior: smooth;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.scroll-wrapper:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Firefox scrollbar styling */
+.scroll-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Hide scrollbar completely on small screens */
+@media (max-width: 576px) {
+  .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-wrapper {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
