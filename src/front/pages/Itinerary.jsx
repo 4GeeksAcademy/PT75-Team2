@@ -130,19 +130,19 @@ const Itinerary = () => {
       {itinerary.length ? (
         <div className="d-flex flex-column align-items-center gap-4">
           {itinerary.map((item) => (
-            <div key={item.id} style={{ width: "100%", maxWidth: "700px", height: "400px" }}>
+            <div key={item.id} style={{ width: "100%", maxWidth: "700px" }}>
               <div className="card shadow-sm h-100 border-0 rounded-4 overflow-hidden">
 
                 <img
                   src={item.location_image_url}
                   className="card-img-top"
                   alt={item.location}
-                  style={{ height: "200px", objectFit: "cover" }}
+                  style={{ height: "300px", objectFit: "cover" }}
                   onError={(e) => (e.target.src = "/fallback.jpg")}
                 />
 
 
-                <div className="card-body d-flex flex-column justify-content-between">
+                <div className="card-body d-flex flex-column justify-content-between py-3">
                   {editingId === item.id ? (
                     <>
                       <input
@@ -185,13 +185,14 @@ const Itinerary = () => {
                             : `You're on your trip or it already passed! 🌴`;
                         })()}
                       </p>
+                     
 
-                      <h5 className="card-title">
+                      <h5>
                         <FaMapMarkerAlt className="me-2 text-primary" />
                         {item.location}
                       </h5>
 
-                      <p className="card-text">
+                      <p className="trip-card-date">
                         <FaCalendarAlt className="me-2 text-secondary" />
                         <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
                       </p>
