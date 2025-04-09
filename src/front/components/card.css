@@ -1,0 +1,56 @@
+
+.profileLink {
+    float: right;
+    padding-top: 20px;
+  }
+  .links {
+    color: whitesmoke;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .links:hover {
+    color: blue;
+  }
+  
+  .landingCard, .hotelCard, .attractionCard{
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .card {
+    display: flex;
+    flex: 0 0 calc(33.33% - 20px);
+    min-width: 300px;
+    
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    height: 500px;
+    width: 400px;
+  }
+  
+  .card-img-top {
+    height: 500px;
+    width: 400px;
+  }
+  .card-price{
+    background-color: white;
+    padding: 5px;
+    position: absolute;
+    float: right;
+    
+  }
+.aboutUs{
+    width: 100%;
+    margin-bottom: 15px;
+}
+.aboutText{
+    font-size: 30px;
+}
+  
+  
+  
+  
+  

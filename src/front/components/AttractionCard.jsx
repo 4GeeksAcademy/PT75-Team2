@@ -1,6 +1,9 @@
 import React from "react";
+import { useTripSyncContext } from "../../contextapi";
 
 export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
+    const {handleAddToWishlist, handleAddToItinerary} = useTripSyncContext();
+
     const {
         name,
         photo_url,
@@ -10,44 +13,44 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
         place_id,
     } = place;
 
-    const handleAddToWishlist = async () => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Please log in to save favorites.");
-            return;
-        }
+    // const handleAddToWishlist = async () => {
+    //     const token = localStorage.getItem("token");
+    //     if (!token) {
+    //         alert("Please log in to save favorites.");
+    //         return;
+    //     }
 
-        try {
-            const method = isWishlisted ? "DELETE" : "POST";
-            const endpoint = isWishlisted
-                ? `${import.meta.env.VITE_BACKEND_URL}wishlist/${place_id}`
-                : `${import.meta.env.VITE_BACKEND_URL}wishlist`;
+    //     try {
+    //         const method = isWishlisted ? "DELETE" : "POST";
+    //         const endpoint = isWishlisted
+    //             ? `${import.meta.env.VITE_BACKEND_URL}wishlist/${place_id}`
+    //             : `${import.meta.env.VITE_BACKEND_URL}wishlist`;
 
-            const payload = isWishlisted
-                ? null
-                : JSON.stringify({
-                    place_id,
-                    name,
-                    address: formatted_address,
-                    rating,
-                    photo_reference: place.photos?.[0]?.photo_reference || "",
-                });
+    //         const payload = isWishlisted
+    //             ? null
+    //             : JSON.stringify({
+    //                 place_id,
+    //                 name,
+    //                 address: formatted_address,
+    //                 rating,
+    //                 photo_reference: place.photos?.[0]?.photo_reference || "",
+    //             });
 
-            await fetch(endpoint, {
-                method,
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                ...(payload && { body: payload }),
-            });
+    //         await fetch(endpoint, {
+    //             method,
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${token}`,
+    //             },
+    //             ...(payload && { body: payload }),
+    //         });
 
-            onToggleWishlist(place);
-        } catch (err) {
-            console.error("Wishlist error:", err);
-            alert("Error updating wishlist.");
-        }
-    };
+    //         onToggleWishlist(place);
+    //     } catch (err) {
+    //         console.error("Wishlist error:", err);
+    //         alert("Error updating wishlist.");
+    //     }
+    // };
 
     return (
         <div
@@ -77,7 +80,7 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
 
                 <button
                     className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
-                    onClick={handleAddToWishlist}
+                    onClick={()=>{handleAddToWishlist(place); onToggleWishlist(place)}}
                     title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     style={{
                         width: "32px",
@@ -104,7 +107,17 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
                     <span className="text-muted small">
                         💰 {price_level ? `$`.repeat(price_level) : "N/A"}
                     </span>
+                    
                 </div>
+                <div>
+                <button
+                    className="btn btn-sm btn-primary w-100 mt-2"
+                    
+                    onClick={()=>{handleAddToItinerary(place)}}
+                >
+                    <i className="bi bi-suitcase2-fill me-1" ></i> Add to Itinerary
+                </button>
+            </div>
 
                 <a
                     className="btn btn-sm btn-outline-primary w-100"
