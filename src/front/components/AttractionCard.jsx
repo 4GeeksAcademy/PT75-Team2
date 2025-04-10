@@ -128,7 +128,7 @@ export const AttractionCard = ({ place, isWishlisted, onToggleWishlist }) => {
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                             name
                         )}&query_place_id=${place_id}`}
-                        target="_blank"
+                        target="_blank" 
                         rel="noopener noreferrer"
                     >
                         <i className="bi bi-geo-alt-fill me-1"></i> View on Maps
