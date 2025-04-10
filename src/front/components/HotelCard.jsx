@@ -9,81 +9,6 @@ export const HotelCard = ({
 }) => {
     const { handleAddToWishlist, handleAddToItinerary } = useTripSyncContext();
 
-    // const handleAddToWishlist = async () => {
-    //     const token = localStorage.getItem("token");
-    //     if (!token) {
-    //         alert("Please log in to save favorites.");
-    //         return;
-    //     }
-
-    //     try {
-    //         const method = isWishlisted ? "DELETE" : "POST";
-    //         const endpoint = isWishlisted
-    //             ? `${import.meta.env.VITE_BACKEND_URL}wishlist/${hotel.place_id}`
-    //             : `${import.meta.env.VITE_BACKEND_URL}wishlist`;
-
-    //         const payload = isWishlisted
-    //             ? null
-    //             : JSON.stringify({
-    //                 place_id: hotel.place_id,
-    //                 name: hotel.name,
-    //                 address: hotel.vicinity,
-    //                 rating: hotel.rating,
-    //                 photo_reference: hotel.photos?.[0]?.photo_reference || "",
-    //             });
-
-    //         await fetch(endpoint, {
-    //             method,
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //             ...(payload && { body: payload }),
-    //         });
-
-            // onToggleWishlist(hotel);
-    //     } catch (err) {
-    //         console.error("Wishlist error:", err);
-    //         alert("Something went wrong updating the wishlist.");
-    //     }
-    // };
-
-    // const handleAddToItinerary = async () => {
-    //     const token = localStorage.getItem("token");
-    //     if (!token) {
-    //         alert("Please log in to add to itinerary.");
-    //         return;
-    //     }
-    //     try {
-    //         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary/`, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Authorization: `Bearer ${token}`,
-                    
-    //             },
-
-    //             body: JSON.stringify({
-    //                 location: hotel.vicinity || hotel.name,
-    //                 start_date: localStorage.getItem("start_date"),
-    //                 end_date: localStorage.getItem("end_date"),
-    //             }),
-    //         });
-            
-
-    //         if (!response.ok) {
-    //             const err = await response.json();
-    //             alert(err.error || "Failed to add to itinerary");
-    //             return;
-    //         }
-
-    //         alert("Added to itinerary!");
-    //     } catch (err) {
-    //         console.error("Itinerary error:", err);
-    //         alert(`Something went wrong: ${err.message}`);
-    //     }
-    // };
-
 
     const photoUrl =
         hotel?.photos?.[0]?.photo_reference
@@ -118,7 +43,7 @@ export const HotelCard = ({
 
                 <button
                     className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
-                    onClick={()=> {handleAddToWishlist(hotel,isWishlisted)}}
+                    onClick={() => { handleAddToWishlist(hotel, isWishlisted) }}
                     title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     style={{
                         width: "32px",
@@ -134,8 +59,8 @@ export const HotelCard = ({
                 </button>
                 <button
                     className="btn btn-sm btn-primary w-100 mt-2"
-                    
-                    onClick={()=>{handleAddToItinerary(hotel)}}
+
+                    onClick={() => { handleAddToItinerary(hotel) }}
                 >
                     <i className="bi bi-suitcase2-fill me-1" ></i> Add to Itinerary
                 </button>

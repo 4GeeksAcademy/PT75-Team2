@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import tripSyncLogo from "../assets/img/TripSync-logo.png";
 
 export const Signup = () => {
 	const [name, setName] = useState("");
@@ -37,7 +38,7 @@ export const Signup = () => {
 			<div className="bg-white p-4 rounded shadow-lg w-100" style={{ maxWidth: "400px" }}>
 				<div className="text-center mb-3">
 					<Link to="/" className="navbar-brand fs-3 text-primary fw-bold text-decoration-none">
-						TripSync
+						<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto", background: "dodgerblue" }} />
 					</Link>
 				</div>
 				<h2 className="text-center mb-4">Sign Up</h2>
