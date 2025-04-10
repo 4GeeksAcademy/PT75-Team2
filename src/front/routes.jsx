@@ -16,6 +16,8 @@ import { LandingPage } from "./pages/Landing";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
+import SharedItinerary from "./pages/SharedItinerary";
+
 import { AboutUs } from "./pages/AboutUs";
 import { AccountSettings } from "./pages/AccountSettings";
 
@@ -37,9 +39,8 @@ export const router = createBrowserRouter(
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
-      <Route path="aboutus" element={<AboutUs />} />
-      <Route path="accountSettings" element={<AccountSettings />} />
-      
+      <Route path="shareditInerary/:user_id" element={<SharedItinerary />} />
+
       {/* Protected route for /home */}
       <Route element={<ProtectedRoute />}>
         <Route path="home" element={<Home />} />

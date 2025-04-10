@@ -17,9 +17,13 @@ export const Login = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         });
+        
 
         const data = await response.json();
-        console.log("Login response:", data);
+        if (data) {
+            const user_id = data.user.id;
+            localStorage.setItem('user_id', user_id)};
+       
 
         if (response.ok) {
             localStorage.setItem("token", data.token);

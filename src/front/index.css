@@ -108,6 +108,18 @@ body {
   }
 }
 
+
+.trip-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.trip-card-date {
+  font-size: 1rem;
+  color: #444;
+}
+
 /* === Elegant Horizontal Scroll Styling === */
 .scroll-wrapper {
   scroll-behavior: smooth;

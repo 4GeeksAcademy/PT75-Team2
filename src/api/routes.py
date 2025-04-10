@@ -11,7 +11,7 @@ import os
 import requests
 
 api = Blueprint('api', __name__)
-
+# CORS(api, origins=["https://miniature-invention-r4pp9wq9p46rh5x7q-3000.app.github.dev"], supports_credentials=True)
 # Allow CORS requests to this API
 # CORS(api)
 
@@ -158,9 +158,26 @@ def upload_avatar():
     return jsonify({"message": "Avatar uploaded", "avatar_url": user.avatar}), 200
 
 
+def get_location_image_url(location, GOOGLE_API_KEY):
+    try:
+        query = f"{location} tourism"
+        url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={query}&key={GOOGLE_API_KEY}"
+        res = requests.get(url)
+        data = res.json()
+        if data.get("results"):
+            place = data["results"][0]
+            if "photos" in place:
+                photo_ref = place["photos"][0]["photo_reference"]
+                return f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=700&photoreference={photo_ref}&key={GOOGLE_API_KEY}"
+    except Exception as e:
+        print(f"Failed to fetch location image for {location}: {str(e)}")
+    return "https://source.unsplash.com/700x200/?travel"
+
+
 @api.route("/itinerary", methods=["POST"])
 @jwt_required()
 def add_to_itinerary():
+    print("User ID from token:", get_jwt_identity())
     user_id = get_jwt_identity()
     data = request.get_json()
 
@@ -177,13 +194,90 @@ def add_to_itinerary():
     return jsonify(new_item.serialize()), 201
 
 
+@api.route("/itinerary/<int:id>", methods=["PUT"])
+@jwt_required()
+def edit_to_itinerary(id):
+    print("User ID from token:", get_jwt_identity())
+    user_id = get_jwt_identity()
+    data = request.get_json()
+
+    itinerary_item = Itinerary.query.filter_by(id=id, user_id=user_id).first()
+
+    if not itinerary_item:
+        return jsonify({"error": "Itinerary item not found"}), 404
+
+    itinerary_item.location = data.get("location", itinerary_item.location)
+    itinerary_item.start_date = data.get(
+        "start_date", itinerary_item.start_date)
+    itinerary_item.end_date = data.get("end_date", itinerary_item.end_date)
+
+    db.session.commit()
+
+    return jsonify(itinerary_item.serialize()), 201
+
+
 @api.route("/itinerary", methods=["GET"])
 @jwt_required()
 def get_itinerary():
     user_id = get_jwt_identity()
     itinerary_items = Itinerary.query.filter_by(user_id=user_id).all()
 
-    return jsonify([item.serialize() for item in itinerary_items]), 200
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+    enriched_itinerary = []
+
+    for item in itinerary_items:
+        location = item.location
+
+        # ---- Fetch Hotel ----
+        hotel_image_url = None
+        try:
+            hotel_query = f"hotel in {location}"
+            hotel_url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={hotel_query}&key={GOOGLE_API_KEY}"
+            hotel_response = requests.get(hotel_url)
+            hotel_data = hotel_response.json()
+            if hotel_data.get("results"):
+                first_hotel = hotel_data["results"][0]
+                if "photos" in first_hotel:
+                    photo_ref = first_hotel["photos"][0]["photo_reference"]
+                    hotel_image_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_ref}&key={GOOGLE_API_KEY}"
+                else:
+                    hotel_image_url = "/placeholder.jpg"
+        except:
+            hotel_image_url = "/placeholder.jpg"
+
+        # ---- Fetch Attractions ----
+        attractions = []
+        try:
+            attraction_query = f"tourist attractions in {location}"
+            attraction_url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={attraction_query}&key={GOOGLE_API_KEY}"
+            attraction_response = requests.get(attraction_url)
+            attraction_data = attraction_response.json()
+
+            if attraction_data.get("results"):
+                for place in attraction_data["results"][:3]:
+                    photo_url = "/placeholder.jpg"
+                    if "photos" in place:
+                        photo_ref = place["photos"][0]["photo_reference"]
+                        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_ref}&key={GOOGLE_API_KEY}"
+
+                    attractions.append({
+                        "name": place.get("name"),
+                        "photo_url": photo_url
+                    })
+        except Exception as e:
+            print("Error fetching attractions:", e)
+
+        location_image_url = get_location_image_url(location, GOOGLE_API_KEY)
+
+
+        enriched_itinerary.append({
+      **item.serialize(),
+        "hotel_image_url": hotel_image_url,
+        "location_image_url": location_image_url,
+        "attractions": attractions
+})
+
+    return jsonify(enriched_itinerary), 200
 
 
 @api.route("/itinerary/<int:item_id>", methods=["DELETE"])
@@ -197,6 +291,19 @@ def remove_itinerary_item(item_id):
     db.session.commit()
 
     return jsonify({"message": "Item removed"}), 200
+
+
+@api.route('/shared/itinerary/<int:user_id>', methods=['GET'])
+def shared_itinerary(user_id):
+    user = User.query.get(user_id)
+    itinerary_items = Itinerary.query.filter_by(user_id=user_id).all()
+
+    if not user or not itinerary_items:
+        return jsonify({"error": "Itinerary not found"}), 404
+
+    return jsonify({
+        "itinerary": [item.serialize() for item in itinerary_items]
+    }), 200
 
 
 @api.route("/hotels", methods=["GET"])

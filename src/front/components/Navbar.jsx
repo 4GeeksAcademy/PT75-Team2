@@ -19,10 +19,15 @@ export const Navbar = () => {
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-custom">
-			<div className="container">
-				<Link to="/" className="navbar-brand fs-3">					
-					<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
-				</Link>
+			<div className="container d-flex justify-content-between align-items-center py-2">
+				{ token?
+				(<Link to="/home" className="navbar-brand fs-3">
+					TripSync
+				</Link>)
+				: (<Link to="/" className="navbar-brand fs-3">
+					TripSync
+				</Link>) 
+                }
 
 				<button
 					className="navbar-toggler"
