@@ -505,3 +505,14 @@ def get_top_destinations():
     except Exception as e:
         print("Error fetching destinations:", e)
         return jsonify({"error": "Internal Server Error"}), 500
+    
+
+from flask import jsonify
+
+@api.route('/user/<int:user_id>', methods=['GET'])
+def get_user_name(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify({"username": user.name}), 200
+

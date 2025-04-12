@@ -35,7 +35,7 @@ export const Tripsync = ({ children }) => {
                 },
                 ...(payload && { body: payload }),
             });
-            onToggleWishlist(item);
+            
         } catch (err) {
             console.error("Wishlist error:", err);
             alert("Something went wrong updating the wishlist.");

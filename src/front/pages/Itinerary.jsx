@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaTrashAlt, FaMapMarkerAlt, FaCalendarAlt, FaSuitcase } from "react-icons/fa";
-import { Attractions } from "./Attractions";
-import { Hotels } from "./Hotels"
-// import 'src/front/components/itinerary.css'
 
 const Itinerary = () => {
   const [itinerary, setItinerary] = useState([]);
