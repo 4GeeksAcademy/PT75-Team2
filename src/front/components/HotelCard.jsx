@@ -44,7 +44,7 @@ export const HotelCard = ({
 
                 <button
                     className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
-                    onClick={()=> {handleAddToWishlist(hotel,isWishlisted)}}
+                    onClick={() => { handleAddToWishlist(hotel, isWishlisted) }}
                     title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     style={{
                         width: "32px",
@@ -60,8 +60,8 @@ export const HotelCard = ({
                 </button>
                 <button
                     className="btn btn-sm btn-primary w-100 mt-2"
-                    
-                    onClick={()=>{handleAddToItinerary(hotel)}}
+
+                    onClick={() => { handleAddToItinerary(hotel) }}
                 >
                     <i className="bi bi-suitcase2-fill me-1" ></i> Add to Itinerary
                 </button>

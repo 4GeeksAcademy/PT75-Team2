@@ -106,8 +106,62 @@ body {
     display: block;
     text-align: center;
   }
-} 
+}
 
+/* === Elegant Horizontal Scroll Styling === */
+.scroll-wrapper {
+  scroll-behavior: smooth;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.scroll-wrapper:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Firefox scrollbar styling */
+.scroll-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Hide scrollbar completely on small screens */
+@media (max-width: 576px) {
+  .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-wrapper {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* Calendar in the Hotels.jsx*/
+.rdrCalendarWrapper {
+  border-radius: 0.5rem;
+  font-family: inherit;
+}
+
+.rdrDateDisplay {
+  display: none; /* hides the input at the top */
+}
+
+.rdrMonthAndYearPickers select {
+  border-radius: 4px;
+  padding: 2px 4px;
+}
 
 .trip-card-title {
   font-size: 1.25rem;
