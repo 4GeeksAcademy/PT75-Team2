@@ -26,7 +26,11 @@ CORS(app,
 app.url_map.strict_slashes = False
 
 # Configure JWT Secret Key (must be unique and secret)
-app.config["JWT_SECRET_KEY"] = "super-secret-key"  # Change this in production
+app.config["JWT_SECRET_KEY"] = "super-secret-key"
+app.config["JWT_TOKEN_LOCATION"] = ["headers"] 
+app.config["JWT_HEADER_NAME"] = "Authorization"    # default, but good to include
+app.config["JWT_HEADER_TYPE"] = "Bearer"           # default, good to include
+
 jwt = JWTManager(app)  # Initialize JWTManager
 
 # database condiguration

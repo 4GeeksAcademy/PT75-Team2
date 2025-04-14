@@ -2,7 +2,15 @@ import React from "react";
 
 const WishlistCard = ({ item, onRemove, onAddToItinerary, apiKey }) => {
     return (
-        <div className="card h-100 shadow-sm position-relative rounded-3" style={{ minWidth: "250px", maxWidth: "100%" }}>
+        <div
+            className="card shadow-sm position-relative"
+            style={{
+                width: "290px",
+                minWidth: "270px",
+                borderRadius: "12px",
+                overflow: "hidden"
+            }}
+        >
             <img
                 src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${apiKey}`}
                 className="card-img-top"
@@ -32,18 +40,9 @@ const WishlistCard = ({ item, onRemove, onAddToItinerary, apiKey }) => {
                 <i className="bi bi-heart-fill text-danger"></i>
             </button>
 
-            <div className="card-body py-3 px-3 bg-white text-dark d-flex flex-column justify-content-between" style={{ height: "140px" }}>
-                <div>
-                    <h6 className="card-title mb-1 text-truncate" title={item.name}>{item.name}</h6>
-                    <p className="card-text text-muted small mb-2 text-truncate" title={item.address}>{item.address}</p>
-                    <button
-                        className="btn btn-sm btn-outline-primary mt-auto w-100"
-                        onClick={() => onAddToItinerary(item)}
-                    >
-                        Add to Itinerary
-                    </button>
-                </div>
-
+            <div className="card- p-3">
+                <h6 className="card-title">{item.name}</h6>
+                <p className="text-muted small">{item.address}</p>
             </div>
         </div>
     );
