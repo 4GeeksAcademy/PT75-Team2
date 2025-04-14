@@ -67,11 +67,11 @@ export const HotelCard = ({
                 </button>
             </div>
 
-            <div className="card-body px-3 pt-3 pb-2">
+            <div className="card-body px-3 pt-0 pb-2 d-flex flex-column">
                 <h6 className="card-title mb-1">{hotel.name}</h6>
                 <p className="text-muted small mb-2">{hotel.vicinity}</p>
 
-                <div className="d-flex justify-content-between align-items-center mb-2">
+                <div className="d-flex justify-content-between align-items-center mt-auto">
                     <span className="badge bg-light text-dark px-2 py-1">
                         ⭐ {hotel.rating || "N/A"}
                     </span>

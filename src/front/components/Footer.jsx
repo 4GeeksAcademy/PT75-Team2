@@ -4,10 +4,10 @@ import "../../front/footer.css";
 import tripSyncLogo from "../assets/img/TripSync-logo.png";
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-4 text-white bg-primary">
+	<footer className="footer mt-auto py-4 text-white">
 		<div className="container">
 			<div className="row align-items-start">
-				<div className="col-lg-6 text-center text-lg-start mb-4">
+				<div className="col-lg-6 text-center text-lg-start">
 					<Link to="/" className="navbar-brand fw-bold fs-3 text-white text-decoration-none">
 						<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
 					</Link>
@@ -21,7 +21,7 @@ export const Footer = () => (
 				</div>
 			</div>
 
-			<hr className="my-4 border-light" />
+			<hr className="border-light" />
 
 			{/* Horizontal links bar — responsive! */}
 			<div className="d-flex flex-wrap justify-content-center gap-4 mb-3">

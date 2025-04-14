@@ -55,7 +55,7 @@ export const LandingPage = () => {
                 }}
             >
                 <h1 className="display-4 fw-bold">Plan Your Perfect Trip with TripSync</h1>
-                <p className="lead">Discover, save, and organize your dream vacations effortlessly.</p>
+                <p className="fs-3">Discover, save, and organize your dream vacations effortlessly.</p>
             </div>
 
             {/* Features */}
@@ -76,7 +76,7 @@ export const LandingPage = () => {
                                 onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"}
                                 onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
                             >
-                                <div className="card-body d-flex flex-column justify-content-center align-items-center">
+                                <div className="card-body d-flex flex-column justify-content-center align-items-center pt-0">
                                     <i className={`bi ${item.icon} fs-1 ${item.color} mb-3`}></i>
                                     <h5 className="card-title">{item.title}</h5>
                                     <p className="card-text">{item.desc}</p>
