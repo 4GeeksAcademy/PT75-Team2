@@ -5,7 +5,7 @@ const WishlistCard = ({ item, onRemove, apiKey }) => {
         <div
             className="card shadow-sm position-relative"
             style={{
-                width: "270px",
+                width: "290px",
                 minWidth: "270px",
                 borderRadius: "12px",
                 overflow: "hidden"
@@ -38,7 +38,7 @@ const WishlistCard = ({ item, onRemove, apiKey }) => {
                 <i className="bi bi-heart-fill text-danger"></i>
             </button>
 
-            <div className="card-body">
+            <div className="card- p-3">
                 <h6 className="card-title">{item.name}</h6>
                 <p className="text-muted small">{item.address}</p>
             </div>
