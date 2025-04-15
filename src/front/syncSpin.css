@@ -4,18 +4,6 @@
   align-items: center;
 }
 
-.spin-button {
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  display: block;
-  margin: 1rem auto;
-}
-
-.spin-button:hover {
-  background: #bcbdbe;
-}
 
 .selected-city {
   display: flex;
@@ -35,12 +23,25 @@
 }
 
 .jumbotron-container {
-  background-color: lightblue;
+  background-color: rgb(182, 226, 252);
   padding: 20px;
   border-radius: 10px;
   width: 80%;
   margin: 20px auto;
+  box-shadow: 1px 5px 22px -2px #bcbdbe;
 }
+
+.spin-button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: white;
+  font-size: larger;
+  font-weight: bolder;
+  border-color: white;
+  box-shadow: 4px 4px 11px 0px #838383;
+ 
+}
+
 
 .sync-card-img-top {
   height: 180px;
@@ -53,7 +54,7 @@
 }
 
 .sync-card-body {
-  padding-top: 20px !important;
+  padding-top: 10px !important;
   margin-top: 20px;
   height: 120px;
   overflow: hidden;
@@ -110,6 +111,8 @@
     width: 100%;
     margin: 0;
   }
+
+
 
   .sync-card-body {
     height: auto;

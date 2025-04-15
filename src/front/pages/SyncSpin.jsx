@@ -187,12 +187,12 @@ const SyncSpin = () => {
 
                 <div className="col-sm-12 col-md-8 col-lg-6 col-xxl-3 jumbo-wrapper">
                     <div className="jumbotron-container text-center">
-                        <h1 className="display-4">What is SyncSpin?</h1>
-                        <p className="lead">
-                            Not sure where to jet-off to next? Leave that to SyncSpin. Spin the wheel and we'll take care of the rest!
+                        <h1 className="display-4 jumbo-header">What is SyncSpin?</h1>
+                        <p className="lead jumbo-body">
+                            Not sure where to jet-off to next? Leave that to SyncSpin. Spin the wheel - we'll take care of the rest!
                         </p>
-                        <button type="button" className="btn btn-light btn-lg spin-button" onClick={spinWheel}>
-                            Spin the Wheel!
+                        <button type="button" className="btn btn-outline-dark spin-button" onClick={spinWheel}>
+                            <div className="display-6">Spin the Wheel!</div>
                         </button>
                     </div>
                 </div>
@@ -200,13 +200,15 @@ const SyncSpin = () => {
 
             {/* Results Section */}
             <div className="container">
+
                 <div className="row justify-content-center">
 
                     {hotel && (
-                        <div className="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center mb-4">
+                        <div className="col-sm-12 col-md-6 col-lg-4 d-flex flex-column align-items-center mb-4">
+                            <h1 className="display-4 text-center mb-3">Hotel</h1>
                             <div className="card sync-card" style={{ width: "18rem" }}>
                                 <img src={getPhotoUrl(hotel)} className="card-img-top sync-card-img-top" alt={hotel.name} />
-                                <button className="btn btn-success sync-itinerary-button" onClick={() => saveToItinerary(hotel, "Hotel")}>
+                                <button className="btn btn-primary sync-itinerary-button" onClick={() => saveToItinerary(hotel, "Hotel")}>
                                     Add to Itinerary
                                 </button>
                                 <div className="card-body sync-card-body">
@@ -228,10 +230,11 @@ const SyncSpin = () => {
                     )}
 
                     {restaurant && (
-                        <div className="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center mb-4">
+                        <div className="col-sm-12 col-md-6 col-lg-4 d-flex flex-column align-items-center mb-4">
+                            <h1 className="display-4 text-center mb-3">Restaurant</h1>
                             <div className="card sync-card" style={{ width: "18rem" }}>
                                 <img src={getPhotoUrl(restaurant)} className="card-img-top sync-card-img-top" alt={restaurant.name} />
-                                <button className="btn btn-success sync-itinerary-button" onClick={() => saveToItinerary(restaurant, "Restaurant")}>
+                                <button className="btn btn-primary sync-itinerary-button" onClick={() => saveToItinerary(restaurant, "Restaurant")}>
                                     Add to Itinerary
                                 </button>
                                 <div className="card-body sync-card-body">
@@ -253,10 +256,11 @@ const SyncSpin = () => {
                     )}
 
                     {attraction && (
-                        <div className="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center mb-4">
+                        <div className="col-sm-12 col-md-6 col-lg-4 d-flex flex-column align-items-center mb-4">
+                            <h1 className="display-4 text-center mb-3">Attraction</h1>
                             <div className="card sync-card" style={{ width: "18rem" }}>
                                 <img src={getPhotoUrl(attraction)} className="card-img-top sync-card-img-top" alt={attraction.name} />
-                                <button className="btn btn-success sync-itinerary-button" onClick={() => saveToItinerary(attraction, "Attraction")}>
+                                <button className="btn btn-primary sync-itinerary-button" onClick={() => saveToItinerary(attraction, "Attraction")}>
                                     Add to Itinerary
                                 </button>
                                 <div className="card-body sync-card-body">
