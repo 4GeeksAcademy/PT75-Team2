@@ -64,14 +64,21 @@
   height: auto;
 }
 
-.sync-itinerary-button,
-.sync-maps-button {
+.sync-itinerary-button {
   width: 17rem;
   margin: 10px auto 0 auto;
   height: 30px;
   font-size: small;
   display: block;
 }
+
+.sync-maps-button {
+  width: 16rem;
+  margin: auto;
+  height: 30px;
+  font-size: small;
+  display: block;
+
 
 .sync-card-text {
   font-size: small;

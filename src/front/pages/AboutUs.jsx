@@ -14,7 +14,7 @@ export const AboutUs = () => {
     return (
         <>
             <div className="container about-us-container text-center p-2 mt-2">
-                <h1>About us</h1>
+                <h1>Meet the Developers</h1>
             </div>
 
             <div className="container about-us-container p-2">
