@@ -45,7 +45,7 @@ export const HotelCard = ({
                 <button
                     className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
                     onClick={() => {
-                        handleAddToWishlist(hotel, isWishlisted);
+                        handleAddToWishlist(hotel, isWishlisted, "hotel");
                         onToggleWishlist(hotel);
                     }}
                     title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}

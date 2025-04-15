@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const TripSyncContext = createContext();
 
 export const Tripsync = ({ children }) => {
-    const handleAddToWishlist = async (item, isWishlisted) => {
+    const handleAddToWishlist = async (item, isWishlisted, type) => {
         const token = localStorage.getItem("token");
         if (!token) {
             alert("Please log in to save favorites.");
@@ -20,12 +20,13 @@ export const Tripsync = ({ children }) => {
             const payload = isWishlisted
                 ? null
                 : JSON.stringify({
-                      place_id: item.place_id,
-                      name: item.name,
-                      address: item.vicinity,
-                      rating: item.rating,
-                      photo_reference: item.photos?.[0]?.photo_reference || "",
-                  });
+                    place_id: item.place_id,
+                    name: item.name,
+                    address: item.vicinity,
+                    rating: item.rating,
+                    photo_reference: item.photos?.[0]?.photo_reference || "",
+                    type: type
+                });
 
             await fetch(endpoint, {
                 method,
@@ -35,7 +36,7 @@ export const Tripsync = ({ children }) => {
                 },
                 ...(payload && { body: payload }),
             });
-            
+
         } catch (err) {
             console.error("Wishlist error:", err);
             alert("Something went wrong updating the wishlist.");

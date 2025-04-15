@@ -12,7 +12,7 @@ export const Home = () => {
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
-		if (!token) navigate("/login");
+		if (!token) navigate("/login"); 3
 	}, [navigate]);
 
 	useEffect(() => {
@@ -84,10 +84,9 @@ export const Home = () => {
 		}
 	};
 
-	const hotels = wishlist.filter(item =>
-		item.name && /hotel|inn|resort|suite/i.test(item.name)
-	);
-	const attractions = wishlist.filter(item => !hotels.includes(item));
+	const hotels = wishlist.filter(item => item.type === "hotel");
+	const attractions = wishlist.filter(item => item.type === "attraction");
+
 
 	return (
 		<div className="container py-5">

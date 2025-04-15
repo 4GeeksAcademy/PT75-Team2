@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+from flask import jsonify
 from werkzeug.utils import secure_filename
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Itinerary, Wishlist
@@ -269,13 +270,12 @@ def get_itinerary():
 
         location_image_url = get_location_image_url(location, GOOGLE_API_KEY)
 
-
         enriched_itinerary.append({
-      **item.serialize(),
-        "hotel_image_url": hotel_image_url,
-        "location_image_url": location_image_url,
-        "attractions": attractions
-})
+            **item.serialize(),
+            "hotel_image_url": hotel_image_url,
+            "location_image_url": location_image_url,
+            "attractions": attractions
+        })
 
     return jsonify(enriched_itinerary), 200
 
@@ -505,9 +505,7 @@ def get_top_destinations():
     except Exception as e:
         print("Error fetching destinations:", e)
         return jsonify({"error": "Internal Server Error"}), 500
-    
 
-from flask import jsonify
 
 @api.route('/user/<int:user_id>', methods=['GET'])
 def get_user_name(user_id):
@@ -515,4 +513,3 @@ def get_user_name(user_id):
     if not user:
         return jsonify({"error": "User not found"}), 404
     return jsonify({"username": user.name}), 200
-
