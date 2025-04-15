@@ -1,6 +1,7 @@
 import React from "react";
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
 
-const WishlistCard = ({ item, onRemove, apiKey }) => {
+const WishlistCard = ({ item, onRemove, onAddToItinerary, apiKey }) => {
     return (
         <div
             className="card shadow-sm position-relative"
@@ -14,22 +15,24 @@ const WishlistCard = ({ item, onRemove, apiKey }) => {
             <img
                 src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${apiKey}`}
                 className="card-img-top"
+                alt={item.name}
                 style={{
-                    height: "300px", width: "100%",
+                    height: "300px",
+                    width: "100%",
                     objectFit: "cover",
                     objectPosition: "center"
                 }}
-                alt={item.name}
-                onError={(e) => (e.target.src = "/placeholder.jpg")}
+                onError={(e) => (e.target.src = rigoPhoto)}
             />
 
+            {/* Remove from Wishlist */}
             <button
-                className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
+                className="btn btn-light position-absolute top-0 end-0 m-2 p-1 rounded-circle shadow-sm"
                 onClick={() => onRemove(item.place_id)}
                 title="Remove from wishlist"
                 style={{
-                    width: "32px",
-                    height: "32px",
+                    width: "34px",
+                    height: "34px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center"

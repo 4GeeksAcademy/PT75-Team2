@@ -29,8 +29,8 @@ export const CarouselSection = ({ id, title, places }) => {
                                         to={`/attractions?destination=${encodeURIComponent(place.name)}`}
                                         className="position-relative card shadow-sm text-decoration-none text-white"
                                         style={{
-                                            width: "270px",
-                                            height: "320px",
+                                            width: "420px",
+                                            height: "420px",
                                             borderRadius: "16px",
                                             overflow: "hidden",
                                             transition: "transform 0.2s ease-in-out",

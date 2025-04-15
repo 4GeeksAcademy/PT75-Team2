@@ -40,6 +40,35 @@ export const Home = () => {
 		fetchData();
 	}, []);
 
+	const handleAddToItinerary = async (item) => {
+		const token = localStorage.getItem("token");
+
+		const payload = {
+			location: item.name,
+			address: item.address,
+			start_date: "2025-05-01", // you can add date picker/modal later
+			end_date: "2025-05-03",
+		};
+
+		try {
+			const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`
+				},
+				body: JSON.stringify(payload)
+			});
+
+			if (res.ok) {
+				console.log("Added to itinerary!");
+				// Optionally refresh itinerary or give UI feedback
+			}
+		} catch (err) {
+			console.error("Failed to add to itinerary:", err);
+		}
+	};
+
 	const handleRemove = async (place_id) => {
 		const token = localStorage.getItem("token");
 		try {
@@ -68,12 +97,13 @@ export const Home = () => {
 			<section className="mb-5">
 				<h3 className="mb-3">Saved Hotels</h3>
 				{hotels.length > 0 ? (
-					<div className="d-flex overflow-auto gap-4 pb-2">
+					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
 						{hotels.map(hotel => (
 							<WishlistCard
 								key={hotel.place_id}
 								item={hotel}
 								onRemove={handleRemove}
+								onAddToItinerary={handleAddToItinerary}
 								apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
 							/>
 						))}
@@ -90,12 +120,13 @@ export const Home = () => {
 			<section className="mb-5">
 				<h3 className="mb-3">Saved Attractions</h3>
 				{attractions.length > 0 ? (
-					<div className="d-flex overflow-auto gap-4 pb-2">
+					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
 						{attractions.map(attraction => (
 							<WishlistCard
 								key={attraction.place_id}
 								item={attraction}
 								onRemove={handleRemove}
+								onAddToItinerary={handleAddToItinerary}
 								apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
 							/>
 						))}
