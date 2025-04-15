@@ -1,4 +1,5 @@
 import React from "react";
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
 
 const WishlistCard = ({ item, onRemove, onAddToItinerary, apiKey }) => {
     return (
@@ -21,7 +22,7 @@ const WishlistCard = ({ item, onRemove, onAddToItinerary, apiKey }) => {
                     objectFit: "cover",
                     objectPosition: "center"
                 }}
-                onError={(e) => (e.target.src = "/placeholder.jpg")}
+                onError={(e) => (e.target.src = rigoPhoto)}
             />
 
             {/* Remove from Wishlist */}

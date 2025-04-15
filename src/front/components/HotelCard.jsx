@@ -1,6 +1,6 @@
 import React from "react";
 import { useTripSyncContext } from "../../contextapi";
-
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
 
 export const HotelCard = ({
     hotel,
@@ -14,7 +14,7 @@ export const HotelCard = ({
     const photoUrl =
         hotel?.photos?.[0]?.photo_reference
             ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hotel.photos[0].photo_reference}&key=${import.meta.env.VITE_GOOGLE_API_KEY}`
-            : "/placeholder.jpg";
+            : rigoPhoto;
 
     return (
         <div
@@ -32,7 +32,7 @@ export const HotelCard = ({
                 <img
                     src={photoUrl}
                     alt={hotel.name}
-                    onError={(e) => (e.target.src = "/placeholder.jpg")}
+                    onError={(e) => (e.target.src = rigoPhoto)}
                     className="card-img-top"
                     style={{
                         height: "220px",
@@ -44,7 +44,10 @@ export const HotelCard = ({
 
                 <button
                     className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
-                    onClick={() => { handleAddToWishlist(hotel, isWishlisted) }}
+                    onClick={() => {
+                        handleAddToWishlist(hotel, isWishlisted);
+                        onToggleWishlist(hotel);
+                    }}
                     title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     style={{
                         width: "32px",
