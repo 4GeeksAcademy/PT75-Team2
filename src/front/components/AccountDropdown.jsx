@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../assets/img/Default-avatar.jpg"; // Optional: use a default avatar from assets
+import { useClickOutside } from "../hooks/useClickOutside";
 
 export default function AccountDropdown({ user, onLogout }) {
     const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef();
+
+    // Close dropdown when clicking outside
+    useClickOutside(dropdownRef, () => setIsOpen(false));
 
     return (
-        <div className="position-relative">
+        <div className="position-relative" ref={dropdownRef}>
             <img
                 src={user?.avatar || defaultAvatar}
                 alt="profile"
@@ -39,7 +44,7 @@ export default function AccountDropdown({ user, onLogout }) {
                                 onClick={onLogout}
                                 className="dropdown-item text-danger py-1 w-100 text-start"
                             >
-                                <i className="bi bi-box-arrow-right  px-3" /> Log out
+                                <i className="bi bi-box-arrow-right px-3" /> Log out
                             </button>
                         </li>
                     </ul>
@@ -48,3 +53,4 @@ export default function AccountDropdown({ user, onLogout }) {
         </div>
     );
 }
+

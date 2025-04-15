@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import tripSyncLogo from "../assets/img/TripSync-logo.png";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -17,13 +18,14 @@ export const Login = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         });
-        
+
 
         const data = await response.json();
         if (data) {
             const user_id = data.user.id;
-            localStorage.setItem('user_id', user_id)};
-       
+            localStorage.setItem('user_id', user_id)
+        };
+
 
         if (response.ok) {
             localStorage.setItem("token", data.token);
@@ -40,7 +42,7 @@ export const Login = () => {
             <div className="bg-white p-4 rounded shadow-lg w-100" style={{ maxWidth: "400px" }}>
                 <div className="text-center mb-3">
                     <Link to="/" className="navbar-brand fs-3 text-primary fw-bold text-decoration-none">
-                        TripSync
+                        <img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto", background: "dodgerblue"}} />
                     </Link>
                 </div>
                 <h2 className="text-center mb-4">Login</h2>

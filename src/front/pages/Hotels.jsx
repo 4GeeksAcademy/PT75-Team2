@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { HotelCard } from "../components/HotelCard";
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { format } from 'date-fns';
+import { useRef } from "react";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 export const Hotels = () => {
     const [destination, setDestination] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(false);
     const [wishlist, setWishlist] = useState([]);
+    const [dateRange, setDateRange] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
+        }
+    ]);
 
+    const calendarRef = useRef();
+    useClickOutside(calendarRef, () => setOpenCalendar(false));
+
+    const [openCalendar, setOpenCalendar] = useState(false);
+
+    // To format the displayed text
+    const formattedStart = format(dateRange[0].startDate, 'MMM dd, yyyy');
+    const formattedEnd = format(dateRange[0].endDate, 'MMM dd, yyyy');
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -33,8 +52,9 @@ export const Hotels = () => {
             );
 
             setHotels(enrichedHotels);
-            localStorage.setItem("start_date", startDate);
-            localStorage.setItem("end_date", endDate);
+            localStorage.setItem("start_date", format(dateRange[0].startDate, 'yyyy-MM-dd'));
+            localStorage.setItem("end_date", format(dateRange[0].endDate, 'yyyy-MM-dd'));
+
 
         } catch (error) {
             console.error("Hotel search error:", error);
@@ -105,23 +125,40 @@ export const Hotels = () => {
                                     required
                                 />
                             </div>
-                            <div className="col-md-2">
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className="col-md-2">
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    value={endDate}
-                                    onChange={(e) => setEndDate(e.target.value)}
-                                    required
-                                />
+                            <div className="col-md-4 position-relative">
+                                <button
+                                    type="button"
+                                    className="form-control text-start"
+                                    onClick={() => setOpenCalendar(!openCalendar)}
+                                >
+                                    <i className="bi bi-calendar me-2"></i>
+                                    {formattedStart} - {formattedEnd}
+                                </button>
+
+                                {openCalendar && (
+                                    <div
+                                        ref={calendarRef}
+                                        className="position-absolute z-3 mt-2 rounded"
+                                        style={{
+                                            background: "white",
+                                            boxShadow: "0 6px 24px rgba(0, 0, 0, 0.15)",
+                                            borderRadius: "0.5rem"
+                                        }}
+                                    >
+                                        <DateRange
+                                            editableDateInputs={true}
+                                            onChange={item => setDateRange([item.selection])}
+                                            moveRangeOnFirstSelection={false}
+                                            ranges={dateRange}
+                                            rangeColors={["#0d6efd"]}
+                                        />
+                                        <div className="text-end px-3 pb-2">
+                                            <button className="btn btn-sm btn-outline-primary" onClick={() => setOpenCalendar(false)}>
+                                                Done
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className="col-md-4">
                                 <button type="submit" className="btn btn-primary w-100">
