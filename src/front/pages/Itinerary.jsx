@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaTrashAlt, FaMapMarkerAlt, FaCalendarAlt, FaSuitcase } from "react-icons/fa";
 
+import itineraryimage from "../assets/img/itineraryimage.jpg"
+
 const Itinerary = () => {
   const [itinerary, setItinerary] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -10,12 +12,7 @@ const Itinerary = () => {
 
 
   const userId = localStorage.getItem('user_id');
-  if (!userId) {
-
-    console.log('User ID not found in localStorage.');
-  } else {
-    console.log('User ID:', userId);
-  }
+ 
 
   const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
 
@@ -96,7 +93,7 @@ const Itinerary = () => {
     <div className=" py-5" style={{backgroundColor:"lightblue"}}>
       <div className="itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3  mb-4" style={{ height: "300px" }}>
         <img
-          src="https://th.bing.com/th/id/OIP.XqTA8VtB9RntnTkXlzVqZAHaE8?rs=1&pid=ImgDetMain"
+          src={itineraryimage}
           alt="Itinerary Background"
           className="position-absolute w-100 h-100"
           style={{ objectFit: "cover", top: 0, left: 0, zIndex: 1 }}

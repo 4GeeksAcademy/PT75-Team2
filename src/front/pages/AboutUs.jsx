@@ -11,6 +11,7 @@ import AshleyLinkedInQR from "../assets/img/ashley-linkedin-qr.png";
 import AshleyGithubQR from "../assets/img/ashley-github-qr.png";
 
 
+
 export const AboutUs = () => {
 
     return (
