@@ -145,7 +145,7 @@ export const AccountSettings = () => {
                     />
                 </div>
 
-                <button className="btn btn-warning mb-4" onClick={handlePasswordChange}>
+                <button className="btn btn-warning" onClick={handlePasswordChange}>
                     Update Password
                 </button>
 
@@ -164,7 +164,7 @@ export const AccountSettings = () => {
 
                 <div className="d-flex justify-content-between flex-wrap gap-2">
                     <button
-                        className="btn btn-outline-secondary"
+                        className="btn btn-warning"
                         onClick={handleAvatarUpload}
                         disabled={!avatarFile}
                     >
