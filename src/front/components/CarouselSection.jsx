@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../css/CarouselSection.css";
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
 
 export const CarouselSection = ({ id, title, places }) => {
     if (!places || places.length === 0) return null;
@@ -27,30 +29,18 @@ export const CarouselSection = ({ id, title, places }) => {
                                     <Link
                                         key={i}
                                         to={`/attractions?destination=${encodeURIComponent(place.name)}`}
-                                        className="position-relative card shadow-sm text-decoration-none text-white"
-                                        style={{
-                                            width: "420px",
-                                            height: "420px",
-                                            borderRadius: "16px",
-                                            overflow: "hidden",
-                                            transition: "transform 0.2s ease-in-out",
-                                        }}
+                                        className="position-relative card shadow-sm text-decoration-none text-white carousel-card"
                                         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
                                         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                                     >
                                         <img
                                             src={place.photo_url}
                                             alt={place.name}
-                                            className="w-100 h-100"
-                                            style={{ objectFit: "cover" }}
-                                            onError={(e) => (e.target.src = "/placeholder.jpg")}
+                                            className="w-100 h-100 carousel-card-img"
+                                            onError={(e) => (e.target.src = rigoPhoto)}
                                         />
                                         <div
-                                            className="position-absolute bottom-0 w-100 text-center"
-                                            style={{
-                                                background: "linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))",
-                                                padding: "0.75rem",
-                                            }}
+                                            className="position-absolute bottom-0 w-100 text-center carousel-caption-overlay"
                                         >
                                             <h6 className="mb-0 text-white fw-semibold">{place.name}</h6>
                                         </div>

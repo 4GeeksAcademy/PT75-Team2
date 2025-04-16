@@ -1,0 +1,22 @@
+/* CarouselSection.css */
+
+.carousel-card {
+  width: 420px;
+  height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.carousel-card:hover {
+  transform: scale(1.03);
+}
+
+.carousel-card-img {
+  object-fit: cover;
+}
+
+.carousel-caption-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  padding: 0.75rem;
+}

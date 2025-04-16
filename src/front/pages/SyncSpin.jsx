@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import "../syncSpin.css";
-
+import "../css/SyncSpin.css";
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
 
 const cities = [
     "Paris", "Tokyo", "New York", "Sydney", "Barcelona",
@@ -32,7 +32,7 @@ const getPhotoUrl = (place) => {
         return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${GOOGLE_API_KEY}`;
     }
     // Fallback placeholder
-    return "/placeholder.jpg";
+    return rigoPhoto;
 };
 
 const getAddress = (place) => {

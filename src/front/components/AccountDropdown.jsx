@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../assets/img/Default-avatar.jpg"; // Optional: use a default avatar from assets
 import { useClickOutside } from "../hooks/useClickOutside";
+import "../css/AccountDropdown.css";
+
 
 export default function AccountDropdown({ user, onLogout }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,14 +17,12 @@ export default function AccountDropdown({ user, onLogout }) {
             <img
                 src={user?.avatar || defaultAvatar}
                 alt="profile"
-                className="rounded-circle border border-light shadow-sm"
-                style={{ width: "42px", height: "42px", objectFit: "cover", cursor: "pointer" }}
+                className="rounded-circle border border-light shadow-sm account-avatar"
                 onClick={() => setIsOpen(!isOpen)}
             />
             {isOpen && (
                 <div
-                    className="position-absolute end-0 mt-2 bg-white rounded shadow-sm border"
-                    style={{ width: "240px", zIndex: 1050 }}
+                    className="position-absolute end-0 mt-2 bg-white rounded shadow-sm border account-dropdown"
                 >
                     <div className="px-3 py-3 border-bottom">
                         <p className="mb-0 fw-semibold">{user?.name}</p>

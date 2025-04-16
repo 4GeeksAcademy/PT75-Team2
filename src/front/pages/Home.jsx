@@ -84,9 +84,10 @@ export const Home = () => {
 		}
 	};
 
-	const hotels = wishlist.filter(item => item.type === "hotel");
-	const attractions = wishlist.filter(item => item.type === "attraction");
-
+	const hotels = wishlist.filter(item =>
+		item.name && /hotel|inn|resort|suite|Marriott|Hyatt|Courtyard/i.test(item.name)
+	);
+	const attractions = wishlist.filter(item => !hotels.includes(item));
 
 	return (
 		<div className="container py-5">

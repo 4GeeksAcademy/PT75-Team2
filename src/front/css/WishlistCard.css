@@ -1,0 +1,23 @@
+/* WishlistCard.css */
+
+.wishlist-card {
+  width: 290px;
+  min-width: 270px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.wishlist-card-img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.wishlist-remove-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
