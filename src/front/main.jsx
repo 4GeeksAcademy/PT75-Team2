@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './css/index.css';
-// import './newindex.css';
+import './css/Index.css';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import { StoreProvider } from './hooks/useGlobalReducer';
