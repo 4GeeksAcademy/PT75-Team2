@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AccountDropdown from "./AccountDropdown";
-import "/src/front/navbar.css";
+import "../css/Navbar.css";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import tripSyncLogo from "../assets/img/TripSync-logo.png";
 

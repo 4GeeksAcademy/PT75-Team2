@@ -1,6 +1,7 @@
 import React from "react";
 import { useTripSyncContext } from "../../contextapi";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
+import "../css/HotelCard.css";
 
 export const HotelCard = ({
     hotel,
@@ -18,13 +19,7 @@ export const HotelCard = ({
 
     return (
         <div
-            className="card shadow-sm position-relative border-0"
-            style={{
-                width: "270px",
-                minWidth: "270px",
-                borderRadius: "1rem",
-                transition: "transform 0.2s ease-in-out",
-            }}
+            className="card shadow-sm position-relative border-0 hotel-card"
             onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         >
@@ -33,29 +28,16 @@ export const HotelCard = ({
                     src={photoUrl}
                     alt={hotel.name}
                     onError={(e) => (e.target.src = rigoPhoto)}
-                    className="card-img-top"
-                    style={{
-                        height: "220px",
-                        width: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center",
-                    }}
+                    className="card-img-top hotel-img"
                 />
 
                 <button
-                    className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm"
+                    className="position-absolute top-0 end-0 m-2 border-0 bg-white rounded-circle shadow-sm wishlist-btn"
                     onClick={() => {
-                        handleAddToWishlist(hotel, isWishlisted);
+                        handleAddToWishlist(hotel, isWishlisted, "hotel");
                         onToggleWishlist(hotel);
                     }}
                     title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                    style={{
-                        width: "32px",
-                        height: "32px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
                 >
                     <i
                         className={`bi ${isWishlisted ? "bi-heart-fill text-danger" : "bi-heart"}`}

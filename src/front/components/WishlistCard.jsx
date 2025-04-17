@@ -1,42 +1,24 @@
 import React from "react";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
+import "../css/WishlistCard.css";
 
 const WishlistCard = ({ item, onRemove, onAddToItinerary, apiKey }) => {
     return (
         <div
-            className="card shadow-sm position-relative"
-            style={{
-                width: "290px",
-                minWidth: "270px",
-                borderRadius: "12px",
-                overflow: "hidden"
-            }}
+            className="card shadow-sm position-relative wishlist-card"
         >
             <img
                 src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${apiKey}`}
-                className="card-img-top"
+                className="card-img-top wishlist-card-img"
                 alt={item.name}
-                style={{
-                    height: "300px",
-                    width: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center"
-                }}
                 onError={(e) => (e.target.src = rigoPhoto)}
             />
 
             {/* Remove from Wishlist */}
             <button
-                className="btn btn-light position-absolute top-0 end-0 m-2 p-1 rounded-circle shadow-sm"
+                className="btn btn-light position-absolute top-0 end-0 m-2 p-1 rounded-circle shadow-sm wishlist-remove-btn"
                 onClick={() => onRemove(item.place_id)}
                 title="Remove from wishlist"
-                style={{
-                    width: "34px",
-                    height: "34px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
             >
                 <i className="bi bi-heart-fill text-danger"></i>
             </button>

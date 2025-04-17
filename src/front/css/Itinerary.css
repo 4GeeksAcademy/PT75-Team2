@@ -1,0 +1,36 @@
+/* Itinerary.css */
+
+.itinerary-page {
+    background-color: lightblue;
+  }
+  
+  .itinerary-jumbotron {
+    height: 300px;
+  }
+  
+  .itinerary-jumbotron img {
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .itinerary-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+  }
+  
+  .itinerary-jumbotron-content {
+    z-index: 3;
+  }
+  
+  .itinerary-card-wrapper {
+    width: 100%;
+    max-width: 700px;
+  }
+  
+  .itinerary-img {
+    height: 300px;
+    object-fit: cover;
+  }
+  
