@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaTrashAlt, FaMapMarkerAlt, FaCalendarAlt, FaSuitcase } from "react-icons/fa";
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
+import "../css/Itinerary.css";
 
 const Itinerary = () => {
   const [itinerary, setItinerary] = useState([]);
@@ -93,18 +95,17 @@ const Itinerary = () => {
   }, []);
 
   return (
-    <div className=" py-5" style={{backgroundColor:"lightblue"}}>
-      <div className="itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3  mb-4" style={{ height: "300px" }}>
+    <div className=" py-5" itinerary-page>
+      <div className="itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3  mb-4" itinerary-jumbotron>
         <img
           src="https://th.bing.com/th/id/OIP.XqTA8VtB9RntnTkXlzVqZAHaE8?rs=1&pid=ImgDetMain"
           alt="Itinerary Background"
           className="position-absolute w-100 h-100"
-          style={{ objectFit: "cover", top: 0, left: 0, zIndex: 1 }}
         />
 
 
-        <div className="position-absolute w-100 h-100" style={{ backgroundColor: "rgba(0, 0, 0, 0.4)", zIndex: 2 }}></div>
-        <div className="position-relative p-5" style={{ zIndex: 3 }}>
+        <div className="position-absolute w-100 h-100 itinerary-overlay"></div>
+        <div className="position-relative p-5 itinerary-jumbotron-content">
           <h1 className="fw-bold display-5">
             <FaSuitcase className="me-2" /> My Travel Itinerary
           </h1>
@@ -127,15 +128,14 @@ const Itinerary = () => {
       {itinerary.length ? (
         <div className="d-flex flex-column align-items-center gap-4">
           {itinerary.map((item) => (
-            <div key={item.id} style={{ width: "100%", maxWidth: "700px" }}>
+            <div key={item.id} className="itinerary-card-wrapper">
               <div className="card shadow-sm h-100 border-0 rounded-4 overflow-hidden">
 
                 <img
                   src={item.location_image_url}
-                  className="card-img-top"
+                  className="card-img-top itinerary-img"
                   alt={item.location}
-                  style={{ height: "300px", objectFit: "cover" }}
-                  onError={(e) => (e.target.src = "/fallback.jpg")}
+                  onError={(e) => (e.target.src = rigoPhoto)}
                 />
 
 
@@ -182,7 +182,7 @@ const Itinerary = () => {
                             : `You're on your trip or it already passed! 🌴`;
                         })()}
                       </p>
-                     
+
 
                       <h5>
                         <FaMapMarkerAlt className="me-2 text-primary" />

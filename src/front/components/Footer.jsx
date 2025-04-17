@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../front/footer.css";
+import "../css/Footer.css";
 import tripSyncLogo from "../assets/img/TripSync-logo.png";
 
 export const Footer = () => (

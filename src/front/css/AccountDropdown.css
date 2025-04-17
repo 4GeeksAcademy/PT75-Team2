@@ -1,0 +1,13 @@
+/* AccountDropdown.css */
+.account-avatar {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  .account-dropdown {
+    width: 240px;
+    z-index: 1050;
+  }
+  

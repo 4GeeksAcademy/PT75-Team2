@@ -30,7 +30,6 @@ export const Login = () => {
         if (response.ok) {
             localStorage.setItem("token", data.token);
             dispatch({ type: "set_user", payload: data.user });
-            alert("Login successful! Redirecting to dashboard...");
             navigate("/home");
         } else {
             setError(data.error || "Invalid credentials. Please try again.");
