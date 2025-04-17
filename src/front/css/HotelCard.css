@@ -1,0 +1,28 @@
+/* HotelCard.css */
+
+.hotel-card {
+    width: 270px;
+    min-width: 270px;
+    border-radius: 1rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .hotel-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .hotel-img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .wishlist-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

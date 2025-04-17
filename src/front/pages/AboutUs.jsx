@@ -1,5 +1,5 @@
 import React from "react";
-import "../aboutus.css";
+import "../css/Aboutus.css";
 import MarioProfile from "../assets/img/mario-profile.jpg";
 import GordonProfile from "../assets/img/gordon-profile.jpg";
 import AshleyProfile from "../assets/img/ashley-profile.jpg";

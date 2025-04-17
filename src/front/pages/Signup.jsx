@@ -26,7 +26,6 @@ export const Signup = () => {
 		console.log("Signup response:", data);
 
 		if (response.ok) {
-			alert("Signup successful! Redirecting to login...");
 			navigate("/login");
 		} else {
 			alert(data.error || "Signup failed. Please try again.");
