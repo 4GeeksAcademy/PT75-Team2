@@ -98,6 +98,7 @@ class Wishlist(db.Model):
     address: Mapped[str] = mapped_column(String(250), nullable=True)
     rating: Mapped[str] = mapped_column(String(10), nullable=True)
     photo_reference: Mapped[str] = mapped_column(Text, nullable=True)
+    note: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     def serialize(self):
         return {
@@ -106,5 +107,6 @@ class Wishlist(db.Model):
             "name": self.name,
             "address": self.address,
             "rating": self.rating,
-            "photo_reference": self.photo_reference
+            "photo_reference": self.photo_reference,
+            "note": self.note
         }
