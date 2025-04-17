@@ -22,14 +22,13 @@ export const Navbar = () => {
 			<div className="container d-flex justify-content-between align-items-center py-2">
 				{token ?
 					(<Link to="/home" className="navbar-brand fs-3">
-						<Link to="/" className="navbar-brand fs-3">
-							<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
-						</Link>
-					</Link>)
+						<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
+					</Link>
+					)
 					: (<Link to="/" className="navbar-brand fs-3">
-						<Link to="/" className="navbar-brand fs-3">
-							<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
-						</Link>
+
+						<img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto" }} />
+
 					</Link>)
 				}
 
