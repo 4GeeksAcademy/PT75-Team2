@@ -86,6 +86,22 @@ export const Home = () => {
 		}
 	};
 
+	const handleDeleteItineraryItem = async (id) => {
+		const token = localStorage.getItem("token");
+		try {
+			const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary/${id}`, {
+				method: "DELETE",
+				headers: { Authorization: `Bearer ${token}` }
+			});
+			if (res.ok) {
+				setItinerary(prev => prev.filter(item => item.id !== id));
+			}
+		} catch (err) {
+			console.error("Failed to delete itinerary item:", err);
+		}
+	};
+
+
 	const hotels = wishlist.filter(item =>
 		item.name && /hotel|inn|resort|suite|Marriott|Hyatt|Courtyard/i.test(item.name)
 	);
@@ -146,7 +162,7 @@ export const Home = () => {
 				<h3 className="mb-3">Itinerary</h3>
 				{itinerary.length > 0 ? (
 					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
-						{itinerary.slice(0, 2).map((item) => (
+						{itinerary.map((item) => (
 							<div key={item.id} className="card shadow-sm rounded-4 border-0 itinerary-card">
 								<img
 									src={item.location_image_url}
@@ -176,7 +192,7 @@ export const Home = () => {
 												: `Trip in progress or passed 🌴`;
 										})()}
 									</p>
-									<button className="removeButton float-end border-0 bg-transparent text-danger fw-bold" onClick={() => handleDelete(item.id)}>
+									<button className="removeButton float-end border-0 bg-transparent text-danger fw-bold" onClick={() => handleDeleteItineraryItem(item.id)}>
 										<i className="bi bi-x-lg"></i>
 									</button>
 								</div>
