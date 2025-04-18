@@ -29,6 +29,11 @@ export const Login = () => {
 
         if (response.ok) {
             localStorage.setItem("token", data.token);
+            localStorage.setItem("user_id", data.user.id);
+            localStorage.setItem("user_email", data.user.email);
+            localStorage.setItem("user_name", data.user.name);         
+            localStorage.setItem("user_avatar", data.user.avatar || "");
+
             dispatch({ type: "set_user", payload: data.user });
             navigate("/home");
         } else {
@@ -41,7 +46,7 @@ export const Login = () => {
             <div className="bg-white p-4 rounded shadow-lg w-100" style={{ maxWidth: "400px" }}>
                 <div className="text-center mb-3">
                     <Link to="/" className="navbar-brand fs-3 text-primary fw-bold text-decoration-none">
-                        <img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto", background: "dodgerblue"}} />
+                        <img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto", background: "dodgerblue" }} />
                     </Link>
                 </div>
                 <h2 className="text-center mb-4">Login</h2>

@@ -12,12 +12,6 @@ const Itinerary = () => {
 
 
   const userId = localStorage.getItem('user_id');
-  if (!userId) {
-
-    console.log('User ID not found in localStorage.');
-  } else {
-    console.log('User ID:', userId);
-  }
 
   const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
 
@@ -95,8 +89,8 @@ const Itinerary = () => {
   }, []);
 
   return (
-    <div className=" py-5" itinerary-page>
-      <div className="itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3  mb-4" itinerary-jumbotron>
+    <div className=" py-5 itinerary-page" >
+      <div className="itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3  mb-4">
         <img
           src="https://th.bing.com/th/id/OIP.XqTA8VtB9RntnTkXlzVqZAHaE8?rs=1&pid=ImgDetMain"
           alt="Itinerary Background"

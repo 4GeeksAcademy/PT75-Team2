@@ -63,6 +63,7 @@ def login():
         return jsonify({"error": "Invalid credentials"}), 401
 
     token = create_access_token(identity=str(user.id))
+
     return jsonify({"message": "Login successful", "token": token, "user": user.serialize()})
 
 # PROTECTED ROUTE (REQUIRES AUDTH)
