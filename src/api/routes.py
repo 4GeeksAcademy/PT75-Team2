@@ -301,9 +301,50 @@ def shared_itinerary(user_id):
     if not user or not itinerary_items:
         return jsonify({"error": "Itinerary not found"}), 404
 
-    return jsonify({
-        "itinerary": [item.serialize() for item in itinerary_items]
-    }), 200
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+    enriched_itinerary = []
+
+    for item in itinerary_items:
+        location = item.location
+
+        # --- Hotel image ---
+        hotel_image_url = "/placeholder.jpg"
+        try:
+            hotel_query = f"hotel in {location}"
+            hotel_url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={hotel_query}&key={GOOGLE_API_KEY}"
+            hotel_res = requests.get(hotel_url).json()
+            if hotel_res.get("results"):
+                photo_ref = hotel_res["results"][0].get(
+                    "photos", [{}])[0].get("photo_reference")
+                if photo_ref:
+                    hotel_image_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo_ref}&key={GOOGLE_API_KEY}"
+        except Exception as e:
+            print("Hotel image fetch error:", e)
+
+        # --- Attractions (if needed) ---
+        attractions = []
+        try:
+            query = f"tourist attractions in {location}"
+            url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={query}&key={GOOGLE_API_KEY}"
+            results = requests.get(url).json().get("results", [])
+            for place in results[:3]:
+                photo = place.get("photos", [{}])[0].get("photo_reference", "")
+                photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo}&key={GOOGLE_API_KEY}" if photo else "/placeholder.jpg"
+                attractions.append(
+                    {"name": place.get("name"), "photo_url": photo_url})
+        except Exception as e:
+            print("Attraction fetch error:", e)
+
+        location_image_url = get_location_image_url(location, GOOGLE_API_KEY)
+
+        enriched_itinerary.append({
+            **item.serialize(),
+            "hotel_image_url": hotel_image_url,
+            "location_image_url": location_image_url,
+            "attractions": attractions
+        })
+
+    return jsonify(enriched_itinerary), 200
 
 
 @api.route("/hotels", methods=["GET"])
