@@ -513,3 +513,39 @@ def get_user_name(user_id):
     if not user:
         return jsonify({"error": "User not found"}), 404
     return jsonify({"username": user.name}), 200
+
+
+@api.route("/verify-user", methods=["POST"])
+def verify_user():
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+
+    if not name or not email:
+        return jsonify({"error": "Both name and email are required."}), 400
+
+    user = User.query.filter_by(name=name, email=email).first()
+    if not user:
+        return jsonify({"error": "No matching user found."}), 404
+
+    return jsonify({"message": "User verified."}), 200
+
+
+@api.route("/reset-password", methods=["POST"])
+def reset_password():
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+    new_password = data.get("new_password")
+
+    if not name or not email or not new_password:
+        return jsonify({"error": "Missing required fields."}), 400
+
+    user = User.query.filter_by(name=name, email=email).first()
+    if not user:
+        return jsonify({"error": "User not found."}), 404
+
+    user.set_password(new_password)
+    db.session.commit()
+
+    return jsonify({"message": "Password reset successful."}), 200
