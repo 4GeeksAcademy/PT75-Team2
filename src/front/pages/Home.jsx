@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
+// import { ItineraryCard } from "../components/ItineraryCard.jsx";
 
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
@@ -83,7 +84,21 @@ export const Home = () => {
 			console.error("Failed to remove from wishlist:", err);
 		}
 	};
+	const handleDelete = async (id) => {
 
+		try {
+		  const token = localStorage.getItem("token");
+		  await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary/${id}`, {
+			method: "DELETE",
+			headers: {
+			  Authorization: `Bearer ${token}`,
+			},
+		  });
+		  setItinerary((prev) => prev.filter((item) => item.id !== id));
+		} catch (error) {
+		  console.error("Failed to delete itinerary item:", error);
+		}
+	}
 	const hotels = wishlist.filter(item =>
 		item.name && /hotel|inn|resort|suite|Marriott|Hyatt|Courtyard/i.test(item.name)
 	);
@@ -143,14 +158,43 @@ export const Home = () => {
 			<section className="mb-4">
 				<h3 className="mb-3">Itinerary</h3>
 				{itinerary.length > 0 ? (
-					itinerary.slice(0, 2).map((item) => (
-						<div key={item.id} className="border p-3 rounded shadow-sm mb-3">
-							<h6 className="mb-1">{item.location}</h6>
-							<p className="mb-0">
-								From: <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
-							</p>
-						</div>
-					))
+					<>
+						{itinerary.slice(0, 2).map((item) => (
+							<div key={item.id} className="card shadow-sm rounded-4 border-0 mb-4" style={{ width: "18rem" }}>
+								<img
+									src={item.location_image_url}
+									className="card-img-top"
+									alt={item.location}
+									style={{ height: "200px", objectFit: "cover" }}
+									onError={(e) => (e.target.src = "/fallback.jpg")}
+								/>
+								<div className="card-body text-center p-3">
+									<h6 className="card-title mb-2">{item.location}</h6>
+									<p className="card-text text-muted small mb-1">
+										From <strong>{item.start_date}</strong> to
+										<br/>
+										
+										 <strong>{item.end_date}</strong>
+									</p>
+									
+									<p className="text-muted small">
+										{(() => {
+											const today = new Date();
+											const start = new Date(item.start_date);
+											const diffTime = start.getTime() - today.getTime();
+											const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+											return daysLeft > 0
+												? `${daysLeft} day(s) left ✈️`
+												: `Trip in progress or passed 🌴`;
+										})()}
+									</p>
+									<button className="removeButton float-end border-0 bg-transparent text-danger fw-bold" onClick={() => handleDelete(item.id)}>×</button>
+
+
+								</div>
+							</div>
+						))}
+					</>
 				) : (
 					<p className="text-muted">You haven't created an itinerary yet.</p>
 				)}
@@ -158,6 +202,7 @@ export const Home = () => {
 					View Your Itinerary
 				</Link>
 			</section>
+
 		</div>
 	);
-};
+}
