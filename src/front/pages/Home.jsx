@@ -206,6 +206,7 @@ export const Home = () => {
 					View Your Itinerary
 				</Link>
 			</section>
+
 		</div>
 	);
-};
+}
