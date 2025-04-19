@@ -83,6 +83,9 @@ export const Login = () => {
                     </button>
                 </form>
                 <p className="mt-3 text-center">
+                    <Link to="/forgotpassword" className="text-primary">Forgot password?</Link>
+                </p>
+                <p className="mt-3 text-center">
                     Don’t have an account?{" "}
                     <Link to="/signup" className="text-primary">Sign up</Link>
                 </p>
