@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
-// import { ItineraryCard } from "../components/ItineraryCard.jsx";
+import rigoPhoto from "../assets/img/rigo-baby.jpg";
 
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
@@ -41,14 +41,15 @@ export const Home = () => {
 		fetchData();
 	}, []);
 
-	const handleAddToItinerary = async (item) => {
+	const handleAddToItinerary = async (item, note = "") => {
 		const token = localStorage.getItem("token");
 
 		const payload = {
 			location: item.name,
 			address: item.address,
-			start_date: "2025-05-01", // you can add date picker/modal later
+			start_date: "2025-05-01",
 			end_date: "2025-05-03",
+			note: note
 		};
 
 		try {
@@ -63,12 +64,12 @@ export const Home = () => {
 
 			if (res.ok) {
 				console.log("Added to itinerary!");
-				// Optionally refresh itinerary or give UI feedback
 			}
 		} catch (err) {
 			console.error("Failed to add to itinerary:", err);
 		}
 	};
+
 
 	const handleRemove = async (place_id) => {
 		const token = localStorage.getItem("token");
@@ -84,21 +85,23 @@ export const Home = () => {
 			console.error("Failed to remove from wishlist:", err);
 		}
 	};
-	const handleDelete = async (id) => {
 
+	const handleDeleteItineraryItem = async (id) => {
+		const token = localStorage.getItem("token");
 		try {
-		  const token = localStorage.getItem("token");
-		  await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary/${id}`, {
-			method: "DELETE",
-			headers: {
-			  Authorization: `Bearer ${token}`,
-			},
-		  });
-		  setItinerary((prev) => prev.filter((item) => item.id !== id));
-		} catch (error) {
-		  console.error("Failed to delete itinerary item:", error);
+			const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}itinerary/${id}`, {
+				method: "DELETE",
+				headers: { Authorization: `Bearer ${token}` }
+			});
+			if (res.ok) {
+				setItinerary(prev => prev.filter(item => item.id !== id));
+			}
+		} catch (err) {
+			console.error("Failed to delete itinerary item:", err);
 		}
-	}
+	};
+
+
 	const hotels = wishlist.filter(item =>
 		item.name && /hotel|inn|resort|suite|Marriott|Hyatt|Courtyard/i.test(item.name)
 	);
@@ -158,25 +161,26 @@ export const Home = () => {
 			<section className="mb-4">
 				<h3 className="mb-3">Itinerary</h3>
 				{itinerary.length > 0 ? (
-					<>
-						{itinerary.slice(0, 2).map((item) => (
-							<div key={item.id} className="card shadow-sm rounded-4 border-0 mb-4" style={{ width: "18rem" }}>
+					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
+						{itinerary.map((item) => (
+							<div key={item.id} className="card shadow-sm rounded-4 border-0 itinerary-card">
 								<img
 									src={item.location_image_url}
-									className="card-img-top"
+									className="itinerary-card-img"
 									alt={item.location}
-									style={{ height: "200px", objectFit: "cover" }}
-									onError={(e) => (e.target.src = "/fallback.jpg")}
+									onError={(e) => (e.target.src = rigoPhoto)}
 								/>
 								<div className="card-body text-center p-3">
 									<h6 className="card-title mb-2">{item.location}</h6>
+									{item.note && (
+										<p className="text-muted small fst-italic mb-2">
+											“{item.note}”
+										</p>
+									)}
 									<p className="card-text text-muted small mb-1">
-										From <strong>{item.start_date}</strong> to
-										<br/>
-										
-										 <strong>{item.end_date}</strong>
+										From <strong>{item.start_date}</strong> to <br />
+										<strong>{item.end_date}</strong>
 									</p>
-									
 									<p className="text-muted small">
 										{(() => {
 											const today = new Date();
@@ -188,13 +192,13 @@ export const Home = () => {
 												: `Trip in progress or passed 🌴`;
 										})()}
 									</p>
-									<button className="removeButton float-end border-0 bg-transparent text-danger fw-bold" onClick={() => handleDelete(item.id)}>×</button>
-
-
+									<button className="removeButton float-end border-0 bg-transparent text-danger fw-bold" onClick={() => handleDeleteItineraryItem(item.id)}>
+										<i className="bi bi-x-lg"></i>
+									</button>
 								</div>
 							</div>
 						))}
-					</>
+					</div>
 				) : (
 					<p className="text-muted">You haven't created an itinerary yet.</p>
 				)}

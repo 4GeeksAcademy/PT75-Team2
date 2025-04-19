@@ -57,7 +57,7 @@ class Itinerary(db.Model):
     end_date: Mapped[str] = mapped_column(db.String(50), nullable=False)
 
     location: Mapped[str] = mapped_column(db.String(100), nullable=False)
-
+    note: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     hotel_name: Mapped[Optional[str]] = mapped_column(
         db.String(100), nullable=True)
     hotel_location: Mapped[Optional[str]] = mapped_column(
@@ -83,7 +83,8 @@ class Itinerary(db.Model):
             "hotel_name": self.hotel_name,
             "hotel_location": self.hotel_location,
             "attraction_name": self.attraction_name,
-            "attraction_location": self.attraction_location
+            "attraction_location": self.attraction_location,
+            "note": self.note
         }
 
 
@@ -98,6 +99,7 @@ class Wishlist(db.Model):
     address: Mapped[str] = mapped_column(String(250), nullable=True)
     rating: Mapped[str] = mapped_column(String(10), nullable=True)
     photo_reference: Mapped[str] = mapped_column(Text, nullable=True)
+    note: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     def serialize(self):
         return {
@@ -106,5 +108,6 @@ class Wishlist(db.Model):
             "name": self.name,
             "address": self.address,
             "rating": self.rating,
-            "photo_reference": self.photo_reference
+            "photo_reference": self.photo_reference,
+            "note": self.note
         }

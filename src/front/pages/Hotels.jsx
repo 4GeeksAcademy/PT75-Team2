@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { useRef } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
 
+
 export const Hotels = () => {
     const [destination, setDestination] = useState("");
     const [hotels, setHotels] = useState([]);

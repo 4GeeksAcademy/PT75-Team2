@@ -15,7 +15,6 @@ const Itinerary = () => {
 
   const userId = localStorage.getItem('user_id');
 
-
   const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
 
 
@@ -92,9 +91,8 @@ const Itinerary = () => {
   }, []);
 
   return (
-    <div className=" py-5" itinerary-page>
-      <div className="container-fluid itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3 mb-4">
-        
+    <div className=" py-5 itinerary-page" >
+      <div className="itineraryJumbotron position-relative text-center text-white overflow-hidden rounded-3  mb-4">
         <img
           src={itineraryimage}
           alt="Itinerary Background"
@@ -190,15 +188,22 @@ const Itinerary = () => {
                       </p>
 
 
+
                       <h5>
                         <FaMapMarkerAlt className="me-2 text-primary" />
                         {item.location}
                       </h5>
 
+                      {item.note && (
+                        <p className="itinerary-note">“{item.note}”</p>
+                      )}
+
                       <p className="trip-card-date">
                         <FaCalendarAlt className="me-2 text-secondary" />
                         <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
                       </p>
+
+
 
                       <div className="d-flex justify-content-end gap-2 mt-3">
                         <button
