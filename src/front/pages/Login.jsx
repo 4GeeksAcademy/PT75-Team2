@@ -32,6 +32,25 @@ export const Login = () => {
             }
         } catch (err) {
             setError("Something went wrong. Please try again.");
+
+        const data = await response.json();
+        if (data) {
+            const user_id = data.user.id;
+            localStorage.setItem('user_id', user_id)
+        };
+
+
+        if (response.ok) {
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user_id", data.user.id);
+            localStorage.setItem("user_email", data.user.email);
+            localStorage.setItem("user_name", data.user.name);         
+            localStorage.setItem("user_avatar", data.user.avatar || "");
+
+            dispatch({ type: "set_user", payload: data.user });
+            navigate("/home");
+        } else {
+            setError(data.error || "Invalid credentials. Please try again.");
         }
     };
 

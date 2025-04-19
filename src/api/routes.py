@@ -63,6 +63,7 @@ def login():
         return jsonify({"error": "Invalid credentials"}), 401
 
     token = create_access_token(identity=str(user.id))
+
     return jsonify({"message": "Login successful", "token": token, "user": user.serialize()})
 
 # PROTECTED ROUTE (REQUIRES AUDTH)
@@ -186,7 +187,8 @@ def add_to_itinerary():
         user_id=user_id,
         location=data.get("location"),
         start_date=data.get("start_date"),
-        end_date=data.get("end_date")
+        end_date=data.get("end_date"),
+        note=data.get("note")
     )
 
     db.session.add(new_item)
