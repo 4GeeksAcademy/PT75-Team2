@@ -41,7 +41,7 @@ export const Login = () => {
             <div className="bg-white p-4 rounded shadow-lg w-100" style={{ maxWidth: "400px" }}>
                 <div className="text-center mb-3">
                     <Link to="/" className="navbar-brand fs-3 text-primary fw-bold text-decoration-none">
-                        <img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto", background: "dodgerblue"}} />
+                        <img src={tripSyncLogo} alt="tripSyncLogo" style={{ height: "90px", width: "auto", background: "dodgerblue" }} />
                     </Link>
                 </div>
                 <h2 className="text-center mb-4">Login</h2>
@@ -77,6 +77,9 @@ export const Login = () => {
                         Login
                     </button>
                 </form>
+                <p className="mt-3 text-center">
+                    <Link to="/forgotpassword" className="text-primary">Forgot password?</Link>
+                </p>
                 <p className="mt-3 text-center">
                     Don’t have an account?{" "}
                     <Link to="/signup" className="text-primary">Sign up</Link>
