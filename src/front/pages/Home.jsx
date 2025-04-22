@@ -4,6 +4,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
 import '../css/WishlistCard.css';
+import '../css/Index.css'
 
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
