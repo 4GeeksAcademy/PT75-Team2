@@ -202,16 +202,20 @@ body {
   overflow-x: auto !important;
   overflow-y: hidden !important;
   gap: 1rem;
+  padding-bottom: 0.5rem;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  padding-bottom: 0.5rem;
+  min-height: 250px; /* ensures card height doesn't collapse */
+  width: 100%; /* forces full row space */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 .scroll-wrapper::-webkit-scrollbar {
   height: 8px;
+  display: block; /* force scrollbar visibility */
 }
+
 
 .scroll-wrapper::-webkit-scrollbar-track {
   background: transparent;
