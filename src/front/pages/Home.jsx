@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
+import '../css/WishlistCard.css';
 
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
