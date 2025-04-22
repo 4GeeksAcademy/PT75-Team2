@@ -4,7 +4,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import WishlistCard from "../components/WishlistCard.jsx";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
 import '../css/WishlistCard.css';
-import '../css/Index.css'
+import '../css/Index.css';
 
 export const Home = () => {
 	const { store, dispatch } = useGlobalReducer();
@@ -13,9 +13,24 @@ export const Home = () => {
 	const [wishlist, setWishlist] = useState([]);
 	const [itinerary, setItinerary] = useState([]);
 
+	const scrollWrapperStyle = {
+		display: 'flex',
+		flexWrap: 'nowrap',
+		overflowX: 'auto',
+		overflowY: 'hidden',
+		gap: '1rem',
+		paddingBottom: '0.5rem',
+		scrollBehavior: 'smooth',
+		scrollSnapType: 'x mandatory',
+		minHeight: '250px',
+		width: '100%',
+		scrollbarWidth: 'thin',
+		scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent'
+	};
+
 	useEffect(() => {
 		const token = localStorage.getItem("token");
-		if (!token) navigate("/login"); 3
+		if (!token) navigate("/login");
 	}, [navigate]);
 
 	useEffect(() => {
@@ -72,7 +87,6 @@ export const Home = () => {
 		}
 	};
 
-
 	const handleRemove = async (place_id) => {
 		const token = localStorage.getItem("token");
 		try {
@@ -103,7 +117,6 @@ export const Home = () => {
 		}
 	};
 
-
 	const hotels = wishlist.filter(item =>
 		item.name && /hotel|inn|resort|suite|Marriott|Hyatt|Courtyard/i.test(item.name)
 	);
@@ -117,7 +130,7 @@ export const Home = () => {
 			<section className="mb-5">
 				<h3 className="mb-3">Saved Hotels</h3>
 				{hotels.length > 0 ? (
-					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
+					<div className="scroll-wrapper" style={scrollWrapperStyle}>
 						{hotels.map(hotel => (
 							<WishlistCard
 								key={hotel.place_id}
@@ -140,7 +153,7 @@ export const Home = () => {
 			<section className="mb-5">
 				<h3 className="mb-3">Saved Attractions</h3>
 				{attractions.length > 0 ? (
-					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
+					<div className="scroll-wrapper" style={scrollWrapperStyle}>
 						{attractions.map(attraction => (
 							<WishlistCard
 								key={attraction.place_id}
@@ -163,7 +176,7 @@ export const Home = () => {
 			<section className="mb-4">
 				<h3 className="mb-3">Itinerary</h3>
 				{itinerary.length > 0 ? (
-					<div className="d-flex overflow-auto flex-nowrap gap-4 pb-3 scroll-wrapper">
+					<div className="scroll-wrapper" style={scrollWrapperStyle}>
 						{itinerary.map((item) => (
 							<div key={item.id} className="card shadow-sm rounded-4 border-0 itinerary-card">
 								<img
@@ -208,7 +221,6 @@ export const Home = () => {
 					View Your Itinerary
 				</Link>
 			</section>
-
 		</div>
 	);
-}
+};
