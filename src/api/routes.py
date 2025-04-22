@@ -154,7 +154,7 @@ def upload_avatar():
     file.save(file_path)
 
     # Store the relative path or full URL if preferred
-    user.avatar = f"/{file_path}"
+    user.avatar = f"/static/avatars/{filename}"
     db.session.commit()
 
     return jsonify({"message": "Avatar uploaded", "avatar_url": user.avatar}), 200
