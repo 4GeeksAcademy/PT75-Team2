@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Aboutus.css";
+import "../css/AboutUs.css";
 import MarioProfile from "../assets/img/mario-profile.jpg";
 import GordonProfile from "../assets/img/gordon-profile.jpg";
 import AshleyProfile from "../assets/img/ashley-profile.jpg";
@@ -152,7 +152,7 @@ export const AboutUs = () => {
                     </div>
                 </div>
 
-                
+
             </div>
         </>
     );
