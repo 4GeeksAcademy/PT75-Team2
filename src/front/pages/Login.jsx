@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import tripSyncLogo from "../assets/img/TripSync-logo.png";
-
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const { dispatch } = useGlobalReducer();
-
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -38,7 +36,6 @@ export const Login = () => {
             setError("Something went wrong. Please try again.");
         }
     };
-
     return (
         <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
             <div className="bg-white p-4 rounded shadow-lg w-100" style={{ maxWidth: "400px" }}>
