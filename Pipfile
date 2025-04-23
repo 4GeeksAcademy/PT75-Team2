@@ -23,6 +23,7 @@ flask-bcrypt = "*"
 flask = "*"
 requests = "*"
 
+
 [requires]
 python_version = "3.13"
 

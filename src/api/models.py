@@ -21,6 +21,7 @@ class User(db.Model):
         db.String(120), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(db.String(255), nullable=False)
     avatar: Mapped[str] = mapped_column(db.String(255), nullable=True)
+
     created_at: Mapped[datetime] = mapped_column(
         db.DateTime, default=datetime.utcnow)
 
@@ -39,6 +40,7 @@ class User(db.Model):
 
     def serialize(self) -> dict:
         """Returns user data without the password."""
+
         return {"id": self.id, "name": self.name, "email": self.email, "avatar": self.avatar}
 
     def __repr__(self):
@@ -111,3 +113,4 @@ class Wishlist(db.Model):
             "photo_reference": self.photo_reference,
             "note": self.note
         }
+

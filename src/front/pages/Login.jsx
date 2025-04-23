@@ -52,6 +52,7 @@ export const Login = () => {
                     </div>
                 )}
 
+
                 <form onSubmit={handleLogin}>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
@@ -81,14 +82,18 @@ export const Login = () => {
                     </button>
                 </form>
 
+
                 <p className="mt-3 text-center">
                     <Link to="/forgotpassword" className="text-primary">Forgot password?</Link>
                 </p>
                 <p className="mt-3 text-center">
                     Don’t have an account?{" "}
                     <Link to="/signup" className="text-primary">Sign up</Link>
+
                 </p>
             </div>
         </div>
     );
+
 };
+

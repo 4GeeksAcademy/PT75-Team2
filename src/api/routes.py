@@ -11,6 +11,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 import os
 import requests
 
+
 api = Blueprint('api', __name__)
 # CORS(api, origins=["https://miniature-invention-r4pp9wq9p46rh5x7q-3000.app.github.dev"], supports_credentials=True)
 # Allow CORS requests to this API
@@ -592,3 +593,4 @@ def reset_password():
     db.session.commit()
 
     return jsonify({"message": "Password reset successful."}), 200
+

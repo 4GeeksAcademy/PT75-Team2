@@ -17,9 +17,9 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
 import SharedItinerary from "./pages/SharedItinerary";
-
 import { AboutUs } from "./pages/AboutUs";
 import { AccountSettings } from "./pages/AccountSettings";
+
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,7 +47,6 @@ export const router = createBrowserRouter(
       <Route element={<ProtectedRoute />}>
         <Route path="home" element={<Home />} />
       </Route>
-
       {/* Fallback for unmatched routes */}
       <Route path="*" element={<h1>Page not found</h1>} />
     </Route>
