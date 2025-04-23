@@ -1,6 +1,9 @@
 // Import necessary hooks and functions from React.
 import { useContext, useReducer, createContext } from "react";
 import storeReducer, { initialStore } from "../store"  // Import the reducer and the initial state.
+import { useEffect } from "react";
+import { isTokenValid } from "./tokenUtils";
+import { useNavigate } from "react-router-dom";
 
 // Create a context to hold the global state of the application
 // We will call this global state the "store" to avoid confusion while using local states
@@ -19,6 +22,49 @@ export function StoreProvider({ children }) {
 
 // Custom hook to access the global state and dispatch function.
 export default function useGlobalReducer() {
-    const { dispatch, store } = useContext(StoreContext)
-    return { dispatch, store };
+    const { dispatch, store } = useContext(StoreContext);
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token && !isTokenValid()) {
+            localStorage.removeItem("token");
+            dispatch({ type: "logout" });
+            navigate("/login");
+        }
+    }, []);
+
+    const loadUserFromToken = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}me`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+
+                dispatch({ type: "set_user", payload: user });
+
+                localStorage.setItem("user_id", user.id);
+                localStorage.setItem("user_email", user.email);
+                localStorage.setItem("user_name", user.name);
+                localStorage.setItem("user_avatar", user.avatar || "");
+            } else {
+                localStorage.clear();
+            }
+        } catch (error) {
+            console.error("Failed to load user:", error);
+            localStorage.clear();
+        }
+    };
+
+    return { dispatch, store, loadUserFromToken };
 }

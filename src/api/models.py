@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Boolean, ForeignKey, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token
 from datetime import datetime
@@ -20,6 +20,8 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(
         db.String(120), unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(db.String(255), nullable=False)
+    avatar: Mapped[str] = mapped_column(db.String(255), nullable=True)
+
     created_at: Mapped[datetime] = mapped_column(
         db.DateTime, default=datetime.utcnow)
 
@@ -38,4 +40,77 @@ class User(db.Model):
 
     def serialize(self) -> dict:
         """Returns user data without the password."""
-        return {"id": self.id, "name": self.name, "email": self.email}
+
+        return {"id": self.id, "name": self.name, "email": self.email, "avatar": self.avatar}
+
+    def __repr__(self):
+        return f"<User {self.name}>"
+
+
+class Itinerary(db.Model):
+    # __table__= "itinerary"
+    id: Mapped[int] = mapped_column(
+        db.Integer, primary_key=True)
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id"), nullable=False)
+
+    start_date: Mapped[str] = mapped_column(db.String(50), nullable=False)
+    end_date: Mapped[str] = mapped_column(db.String(50), nullable=False)
+
+    location: Mapped[str] = mapped_column(db.String(100), nullable=False)
+    note: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    hotel_name: Mapped[Optional[str]] = mapped_column(
+        db.String(100), nullable=True)
+    hotel_location: Mapped[Optional[str]] = mapped_column(
+        db.String(100), nullable=True)
+
+    attraction_name: Mapped[Optional[str]] = mapped_column(
+        db.String(100), nullable=True)
+    attraction_location: Mapped[Optional[str]] = mapped_column(
+        db.String(100), nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+        db.DateTime, default=datetime.utcnow)
+
+    # Relationship to User
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "location": self.location,
+            "hotel_name": self.hotel_name,
+            "hotel_location": self.hotel_location,
+            "attraction_name": self.attraction_name,
+            "attraction_location": self.attraction_location,
+            "note": self.note
+        }
+
+
+class Wishlist(db.Model):
+    __tablename__ = "wishlist"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id"), nullable=False)
+    place_id: Mapped[str] = mapped_column(String(120), nullable=False)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
+    address: Mapped[str] = mapped_column(String(250), nullable=True)
+    rating: Mapped[str] = mapped_column(String(10), nullable=True)
+    photo_reference: Mapped[str] = mapped_column(Text, nullable=True)
+    note: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "place_id": self.place_id,
+            "name": self.name,
+            "address": self.address,
+            "rating": self.rating,
+            "photo_reference": self.photo_reference,
+            "note": self.note
+        }
+

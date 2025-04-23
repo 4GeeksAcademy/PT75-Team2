@@ -1,0 +1,71 @@
+/* WishlistCard.css */
+
+.wishlist-card {
+  width: 270px;
+  max-width: 270px;
+  min-width: 270px;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+
+.wishlist-card-img {
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.wishlist-remove-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea.wishlist-note {
+  resize: none;
+  font-size: 0.85rem;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  min-height: 60px;
+}
+
+/* === ENFORCED SCROLL FIX FOR RENDER === */
+.scroll-wrapper {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  min-height: 250px; /* ensures card height doesn't collapse */
+  width: 100%; /* forces full row space */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+  display: block; /* force scrollbar visibility */
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.scroll-wrapper:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.35);
+}

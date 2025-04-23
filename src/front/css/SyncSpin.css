@@ -1,0 +1,156 @@
+.wheel-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.selected-city {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+  margin-top: 0.5rem;
+}
+
+.sync-spin-text {
+  justify-content: center;
+}
+
+.destination-announce {
+  font-size: x-large;
+  text-align: center;
+}
+
+.jumbotron-container {
+  background-color: rgb(182, 226, 252);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 20px auto;
+  box-shadow: 1px 5px 22px -2px #bcbdbe;
+}
+
+.spin-button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: white;
+  font-size: larger;
+  font-weight: bolder;
+  border-color: white;
+  box-shadow: 4px 4px 11px 0px #838383;
+ 
+}
+
+
+.sync-card-img-top {
+  height: 180px;
+  width: auto;
+  object-fit: cover;
+}
+
+.fa-location-dot {
+  margin-right: 10px;
+}
+
+.sync-card-body {
+  padding-top: 10px !important;
+  margin-top: 20px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.sync-card {
+  height: auto;
+}
+
+.sync-itinerary-button {
+  width: 17rem;
+  margin: 10px auto 0 auto;
+  height: 30px;
+  font-size: small;
+  display: block;
+}
+
+.sync-maps-button {
+  width: 16rem;
+  margin: auto;
+  height: 30px;
+  font-size: small;
+  display: block;
+
+
+.sync-card-text {
+  font-size: small;
+}
+
+.container-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .wheel-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .destination-announce {
+    font-size: 1.2rem;
+  }
+
+  .selected-city {
+    font-size: 1.3rem;
+  }
+
+  .sync-card-img-top {
+    height: 150px;
+  }
+
+  .sync-itinerary-button,
+  .sync-maps-button {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .jumbotron-container {
+    width: 100%;
+    margin: 0;
+  }
+
+
+
+  .sync-card-body {
+    height: auto;
+    margin-top: 10px;
+    padding-top: 20px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wheel-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .selected-city {
+    font-size: 2rem;
+  }
+}
+
+.wheel-canvas-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+  width: 100%;
+  max-width: 300px;
+}
+
+.wheel-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}

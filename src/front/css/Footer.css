@@ -1,0 +1,40 @@
+.footer {
+  background-color: dodgerblue;
+  color: white;
+}
+
+hr {
+  height: 5px;
+  background-color: white;
+  border: none;
+}
+
+.logo-div {
+  text-align: left;
+}
+
+.copyright {
+  font-size: smaller;
+  margin-top: 20px;
+}
+
+#footerButton:link {
+  color: white;
+  background-color: transparent;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: large;
+}
+
+#footerButton:visited {
+  color: white;
+  background-color: transparent;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#footerButton:hover {
+  color: white;
+  background-color: transparent;
+  text-shadow: 2px 2px 2px black;
+}

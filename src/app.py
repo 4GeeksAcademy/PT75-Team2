@@ -12,17 +12,28 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 # from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
-    os.path.realpath(__file__)), '../public/')
-app = Flask(__name__)
+    os.path.realpath(__file__)), '../dist/')
+app = Flask(__name__, static_url_path='/static', static_folder='static')
+# CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app,
+     origins=[os.getenv("FRONTEND_URL")],
+     supports_credentials=True)
 app.url_map.strict_slashes = False
 
 # Configure JWT Secret Key (must be unique and secret)
-app.config["JWT_SECRET_KEY"] = "super-secret-key"  # Change this in production
+
+app.config["JWT_SECRET_KEY"] = "super-secret-key"
+app.config["JWT_TOKEN_LOCATION"] = ["headers"]
+# default, but good to include
+app.config["JWT_HEADER_NAME"] = "Authorization"
+app.config["JWT_HEADER_TYPE"] = "Bearer"           # default, good to include
+
 jwt = JWTManager(app)  # Initialize JWTManager
 
 # database condiguration

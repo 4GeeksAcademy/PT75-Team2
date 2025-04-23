@@ -7,10 +7,19 @@ import {
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
-import { Single } from "./pages/Single";
-import { Demo } from "./pages/Demo";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import SyncSpin from "./pages/SyncSpin";
+import Itinerary from "./pages/Itinerary";
+import { LandingPage } from "./pages/Landing";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Hotels } from "./pages/Hotels";
+import { Attractions } from "./pages/Attractions";
+import SharedItinerary from "./pages/SharedItinerary";
+import { AboutUs } from "./pages/AboutUs";
+import { AccountSettings } from "./pages/AccountSettings";
+
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,14 +30,25 @@ export const router = createBrowserRouter(
     // Note: The child paths of the Layout element replace the Outlet component with the elements contained in the "element" attribute of these child paths.
 
     // Root Route: All navigation will start from here.
-    <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
+    <Route path="/" element={<Layout />} >
+      <Route index element={<LandingPage />} />
+      <Route path="login" element={<Login />} />
+      <Route path="syncspin" element={<SyncSpin />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="forgotpassword" element={<ForgotPassword />} />
+      <Route path="hotels" element={<Hotels />} />
+      <Route path="itinerary" element={<Itinerary />} />
+      <Route path="attractions" element={<Attractions />} />
+      <Route path="sharedItinerary/:user_id" element={<SharedItinerary />} />
+      <Route path="aboutus" element={<AboutUs />} />
+      <Route path="accountSettings" element={<AccountSettings />} />
 
-      {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
-      <Route path="/" element={<Home />} />
-      <Route path="/single/:theId" element={<Single />} />  {/* Dynamic route for single items */}
-      <Route path="/demo" element={<Demo />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      {/* Protected route for /home */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="home" element={<Home />} />
+      </Route>
+      {/* Fallback for unmatched routes */}
+      <Route path="*" element={<h1>Page not found</h1>} />
     </Route>
   )
 );

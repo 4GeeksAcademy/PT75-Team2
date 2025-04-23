@@ -1,0 +1,204 @@
+/* === Navbar/Profile Customization === */
+.profileLink {
+  float: right;
+  padding-top: 20px;
+}
+
+.links {
+  color: whitesmoke;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.links:hover {
+  color: blue;
+}
+
+/* === Carousel Arrows Styling === */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: white;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Make arrows white */
+}
+
+/* === Hero Background === */
+.hero-section {
+  background-image: url("/hotel-room.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  position: relative;
+}
+
+/* === Hotel Card Image Fixes === */
+.image-slider {
+  height: 100%;
+  width: 100%;
+}
+
+.slider-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* new changes mobile tweaks */
+/* === GLOBAL RESPONSIVE TWEAKS === */
+body {
+  overflow-x: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Make text & padding adapt to screen size */
+@media (max-width: 576px) {
+  .navbar .nav-link {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .hero-section {
+    height: auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .links-container {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  #footerButton {
+    padding: 0.5rem 0;
+    display: block;
+    text-align: center;
+  }
+}
+
+/* Card container */
+.itinerary-card {
+  min-width: 270px;
+  max-width: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Image */
+.itinerary-card-img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+/* Firefox scrollbar styling */
+.scroll-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Hide scrollbar completely on small screens */
+@media (max-width: 576px) {
+  .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-wrapper {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* Calendar in the Hotels.jsx*/
+.rdrCalendarWrapper {
+  border-radius: 0.5rem;
+  font-family: inherit;
+}
+
+.rdrDateDisplay {
+  display: none; /* hides the input at the top */
+}
+
+.rdrMonthAndYearPickers select {
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.trip-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.trip-card-date {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Hide scroll on mobile */
+@media (max-width: 576px) {
+  .scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Dropdown menu on mobile */
+@media (max-width: 576px) {
+  .account-dropdown {
+    left: 30% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    max-width: 90vw !important;
+  }
+}
+
+.navbar {
+  overflow: visible !important;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
+}
