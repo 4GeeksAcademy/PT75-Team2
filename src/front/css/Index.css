@@ -184,3 +184,21 @@ body {
     scrollbar-width: none;
   }
 }
+
+/* Dropdown menu on mobile */
+@media (max-width: 576px) {
+  .account-dropdown {
+    left: 30% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    max-width: 90vw !important;
+  }
+}
+
+.navbar {
+  overflow: visible !important;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
+}

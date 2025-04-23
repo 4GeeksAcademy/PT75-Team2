@@ -2,21 +2,20 @@ import React, { useState, useEffect } from "react";
 import { FaTrashAlt, FaMapMarkerAlt, FaCalendarAlt, FaSuitcase } from "react-icons/fa";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
 import "../css/Itinerary.css";
-
 import itineraryimage from "../assets/img/itineraryimage.jpg"
+import useAuthGuard from "../hooks/useAuthGuard";
 
 const Itinerary = () => {
+  useAuthGuard();
+
   const [itinerary, setItinerary] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editLocation, setEditLocation] = useState("");
   const [editStart, setEditStart] = useState("");
   const [editEnd, setEditEnd] = useState("");
 
-
   const userId = localStorage.getItem('user_id');
-
   const shareableLink = `${window.location.origin}/sharedItinerary/${userId}`;
-
 
   const fetchItinerary = async () => {
     const token = localStorage.getItem("token");

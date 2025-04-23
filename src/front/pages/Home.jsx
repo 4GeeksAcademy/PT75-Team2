@@ -5,8 +5,11 @@ import WishlistCard from "../components/WishlistCard.jsx";
 import rigoPhoto from "../assets/img/rigo-baby.jpg";
 import '../css/WishlistCard.css';
 import '../css/Index.css';
+import useAuthGuard from "../hooks/useAuthGuard";
 
 export const Home = () => {
+	useAuthGuard();
+
 	const { store, dispatch } = useGlobalReducer();
 	const navigate = useNavigate();
 

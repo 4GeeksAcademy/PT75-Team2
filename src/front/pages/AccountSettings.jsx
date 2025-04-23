@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import useAuthGuard from "../hooks/useAuthGuard";
 
 export const AccountSettings = () => {
+    useAuthGuard();
+    
     const { store, dispatch } = useGlobalReducer();
     const [name, setName] = useState(store.user?.name || "");
     const [email, setEmail] = useState(store.user?.email || "");

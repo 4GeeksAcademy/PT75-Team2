@@ -8,6 +8,8 @@
   
   .account-dropdown {
     width: 240px;
+    max-width: 90vw;
+    right: 0;
     z-index: 1050;
   }
   

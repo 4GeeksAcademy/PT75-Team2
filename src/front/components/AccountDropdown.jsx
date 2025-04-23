@@ -13,7 +13,7 @@ export default function AccountDropdown({ user, onLogout }) {
     useClickOutside(dropdownRef, () => setIsOpen(false));
 
     return (
-        <div className="position-relative" ref={dropdownRef}>
+        <div className="position-relative w-100" ref={dropdownRef}>
             <img
                 src={user?.avatar || defaultAvatar}
                 alt="profile"
