@@ -35,13 +35,19 @@ export default function useGlobalReducer() {
 
             if (response.ok) {
                 const user = await response.json();
+
                 dispatch({ type: "set_user", payload: user });
+
+                localStorage.setItem("user_id", user.id);
+                localStorage.setItem("user_email", user.email);
+                localStorage.setItem("user_name", user.name);
+                localStorage.setItem("user_avatar", user.avatar || "");
             } else {
-                localStorage.removeItem("token");
+                localStorage.clear();
             }
         } catch (error) {
             console.error("Failed to load user:", error);
-            localStorage.removeItem("token");
+            localStorage.clear();
         }
     };
 

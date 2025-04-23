@@ -10,6 +10,7 @@ import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
+import { ForgotPassword } from "./pages/ForgotPassword";
 import SyncSpin from "./pages/SyncSpin";
 import Itinerary from "./pages/Itinerary";
 import { LandingPage } from "./pages/Landing";
@@ -36,6 +37,7 @@ export const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="syncspin" element={<SyncSpin />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="forgotpassword" element={<ForgotPassword />} />
       <Route path="hotels" element={<Hotels />} />
       <Route path="itinerary" element={<Itinerary />} />
       <Route path="attractions" element={<Attractions />} />
