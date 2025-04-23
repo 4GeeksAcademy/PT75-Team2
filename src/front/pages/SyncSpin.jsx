@@ -120,7 +120,7 @@ const SyncSpin = () => {
 
     return (
         <div className="container-fluid">
-            {/* Wheel and Header Section */}
+          {/* Wheel and Header Section  */}
             <div className="row justify-content-center align-items-center my-5">
                 <div className="col-sm-12 col-md-8 col-lg-6 col-xxl-3 text-center wheel-wrapper">
                     <div className="wheel-canvas-wrapper position-relative">
@@ -137,11 +137,11 @@ const SyncSpin = () => {
                                 const radius = canvas.width / 2;
                                 const angleStep = (2 * Math.PI) / cities.length;
 
-                                // Draw the wheel
+                                // wheel
                                 const drawWheel = () => {
                                     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous frame
 
-                                    // Draw wheel slices (cities)
+                                    // draw slices - cities
                                     cities.forEach((city, i) => {
                                         const startAngle = i * angleStep;
                                         const endAngle = startAngle + angleStep;
@@ -151,7 +151,7 @@ const SyncSpin = () => {
                                         ctx.fillStyle = `hsl(${(i * 360) / cities.length}, 70%, 60%)`;
                                         ctx.fill();
 
-                                        // Draw city names in the center of each slice
+                                        // city names on slice
                                         ctx.save();
                                         ctx.translate(radius, radius); // Move context to the center of the wheel
                                         ctx.rotate(startAngle + angleStep / 2); // Rotate context to the middle of the slice
@@ -162,19 +162,6 @@ const SyncSpin = () => {
                                         ctx.restore();
                                     });
 
-                                    // Draw pointer (Arrow)
-                                    const pointerAngle = (rotation % 360) * (Math.PI / 180); // Convert rotation to radians
-                                    ctx.save();
-                                    ctx.translate(radius, 0); // Move pointer to the top center
-                                    ctx.rotate(pointerAngle); // Rotate pointer based on the rotation state
-                                    ctx.beginPath();
-                                    ctx.moveTo(0, -radius); // Top center of the wheel
-                                    ctx.lineTo(-10, -radius + 20); // Left side of the pointer
-                                    ctx.lineTo(10, -radius + 20); // Right side of the pointer
-                                    ctx.closePath();
-                                    ctx.fillStyle = "black";
-                                    ctx.fill();
-                                    ctx.restore();
                                 };
 
                                 drawWheel();
