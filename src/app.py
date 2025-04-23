@@ -17,8 +17,8 @@ from flask_cors import CORS
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
-    os.path.realpath(__file__)), '../public/')
-app = Flask(__name__)
+    os.path.realpath(__file__)), '../dist/')
+app = Flask(__name__, static_url_path='/static', static_folder='static')
 # CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 CORS(app,
      origins=[os.getenv("FRONTEND_URL")],
