@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
-import { Single } from "./pages/Single";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 import { ForgotPassword } from "./pages/ForgotPassword";
@@ -33,7 +32,6 @@ export const router = createBrowserRouter(
     // Root Route: All navigation will start from here.
     <Route path="/" element={<Layout />} >
       <Route index element={<LandingPage />} />
-      <Route path="single/:theId" element={<Single />} />
       <Route path="login" element={<Login />} />
       <Route path="syncspin" element={<SyncSpin />} />
       <Route path="signup" element={<Signup />} />

@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
+// Global base styles first
+import './css/Index.css';
+
+// Shared/reusable components next
+import './css/Navbar.css';
+import './css/Footer.css';
+import './css/CarouselSection.css';
+
+// Specific component styles after
+import './css/WishlistCard.css';
+import './css/HotelCard.css';
+import './css/AttractionCard.css';
+import './css/Itinerary.css';
 import './css/AboutUs.css';
 import './css/AccountDropdown.css';
-import './css/AttractionCard.css';
-import './css/CarouselSection.css';
-import './css/Footer.css';
-import './css/HotelCard.css';
-import './css/Itinerary.css';
-import './css/Navbar.css';
 import './css/SyncSpin.css';
-import './css/WishlistCard.css';
-import './css/Index.css';
+
+
+
 
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';

@@ -108,28 +108,6 @@ body {
   }
 }
 
-/* === Elegant Horizontal Scroll Styling === */
-.scroll-wrapper {
-  scroll-behavior: smooth;
-}
-
-.scroll-wrapper::-webkit-scrollbar {
-  height: 8px;
-}
-
-.scroll-wrapper::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scroll-wrapper::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-.scroll-wrapper:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.35);
-}
-
 /* Card container */
 .itinerary-card {
   min-width: 270px;
@@ -195,37 +173,6 @@ body {
   color: #444;
 }
 
-/* === ENFORCED SCROLL FIX FOR RENDER === */
-.scroll-wrapper {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  gap: 1rem;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 0.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-}
-
-.scroll-wrapper::-webkit-scrollbar {
-  height: 8px;
-}
-
-.scroll-wrapper::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scroll-wrapper::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-.scroll-wrapper:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.35);
-}
-
 /* Hide scroll on mobile */
 @media (max-width: 576px) {
   .scroll-wrapper::-webkit-scrollbar {
@@ -236,4 +183,22 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* Dropdown menu on mobile */
+@media (max-width: 576px) {
+  .account-dropdown {
+    left: 30% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    max-width: 90vw !important;
+  }
+}
+
+.navbar {
+  overflow: visible !important;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
 }
