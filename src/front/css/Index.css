@@ -130,6 +130,27 @@ body {
   background-color: rgba(0, 0, 0, 0.35);
 }
 
+/* Card container */
+.itinerary-card {
+  min-width: 270px;
+  max-width: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Image */
+.itinerary-card-img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
 /* Firefox scrollbar styling */
 .scroll-wrapper {
   scrollbar-width: thin;

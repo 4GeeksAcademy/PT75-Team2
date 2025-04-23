@@ -190,15 +190,22 @@ const Itinerary = () => {
                       </p>
 
 
+
                       <h5>
                         <FaMapMarkerAlt className="me-2 text-primary" />
                         {item.location}
                       </h5>
 
+                      {item.note && (
+                        <p className="itinerary-note">“{item.note}”</p>
+                      )}
+
                       <p className="trip-card-date">
                         <FaCalendarAlt className="me-2 text-secondary" />
                         <strong>{item.start_date}</strong> to <strong>{item.end_date}</strong>
                       </p>
+
+
 
                       <div className="d-flex justify-content-end gap-2 mt-3">
                         <button
