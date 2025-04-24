@@ -22,6 +22,8 @@ sqlalchemy = "*"
 flask-bcrypt = "*"
 flask = "*"
 requests = "*"
+flask-mail = "*"
+sendgrid = "*"
 
 [requires]
 python_version = "3.13"

@@ -10,6 +10,15 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 import os
 import requests
+import sendgrid
+from sendgrid.helpers.mail import Mail
+import secrets
+from datetime import datetime, timedelta
+
+
+def generate_reset_token():
+    return secrets.token_urlsafe(32)
+
 
 api = Blueprint('api', __name__)
 # CORS(api, origins=["https://miniature-invention-r4pp9wq9p46rh5x7q-3000.app.github.dev"], supports_credentials=True)
@@ -574,21 +583,71 @@ def verify_user():
     return jsonify({"message": "User verified."}), 200
 
 
+def send_email(to, subject, content):
+    sg = sendgrid.SendGridAPIClient(api_key=os.getenv("SENDGRID_API_KEY"))
+    email = Mail(
+        from_email=os.getenv("SENDGRID_FROM_EMAIL"),
+        to_emails=to,
+        subject=subject,
+        plain_text_content=content
+    )
+    sg.send(email)
+
+
+@api.route("/forgot-password", methods=["POST"])
+def forgot_password():
+    data = request.get_json()
+    email = data.get("email")
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"error": "Email not found"}), 404
+
+    import random
+    code = f"{random.randint(100000, 999999)}"
+    user.reset_code = code
+    user.reset_code_expiry = datetime.utcnow() + timedelta(minutes=15)
+    db.session.commit()
+
+    # Send the 6-digit code using SendGrid
+    send_email(
+        to=email,
+        subject="TripSync Password Reset Code",
+        content=f"Your password reset code is: {code}\n\nThis code will expire in 15 minutes."
+    )
+
+    return jsonify({"message": "Reset code sent"}), 200
+
+
+@api.route("/verify-reset-code", methods=["POST"])
+def verify_reset_code():
+    data = request.get_json()
+    email = data.get("email")
+    code = data.get("code")
+
+    user = User.query.filter_by(email=email).first()
+    if not user or user.reset_code != code:
+        return jsonify({"error": "Invalid code"}), 400
+
+    if datetime.utcnow() > user.reset_code_expiry:
+        return jsonify({"error": "Code expired"}), 403
+
+    return jsonify({"message": "Code verified"}), 200
+
+
 @api.route("/reset-password", methods=["POST"])
 def reset_password():
     data = request.get_json()
-    name = data.get("name")
     email = data.get("email")
     new_password = data.get("new_password")
 
-    if not name or not email or not new_password:
-        return jsonify({"error": "Missing required fields."}), 400
-
-    user = User.query.filter_by(name=name, email=email).first()
+    user = User.query.filter_by(email=email).first()
     if not user:
-        return jsonify({"error": "User not found."}), 404
+        return jsonify({"error": "User not found"}), 404
 
     user.set_password(new_password)
+    user.reset_code = None
+    user.reset_code_expiry = None
     db.session.commit()
 
-    return jsonify({"message": "Password reset successful."}), 200
+    return jsonify({"message": "Password updated successfully"}), 200

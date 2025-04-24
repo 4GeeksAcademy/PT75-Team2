@@ -23,6 +23,13 @@ class User(db.Model):
     avatar: Mapped[str] = mapped_column(db.String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         db.DateTime, default=datetime.utcnow)
+    reset_token: Mapped[Optional[str]] = mapped_column(
+        db.String(100), nullable=True)
+    reset_token_expiry: Mapped[Optional[datetime]] = mapped_column(
+        db.DateTime, nullable=True)
+    reset_code: Mapped[str] = mapped_column(db.String(6), nullable=True)
+    reset_code_expiry: Mapped[datetime] = mapped_column(
+        db.DateTime, nullable=True)
 
     def set_password(self, password: str) -> None:
         """Hashes and stores the password"""

@@ -4,37 +4,56 @@ import tripSyncLogo from "../assets/img/TripSync-logo.png";
 
 export const ForgotPassword = () => {
     const [step, setStep] = useState(1);
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [code, setCode] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const handleVerify = async (e) => {
+    const handleSendEmail = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}verify-user`, {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}forgot-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email })
+                body: JSON.stringify({ email }),
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
+            if (res.ok) {
                 setStep(2);
                 setError(null);
             } else {
-                setError(data.error || "Name and email do not match any user.");
+                const data = await res.json();
+                setError(data.error || "Failed to send reset code.");
             }
-        } catch (err) {
+        } catch {
             setError("Something went wrong. Please try again.");
         }
     };
 
-    const handleReset = async (e) => {
+    const handleVerifyCode = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}verify-reset-code`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, code }),
+            });
+
+            if (res.ok) {
+                setStep(3);
+                setError(null);
+            } else {
+                const data = await res.json();
+                setError(data.error || "Invalid or expired code.");
+            }
+        } catch {
+            setError("Something went wrong. Please try again.");
+        }
+    };
+
+    const handleResetPassword = async (e) => {
         e.preventDefault();
 
         if (newPassword !== confirmPassword) {
@@ -43,20 +62,19 @@ export const ForgotPassword = () => {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}reset-password`, {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}reset-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, new_password: newPassword })
+                body: JSON.stringify({ email, new_password: newPassword }),
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
+            if (res.ok) {
                 navigate("/login");
             } else {
+                const data = await res.json();
                 setError(data.error || "Failed to reset password.");
             }
-        } catch (err) {
+        } catch {
             setError("Something went wrong. Please try again.");
         }
     };
@@ -71,26 +89,15 @@ export const ForgotPassword = () => {
                 </div>
                 <h2 className="text-center mb-4">Reset Password</h2>
 
-                {error && (
-                    <div className="alert alert-danger py-2" role="alert">
-                        {error}
-                    </div>
-                )}
+                {error && <div className="alert alert-danger py-2" role="alert">{error}</div>}
 
-                <form onSubmit={step === 1 ? handleVerify : handleReset}>
-                    {step === 1 ? (
+                <form onSubmit={
+                    step === 1 ? handleSendEmail :
+                        step === 2 ? handleVerifyCode :
+                            handleResetPassword
+                }>
+                    {step === 1 && (
                         <>
-                            <div className="mb-3">
-                                <label htmlFor="name" className="form-label">Name</label>
-                                <input
-                                    id="name"
-                                    type="text"
-                                    className="form-control"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    required
-                                />
-                            </div>
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">Email</label>
                                 <input
@@ -102,11 +109,28 @@ export const ForgotPassword = () => {
                                     required
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary w-100">
-                                Verify Identity
-                            </button>
+                            <button type="submit" className="btn btn-primary w-100">Send Reset Code</button>
                         </>
-                    ) : (
+                    )}
+
+                    {step === 2 && (
+                        <>
+                            <div className="mb-3">
+                                <label htmlFor="code" className="form-label">Verification Code</label>
+                                <input
+                                    id="code"
+                                    type="text"
+                                    className="form-control"
+                                    value={code}
+                                    onChange={(e) => setCode(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-warning w-100">Verify Code</button>
+                        </>
+                    )}
+
+                    {step === 3 && (
                         <>
                             <div className="mb-3">
                                 <label htmlFor="newPassword" className="form-label">New Password</label>
@@ -130,9 +154,7 @@ export const ForgotPassword = () => {
                                     required
                                 />
                             </div>
-                            <button type="submit" className="btn btn-success w-100">
-                                Reset Password
-                            </button>
+                            <button type="submit" className="btn btn-success w-100">Reset Password</button>
                         </>
                     )}
                 </form>

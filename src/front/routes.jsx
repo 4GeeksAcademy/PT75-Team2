@@ -17,7 +17,6 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Hotels } from "./pages/Hotels";
 import { Attractions } from "./pages/Attractions";
 import SharedItinerary from "./pages/SharedItinerary";
-
 import { AboutUs } from "./pages/AboutUs";
 import { AccountSettings } from "./pages/AccountSettings";
 
